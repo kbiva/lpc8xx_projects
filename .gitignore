@@ -1,0 +1,14 @@
+*.uvguix.*
+*.bak
+*.dep
+*.uvoptx
+*.lst
+*.map
+*.axf
+*.htm
+*.lnp
+*.sct
+*.crf
+*.d
+*.o
+ArInp.Scr
