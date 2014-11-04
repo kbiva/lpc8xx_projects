@@ -365,7 +365,7 @@
               <MiscControls></MiscControls>
               <Define>CORE_M0PLUS</Define>
               <Undefine></Undefine>
-              <IncludePath>.\inc;..\lib_lpc_chip_8xx\inc</IncludePath>
+              <IncludePath>.\inc;..\..\libs\lib_lpc_chip_8xx\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -476,7 +476,7 @@
             <File>
               <FileName>lib_lpc_chip_8xx.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>..\lib_lpc_chip_8xx\obj\lib_lpc_chip_8xx.lib</FilePath>
+              <FilePath>..\..\libs\lib_lpc_chip_8xx\obj\lib_lpc_chip_8xx.lib</FilePath>
             </File>
           </Files>
         </Group>
