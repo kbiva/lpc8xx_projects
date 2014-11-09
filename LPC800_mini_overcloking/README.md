@@ -1,5 +1,5 @@
-=
 WARNING
+=
 Do not try this at home. Your LPC810 may be damaged if operating at more than 30Mhz.
 The source code is purely for educational purposes on how to set MCU clock speed and
 so a simple benchmark.
@@ -39,6 +39,6 @@ The libraries were built with the following options:
 
 Links
 =
-More info at :
+More info at: https://kbiva.wordpress.com/2014/11/10/overclocking-lpc81x/
 
-Video: 
+Video: http://youtu.be/aPeuHSqAGag
