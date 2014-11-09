@@ -98,7 +98,7 @@ void LCDSetWindow(int32_t x1, int32_t y1,int32_t x2, int32_t y2) {
 
 void LCDSetPixel(int32_t x, int32_t y, int32_t color) {
 
-  LCDSetWindow(x,x,y,y);
+  LCDSetWindow(x,y,x,y);
 
 #ifdef _8BITCOLOR
   spi0Transfer((color & 0xFF) | 0x100);
