@@ -12,3 +12,8 @@
 *.d
 *.o
 ArInp.Scr
+*.fed
+*.l2p
+Extdll.iex
+*._2i
+
