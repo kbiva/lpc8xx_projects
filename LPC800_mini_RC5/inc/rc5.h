@@ -37,6 +37,9 @@ typedef enum {
 #define IR_RC5_2_HEADER_PULSE      (1*IR_RC5_TIME_UNIT_US)
 #define IR_RC5_2_HEADER_WIDTH      (2*IR_RC5_TIME_UNIT_US)
 
+#define IR_RC5_3_HEADER_PULSE      (1*IR_RC5_TIME_UNIT_US)
+#define IR_RC5_3_HEADER_WIDTH      (3*IR_RC5_TIME_UNIT_US)
+
 #define IR_RC5_0_WIDTH             (2*IR_RC5_TIME_UNIT_US)
 #define IR_RC5_1_WIDTH             (3*IR_RC5_TIME_UNIT_US)
 #define IR_RC5_2_WIDTH             (4*IR_RC5_TIME_UNIT_US)

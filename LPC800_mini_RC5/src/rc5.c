@@ -112,15 +112,19 @@ void SCT_IRQHandler(void) {
                frame = 0x02;
                rc5state=RC5Advance(RC5STATE_MID1,RC5EVENT_LONGPULSE);
              }
-         // untested, may be wrong
-        /*
         // first two bits are 1 1
         else if(checkVal(high_time+low_time, IR_RC5_2_HEADER_WIDTH, IR_RC5_TOL_PCT) &&
                 checkVal(low_time, IR_RC5_2_HEADER_PULSE, IR_RC5_TOL_PCT) ) {
              frame = 0x01;
+             rc5state=RC5Advance(RC5STATE_MID1,RC5EVENT_LONGPULSE);
+        }
+        // first two bits are 1 1
+        else if(checkVal(high_time+low_time, IR_RC5_3_HEADER_WIDTH, IR_RC5_TOL_PCT) &&
+                checkVal(low_time, IR_RC5_3_HEADER_PULSE, IR_RC5_TOL_PCT) ) {
+             frame = 0x01;
              rc5state=RC5Advance(RC5STATE_MID1,RC5EVENT_SHORTPULSE);
         }
-        */
+
     }
     Chip_SCT_ClearEventFlag(LPC_SCT,SCT_EVT_1);          // clear event 1 flag
   }
