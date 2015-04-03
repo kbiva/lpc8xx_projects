@@ -21,7 +21,7 @@ static void errorI2C(void) {
 /* Setup I2C handle and parameters */
 void setupI2CMaster(void) {
   /* Enable I2C clock and reset I2C peripheral - the boot ROM does not do this */
-  Chip_I2C_Init();
+  Chip_I2C_Init(LPC_I2C);
 
   /* Perform a sanity check on the storage allocation */
   if (LPC_I2CD_API->i2c_get_mem_size() > sizeof(i2cMasterHandleMEM)) {
