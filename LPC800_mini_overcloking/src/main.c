@@ -191,7 +191,7 @@ int32_t main(void) {
     w = 88675123;
 
     // reset milliseconds counter
-     counter=0;
+    counter=0;
 
     // do 100 filled rectangles
     for (i = 0; i < 100; i++) {
