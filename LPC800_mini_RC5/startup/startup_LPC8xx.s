@@ -1,24 +1,28 @@
-;/*****************************************************************************
-; * @file:    startup_LPC8xx.s
-; * @purpose: CMSIS Cortex-M0+ Core Device Startup File
-; *           for the NXP LPC8xx Device Series
-; * @version: V1.0
-; * @date:    16. Aug. 2012
-; *------- <<< Use Configuration Wizard in Context Menu >>> ------------------
+;/**************************************************************************//**
+; * @file     startup_LPC8xx.s
+; * @brief    CMSIS Core Device Startup File for
+; *           NXP LPC81x Device Series
+; * @version  V1.10
+; * @date     19. August 2014
 ; *
-; * Copyright (C) 2012 ARM Limited. All rights reserved.
-; * ARM Limited (ARM) is supplying this software for use with Cortex-M0+
+; * @note
+; * Copyright (C) 2014 ARM Limited. All rights reserved.
+; *
+; * @par
+; * ARM Limited (ARM) is supplying this software for use with Cortex-M
 ; * processor based microcontrollers.  This file can be freely distributed
 ; * within development tools that are supporting such ARM based processors.
 ; *
+; * @par
 ; * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
 ; * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
 ; * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
 ; * ARM SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, OR
 ; * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
 ; *
-; *****************************************************************************/
+; ******************************************************************************/
 
+; *------- <<< Use Configuration Wizard in Context Menu >>> ------------------
 
 ; <h> Stack Configuration
 ;   <o> Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
@@ -70,45 +74,50 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     SysTick_Handler           ; SysTick Handler
 
                 ; External Interrupts
-                DCD     SPI0_IRQHandler             ; SPI0 controller
-                DCD     SPI1_IRQHandler             ; SPI1 controller
-                DCD     0                           ; Reserved
-                DCD     UART0_IRQHandler            ; UART0
-                DCD     UART1_IRQHandler            ; UART1
-                DCD     UART2_IRQHandler            ; UART2
-                DCD     0                           ; Reserved
-                DCD     0                           ; Reserved
-                DCD     I2C_IRQHandler              ; I2C controller
-                DCD     SCT_IRQHandler              ; Smart Counter Timer
-                DCD     MRT_IRQHandler              ; Multi-Rate Timer
-                DCD     CMP_IRQHandler              ; Comparator
-                DCD     WDT_IRQHandler              ; PIO1 (0:11)
-                DCD     BOD_IRQHandler              ; Brown Out Detect
-                DCD     0                           ; Reserved
-                DCD     WKT_IRQHandler              ; Wakeup timer
-                DCD     0                           ; Reserved
-                DCD     0                           ; Reserved
-                DCD     0                           ; Reserved
-                DCD     0                           ; Reserved
-                DCD     0                           ; Reserved
-                DCD     0                           ; Reserved
-                DCD     0                           ; Reserved
-                DCD     0                           ; Reserved
-                DCD     PININT0_IRQHandler          ; PIO INT0
-                DCD     PININT1_IRQHandler         ; PIO INT1
-                DCD     PININT2_IRQHandler         ; PIO INT2
-                DCD     PININT3_IRQHandler         ; PIO INT3
-                DCD     PININT4_IRQHandler         ; PIO INT4
-                DCD     PININT5_IRQHandler         ; PIO INT5
-                DCD     PININT6_IRQHandler         ; PIO INT6
-                DCD     PININT7_IRQHandler         ; PIO INT7
+                DCD     SPI0_IRQHandler           ; 16+ 0  SPI0
+                DCD     SPI1_IRQHandler           ; 16+ 1  SPI1
+                DCD     0                         ; 16+ 2  Reserved
+                DCD     UART0_IRQHandler          ; 16+ 3  UART0
+                DCD     UART1_IRQHandler          ; 16+ 4  UART1
+                DCD     UART2_IRQHandler          ; 16+ 5  UART2
+                DCD     0                         ; 16+ 6  Reserved
+                DCD     0                         ; 16+ 7  Reserved
+                DCD     I2C_IRQHandler            ; 16+ 8  I2C
+                DCD     SCT_IRQHandler            ; 16+ 9  State configurable timer
+                DCD     MRT_IRQHandler            ; 16+10  Multi-rate timer
+                DCD     CMP_IRQHandler            ; 16+11  Analog comparator
+                DCD     WDT_IRQHandler            ; 16+12  Windowed watchdog timer
+                DCD     BOD_IRQHandler            ; 16+13  BOD
+                DCD     0                         ; 16+14  Reserved
+                DCD     WKT_IRQHandler            ; 16+15  Self wake-up timer
+                DCD     0                         ; 16+16  Reserved
+                DCD     0                         ; 16+17  Reserved
+                DCD     0                         ; 16+18  Reserved
+                DCD     0                         ; 16+19  Reserved
+                DCD     0                         ; 16+20  Reserved
+                DCD     0                         ; 16+21  Reserved
+                DCD     0                         ; 16+22  Reserved
+                DCD     0                         ; 16+23  Reserved
+                DCD     PININT0_IRQHandler        ; 16+24  PIO INT0
+                DCD     PININT1_IRQHandler        ; 16+25  PIO INT1
+                DCD     PININT2_IRQHandler        ; 16+26  PIO INT2
+                DCD     PININT3_IRQHandler        ; 16+27  PIO INT3
+                DCD     PININT4_IRQHandler        ; 16+28  PIO INT4
+                DCD     PININT5_IRQHandler        ; 16+29  PIO INT5
+                DCD     PININT6_IRQHandler        ; 16+30  PIO INT6
+                DCD     PININT7_IRQHandler        ; 16+31  PIO INT7
 
-
+; <h> Code Read Protection
+;   <o> Code Read Protection  <0xFFFFFFFF=>CRP Disabled
+;                             <0x12345678=>CRP Level 1
+;                             <0x87654321=>CRP Level 2
+;                             <0x43218765=>CRP Level 3 (ARE YOU SURE?)
+;                             <0x4E697370=>NO ISP (ARE YOU SURE?)
+; </h>
                 IF      :LNOT::DEF:NO_CRP
                 AREA    |.ARM.__at_0x02FC|, CODE, READONLY
-CRP_Key         DCD     0xFFFFFFFF
+                DCD     0xFFFFFFFF
                 ENDIF
-
 
                 AREA    |.text|, CODE, READONLY
 
