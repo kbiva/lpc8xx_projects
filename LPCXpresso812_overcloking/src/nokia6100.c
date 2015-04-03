@@ -198,18 +198,7 @@ void LCDRect(int32_t x0, int32_t y0, int32_t x1, int32_t y1, int32_t color) {
     ymax = (y0 > y1) ? y0 : y1;
 
     // specify the controller drawing box according to those limits
-    // Row address set (command 0x2B)
-    spi0Transfer(PASET);
-    spi0Transfer(xmin | 0x100);
-    spi0Transfer(xmax | 0x100);
-
-    // Column address set (command 0x2A)
-    spi0Transfer(CASET);
-    spi0Transfer(ymin | 0x100);
-    spi0Transfer(ymax | 0x100);
-
-    // WRITE MEMORY
-    spi0Transfer(RAMWR);
+    LCDSetWindow(xmin,ymin,xmax,ymax);
 
 #ifdef _8BITCOLOR
     // loop on total number of pixels
