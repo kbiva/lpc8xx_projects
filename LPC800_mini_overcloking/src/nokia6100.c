@@ -53,6 +53,7 @@ void LCDInit(void) {
 }
 
 void LCDSetWindow(int32_t x1, int32_t y1,int32_t x2, int32_t y2) {
+
   // Row address set (command 0x2B)
   spi0Transfer(PASET);
   spi0Transfer(x1 | 0x100);
@@ -83,6 +84,7 @@ void LCDSetPixel(int32_t x, int32_t y, int32_t color) {
 }
 
 void LCDPutChar(char c, int32_t x, int32_t y) {
+	
   int32_t i, j;
   uint32_t nCols;
   uint32_t nRows;
@@ -153,6 +155,7 @@ void LCDPutChar(char c, int32_t x, int32_t y) {
 }
 
 void LCDPutStr(char *pString, int32_t x, int32_t y) {
+
   // loop until null-terminator is seen
   while (*pString) {
     // draw the character
@@ -186,6 +189,7 @@ void LCDSetup8BitColor(void) {
 
 
 void LCDRect(int32_t x0, int32_t y0, int32_t x1, int32_t y1, int32_t color) {
+	
   int32_t xmin, xmax, ymin, ymax;
   int32_t i;
 
