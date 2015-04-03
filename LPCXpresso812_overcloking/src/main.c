@@ -211,7 +211,7 @@ int32_t main(void) {
     Board_LED_Set(2,true);
 
     // reset milliseconds counter
-     counter=0;
+    counter=0;
 
     // do 100 filled rectangles
     for (i = 0; i < 100; i++) {
