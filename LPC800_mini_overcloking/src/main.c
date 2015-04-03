@@ -11,8 +11,6 @@
 #include "xprintf.h"
 #include "delay.h"
 
-#define LED_PIN 2
-
 const uint32_t OscRateIn = 12000000;
 const uint32_t ExtRateIn = 0;
 
