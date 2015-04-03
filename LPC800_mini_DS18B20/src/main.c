@@ -36,8 +36,6 @@ int32_t main(void) {
   uint8_t cnt,i,j,res;
   uint32_t temp1[One_Wire_Device_Number_MAX];
 
-  SPI_CONFIG_T ConfigStruct;
-
   SystemCoreClockUpdate();
 
   // init GPIO
@@ -45,12 +43,13 @@ int32_t main(void) {
   Chip_SYSCTL_PeriphReset(RESET_GPIO);
 
   // init SPI0 at SystemCoreClock speed
-  ConfigStruct.Mode = SPI_MODE_MASTER;
-  ConfigStruct.ClkDiv = 0;
-  ConfigStruct.ClockMode = SPI_CLOCK_CPHA0_CPOL0;
-  ConfigStruct.DataOrder = SPI_DATA_MSB_FIRST;
-  ConfigStruct.SSELPol = SPI_SSEL_ACTIVE_LO;
-  Chip_SPI_Init(LPC_SPI0,&ConfigStruct);
+  Chip_SPI_Init(LPC_SPI0);
+  Chip_SPI_ConfigureSPI(LPC_SPI0,SPI_MODE_MASTER|
+                                 SPI_CLOCK_CPHA0_CPOL0|
+                                 SPI_DATA_MSB_FIRST|
+                                 SPI_SSEL_ACTIVE_LO);
+  //Chip_SPIM_SetClockRate(LPC_SPI0,SystemCoreClock);
+  LPC_SPI0->DIV=0;
   Chip_SPI_Enable(LPC_SPI0);
 
   // init MRT

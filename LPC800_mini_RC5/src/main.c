@@ -39,7 +39,6 @@ int32_t main(void) {
   uint8_t RC5_System_prev=0;
   uint8_t RC5_Command_prev=0;
   CHIP_PMU_MCUPOWER_T mcupower=PMU_MCU_SLEEP;
-  SPI_CONFIG_T ConfigStruct;
 
   SystemCoreClockUpdate();
 
@@ -48,12 +47,12 @@ int32_t main(void) {
   Chip_SYSCTL_PeriphReset(RESET_GPIO);
 
 // init SPI0 at SystemCoreClock speed
-  ConfigStruct.Mode = SPI_MODE_MASTER;
-  ConfigStruct.ClkDiv = 0;
-  ConfigStruct.ClockMode = SPI_CLOCK_CPHA0_CPOL0;
-  ConfigStruct.DataOrder = SPI_DATA_MSB_FIRST;
-  ConfigStruct.SSELPol = SPI_SSEL_ACTIVE_LO;
-  Chip_SPI_Init(LPC_SPI0,&ConfigStruct);
+  Chip_SPI_Init(LPC_SPI0);
+  Chip_SPI_ConfigureSPI(LPC_SPI0,SPI_MODE_MASTER|
+                                 SPI_CLOCK_CPHA0_CPOL0|
+                                 SPI_DATA_MSB_FIRST|
+                                 SPI_SSEL_ACTIVE_LO);
+  LPC_SPI0->DIV=0;
   Chip_SPI_Enable(LPC_SPI0);
 
 // init MRT

@@ -111,8 +111,6 @@ int32_t main(void) {
   uint32_t p2y;
   uint32_t pcol;
 
-  SPI_CONFIG_T ConfigStruct;
-
   SystemCoreClockUpdate();
 
 // init GPIO
@@ -133,12 +131,13 @@ int32_t main(void) {
   Chip_SWM_MovablePinAssign(SWM_SPI0_MOSI_IO,MOSI_PIN);
 
 // init SPI0 at SystemCoreClock speed
-  ConfigStruct.Mode = SPI_MODE_MASTER;
-  ConfigStruct.ClkDiv = 0;
-  ConfigStruct.ClockMode = SPI_CLOCK_CPHA0_CPOL0;
-  ConfigStruct.DataOrder = SPI_DATA_MSB_FIRST;
-  ConfigStruct.SSELPol = SPI_SSEL_ACTIVE_LO;
-  Chip_SPI_Init(LPC_SPI0,&ConfigStruct);
+  Chip_SPI_Init(LPC_SPI0);
+  Chip_SPI_ConfigureSPI(LPC_SPI0,SPI_MODE_MASTER|
+                                 SPI_CLOCK_CPHA0_CPOL0|
+                                 SPI_DATA_MSB_FIRST|
+                                 SPI_SSEL_ACTIVE_LO);
+  //Chip_SPIM_SetClockRate(LPC_SPI0,SystemCoreClock);
+  LPC_SPI0->DIV=0;
   Chip_SPI_Enable(LPC_SPI0);
 
   // init MRT
