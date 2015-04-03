@@ -203,7 +203,6 @@ void LCDRect(int32_t x0, int32_t y0, int32_t x1, int32_t y1, int32_t color) {
     ymax = (y0 > y1) ? y0 : y1;
 
     // specify the controller drawing box according to those limits
-
     LCDSetWindow(xmin,ymin,xmax,ymax);
 
 #ifdef _8BITCOLOR
