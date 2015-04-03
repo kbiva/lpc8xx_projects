@@ -170,10 +170,14 @@ int32_t main(void) {
   for(j=0;j<sizeof(modes)/sizeof(MODE);j++) {
 
     // setup new clock speed using PLL
+    // power down PLL when changing MSEL and PSEL, chapter 4.7.4.3.3 in LPC81x User manual (UM10601)
+    Chip_Clock_SetMainClockSource(SYSCTL_MAINCLKSRC_IRC);
+    Chip_SYSCTL_PowerDown(SYSCTL_SLPWAKE_SYSPLL_PD);
     Chip_Clock_SetupSystemPLL(modes[j].MSEL,modes[j].PSEL);
     Chip_SYSCTL_PowerUp(SYSCTL_SLPWAKE_SYSPLL_PD);
     while(!Chip_Clock_IsSystemPLLLocked()){};
     Chip_Clock_SetSysClockDiv(modes[j].DIV);
+    Chip_Clock_SetMainClockSource(SYSCTL_MAINCLKSRC_PLLOUT);
 
     SystemCoreClockUpdate();
 
