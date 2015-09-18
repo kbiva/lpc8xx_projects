@@ -164,12 +164,7 @@ int32_t main(void) {
         LCDPutChar(ascii[(cnt >> (i * 4)) & 0x0F],MAX_X / 2 - 40,80+(3-i)*7,WHITE, BLACK);
       }
 
-      if(RC5_Toggle) {
-        LCDPutStr("ON ", MAX_X / 2 - 25, 80, WHITE, BLACK);
-      }
-      else {
-        LCDPutStr("OFF", MAX_X / 2 - 25, 80, WHITE, BLACK);
-      }
+      LCDPutStr(RC5_Toggle ? "ON ":"OFF", MAX_X / 2 - 25, 80, WHITE, BLACK);
 
       switch(RC5_Command) {
         case 0x50:
