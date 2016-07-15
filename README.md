@@ -15,6 +15,22 @@ Overclocks MCU up to 72Mhz.
 
 LPC800 Mini-Kit: shows decoded RC5 codes from IR receiver on LCD.
 
+* LPC812_microboard_7segment_DS18B20
+
+Showing temperature on 2.5 digit indicator.
+
+* LPC812_microboard_7segment_oc
+
+Overclocking LCP812 from 1Mhz to 72Mhz. Showing frequency on 2.5 digit indicator.
+
+* LPC812_microboard_blinky
+
+Blinking one LED.
+
+* LPC812_microboard_blinky_tneo
+
+Blinking 8 LEDs using real-time kernel (TNeo).
+
 * LPC812_clock
 
 Custom made clock with LPC812 microcontroler.
