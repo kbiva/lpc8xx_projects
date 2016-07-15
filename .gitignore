@@ -16,4 +16,6 @@ ArInp.Scr
 *.l2p
 Extdll.iex
 *._2i
+JLinkSettings.ini
+JLinkLog.txt
 
