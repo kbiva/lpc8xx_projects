@@ -1,7 +1,8 @@
 Introduction
 =
 LPC812 microboard, DS18B20 thermometer and 2.5 digits indicator.
-Displays current temperature on a 2.5 digits indicator.
+First it displays 64 bit serial number of the connected thermometer 
+and then displays current temperature on a 2.5 digits indicator.
 LED blinks at constant speed (period is 1s).
 
 Hardware
