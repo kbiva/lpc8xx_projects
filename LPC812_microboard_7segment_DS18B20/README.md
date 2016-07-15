@@ -1,6 +1,6 @@
 Introduction
 =
-LPC812 microboard, DS18B20 thermomether and 2.5 digits indicator.
+LPC812 microboard, DS18B20 thermometer and 2.5 digits indicator.
 Displays current temperature on a 2.5 digits indicator.
 LED blinks at constant speed (period is 1s).
 
