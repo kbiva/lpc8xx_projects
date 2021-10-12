@@ -18,6 +18,19 @@ Hardware
 * Custom made Nokia 6020 LCD backpack.
 * NXP LPC800-Mini-Kit: MCU clock is 12Mhz from internal oscillator.
 
+Connections
+=
+
+Nokia 6020 LCD backpack:
+
+* VCC to 3.3V
+* GND to GND
+* CLK to PIO0_4
+* MOSI to PIO0_0
+* RST to PIO0_1
+* CE to GND
+* VLED to 5V
+
 Software
 =
 Used peripherals: 
@@ -26,16 +39,10 @@ Used peripherals:
 * SPI0 (9-bit, speed is the same as MCU clock (2Mhz -72Mhz).
 * Multi-Rate Timer (MRT) for millisesonds delay. 
 
-In order to fit compiled code in 4Kb following options we used:
-"Use MicroLIB", "Optimization: Level 2(-O2)", "One ELF Section per Function"
-
 Project uses external libraries:
 
-* LPCOpen Software Development Platform 2.01
+* LPCOpen Software Development Platform 3.02
 * xprintf library
-
-The libraries were built with the following options:
-"Optimization: Level 3(-O3)", "One ELF Section per Function".
 
 Links
 =
