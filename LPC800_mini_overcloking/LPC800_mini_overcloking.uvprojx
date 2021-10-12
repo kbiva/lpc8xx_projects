@@ -469,8 +469,8 @@
           <targetInfo name="LPC800_mini_overcloking"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="1.0.1" condition="LPC81x CMSIS">
-        <package name="LPC800_DFP" schemaVersion="1.2" url="http://www.keil.com/pack/" vendor="Keil" version="1.2.0"/>
+      <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="2.0.0" condition="LPC810 CMSIS">
+        <package name="LPC800_DFP" schemaVersion="1.4" url="http://www.keil.com/pack/" vendor="Keil" version="1.10.1"/>
         <targetInfos>
           <targetInfo name="LPC800_mini_overcloking"/>
         </targetInfos>
