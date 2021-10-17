@@ -12,13 +12,9 @@
 #include "2_5_digits_indicator.h"
 #include "DS18B20.h"
 #include "1-Wire.h"
-
-#define LED_PIN 17
+#include "board.h"
 
 extern uint32_t SystemCoreClock;
-
-const uint32_t OscRateIn = 12000000;
-const uint32_t ExtRateIn = 0;
 
 unsigned char ROM_SN[DS18B20_SERIAL_NUM_SIZE];
 
@@ -28,7 +24,7 @@ void WKT_IRQHandler(void) {
   Chip_WKT_ClearIntStatus(LPC_WKT);
 
   // LED will toggle state on wakeup event
-  Chip_GPIO_SetPinToggle(LPC_GPIO_PORT, 0, LED_PIN);
+  Board_LED_Toggle(0);
 }
 
 volatile uint32_t counter=0;
@@ -54,12 +50,11 @@ int main(void) {
   // Read clock settings and update SystemCoreClock variable
   SystemCoreClockUpdate();
 
-  // init GPIO
-  Chip_GPIO_Init(LPC_GPIO_PORT);
-  Chip_GPIO_SetPinDIROutput(LPC_GPIO_PORT, 0, LED_PIN);
-  Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, LED_PIN, false);
+  // init board
+  Board_Init();
+  Board_LED_Set(0, false);
 
-  Init_2_5_Digits_Indicator();
+  Init_2_5_Digits_Indicator(4, 0);
 
   // init MRT
   Chip_MRT_Init();
@@ -72,29 +67,29 @@ int main(void) {
   Chip_MRT_SetMode(LPC_MRT_CH1,MRT_MODE_ONESHOT_BUS_STALL);
   Chip_MRT_SetEnabled(LPC_MRT_CH1);
 
-  IndicatorDisplayMinus();
+  Indicator_Display_Minus();
   delay_ms(2000);
 
   // reset 1wire bus
-  while(One_Wire_Reset()){
+  while (One_Wire_Reset()){
     delay_ms(10);
   }
 
   // search for thermometer
-  if(DS18B20_Search_Rom_One_Device(&ROM_SN)!=One_Wire_Success) {
-    Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, LED_PIN, true);
-    while(1){};
+  if (DS18B20_Search_Rom_One_Device(&ROM_SN) != One_Wire_Success) {
+    Board_LED_Set(0, true);
+    while (1) {};
   }
 
   // display ROM
-  for(i=0;i<DS18B20_SERIAL_NUM_SIZE;i++){
-    IndicatorDisplayHexLZ(ROM_SN[i]);
+  for (i = 0; i < DS18B20_SERIAL_NUM_SIZE; i++){
+    Indicator_Display_Hex_LZ(ROM_SN[i]);
     delay_ms(1000);
-    IndicatorClear();
+    Indicator_Clear();
     delay_ms(1000);
   }
 
-  IndicatorDisplayMinus();
+  Indicator_Display_Minus();
 
   // Alarm/wake timer as chip wakeup source
   Chip_SYSCTL_EnablePeriphWakeup(SYSCTL_WAKEUP_WKTINT);
@@ -119,7 +114,7 @@ int main(void) {
   while (1) {
 
     //display temperature
-    if(DS18B20_Start_Conversion_by_ROM(&ROM_SN)==One_Wire_Success) {
+    if(DS18B20_Start_Conversion_by_ROM(&ROM_SN) == One_Wire_Success) {
 
       // Wait 1s for conversion complete
       Chip_WKT_LoadCount(LPC_WKT, Chip_WKT_GetClockRate(LPC_WKT) * 1);
@@ -128,15 +123,15 @@ int main(void) {
       // Will return here after wakeup and WKT IRQ
       Chip_WKT_Stop(LPC_WKT);
 
-      if(DS18B20_Get_Conversion_Result_by_ROM_CRC(&ROM_SN,&temp1)==One_Wire_Success) {
-        IndicatorDisplayDec(temp1>>4);
+      if (DS18B20_Get_Conversion_Result_by_ROM_CRC(&ROM_SN,&temp1) == One_Wire_Success) {
+        Indicator_Display_Dec(temp1 >> 4);
       }
       else {
-        IndicatorDisplayMinus();
+        Indicator_Display_Minus();
       }
     }
     else {
-      IndicatorDisplayMinus();
+      Indicator_Display_Minus();
     }
   }
 }

@@ -20,18 +20,12 @@ Used peripherals:
 * SPI0 (16-bit, speed is the same as MCU clock.
 * Multi-Rate Timer (MRT) for millisesonds delay. 
 
-Following options we used:
-"Use MicroLIB", "Optimization: Level 2(-O2)", "One ELF Section per Function"
-
 Project uses external libraries:
 
-* LPCOpen 2.19 library for LPC8xx
+* LPCOpen 3.02 library for LPC8xx
 * 2.5 digits indicator library
 * 1-Wire library
 * DS18B20 library
-
-The libraries were built with the following options:
-"Optimization: Level 3(-O3)", "One ELF Section per Function".
 
 Links
 =
