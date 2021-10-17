@@ -19,6 +19,10 @@ LPC800 Mini-Kit: shows decoded RC5 codes from IR receiver on 2.5 digits indicato
 LPC800 Mini-Kit: shows how to dinamically change MCU clock speed.
 Overclocks MCU up to 72Mhz.
 
+* LPC812_birthday_clock
+
+Custom made clock with LPC812 microcontroler.
+
 * LPC812_clock
 
 Custom made clock with LPC812 microcontroler.
