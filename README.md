@@ -51,3 +51,8 @@ Overclocks MCU up to 72Mhz.
 * LPCXpresso812_RC5_7segment
 
 LPCXpresso LPC812: shows decoded RC5 codes from IR receiver on 2.5 digits indicator.
+
+* LPCXpresso812_RC5_NokiaLCD
+
+LPCXpresso LPC812: shows decoded RC5 codes from IR receiver on Nokia 6100 LCD.
+
