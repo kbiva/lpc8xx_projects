@@ -11,13 +11,9 @@
 #include "nokia6100.h"
 #include "DS18B20.h"
 #include "1-Wire.h"
-
-#define LED_PIN 2
+#include "board.h"
 
 const char ascii[] = "0123456789ABCDEF";
-
-const uint32_t OscRateIn = 12000000;
-const uint32_t ExtRateIn = 0;
 
 // up to 10 thermometers on 1-Wire bus
 unsigned char ROM_SN[10][DS18B20_SERIAL_NUM_SIZE];
@@ -27,7 +23,7 @@ void WKT_IRQHandler(void) {
   Chip_WKT_ClearIntStatus(LPC_WKT);
 
   // LED will toggle state on wakeup event
-  Chip_GPIO_SetPinToggle(LPC_GPIO_PORT, 0, LED_PIN);
+  Board_LED_Toggle(0);
 }
 
 int32_t main(void) {
@@ -49,7 +45,7 @@ int32_t main(void) {
                                  SPI_DATA_MSB_FIRST|
                                  SPI_SSEL_ACTIVE_LO);
   //Chip_SPIM_SetClockRate(LPC_SPI0,SystemCoreClock);
-  LPC_SPI0->DIV=0;
+  LPC_SPI0->DIV = 0;
   Chip_SPI_Enable(LPC_SPI0);
 
   // init MRT
@@ -66,9 +62,8 @@ int32_t main(void) {
   Chip_SWM_MovablePinAssign(SWM_SPI0_MOSI_IO,MOSI_PIN);
   Chip_SWM_Deinit();
 
-  // init onboard LED
-  Chip_GPIO_SetPinState(LPC_GPIO_PORT,0,LED_PIN,true);
-  Chip_GPIO_SetPinDIROutput(LPC_GPIO_PORT,0,LED_PIN);
+  // init board
+  Board_Init();
 
   // init LCD reset pin
   Chip_GPIO_SetPinDIROutput(LPC_GPIO_PORT,0,RESET_PIN);
@@ -81,7 +76,7 @@ int32_t main(void) {
 
   // reset 1wire bus
   while(One_Wire_Reset()){
-    for(dd=0;dd<1000000;dd++){};
+    for (dd = 0; dd < 1000000; dd++) {};
   }
 
   LCDPutStr("Nokia 6020 LCD and", 101, 4, WHITE, BLACK);
@@ -89,14 +84,14 @@ int32_t main(void) {
   LCDPutStr("Nr       ID         C", 78, 1, WHITE, BLACK);
 
   // search for thermometers
-  DS18B20_Search_Rom2(&cnt,&ROM_SN);
+  DS18B20_Search_Rom2(&cnt, &ROM_SN);
 
   // display found IDs
-  for(j=0;j<cnt;j++) {
-    LCDPutChar(j+0x31,66-j*9,2,WHITE, BLACK);
-    for(i=0;i<DS18B20_SERIAL_NUM_SIZE;i++) {
-      LCDPutChar(ascii[(ROM_SN[j][i] >> 4) & 0x0F],66-j*9,14+(i*12),WHITE, BLACK);
-      LCDPutChar(ascii[(ROM_SN[j][i] ) & 0x0F],66-j*9,14+(i*12+6),WHITE, BLACK);
+  for (j = 0; j < cnt; j++) {
+    LCDPutChar(j + 0x31, 66 - j * 9, 2, WHITE, BLACK);
+    for (i = 0; i < DS18B20_SERIAL_NUM_SIZE; i++) {
+      LCDPutChar(ascii[(ROM_SN[j][i] >> 4) & 0x0F], 66 - j * 9, 14 + (i * 12), WHITE, BLACK);
+      LCDPutChar(ascii[(ROM_SN[j][i] ) & 0x0F], 66 - j * 9, 14 + (i * 12 + 6), WHITE, BLACK);
     }
   }
 
@@ -132,16 +127,16 @@ int32_t main(void) {
     Chip_WKT_Stop(LPC_WKT);
 
     //display temperatures
-    for(j=0;j<cnt;j++) {
+    for (j = 0; j < cnt; j++) {
       DS18B20_Start_Conversion_by_ROM(&ROM_SN[j]);
-      res=DS18B20_Get_Conversion_Result_by_ROM_CRC(&ROM_SN[j],&temp1[j]);
-      if(res==One_Wire_Success && temp1[j] != 0x550) {
-        LCDPutChar(ascii[((temp1[j]>>4)/10) & 0x0F],66-j*9,118,WHITE, BLACK);
-        LCDPutChar(ascii[((temp1[j]>>4)%10) & 0x0F],66-j*9,124,WHITE, BLACK);
+      res = DS18B20_Get_Conversion_Result_by_ROM_CRC(&ROM_SN[j], &temp1[j]);
+      if (res == One_Wire_Success && temp1[j] != 0x550) {
+        LCDPutChar(ascii[((temp1[j] >> 4) / 10) & 0x0F], 66 - j * 9, 118, WHITE, BLACK);
+        LCDPutChar(ascii[((temp1[j] >> 4) % 10) & 0x0F], 66 - j * 9, 124, WHITE, BLACK);
       }
       else {
-        LCDPutChar('E',66-j*9,118,WHITE, BLACK);
-        LCDPutChar('r',66-j*9,124,WHITE, BLACK);
+        LCDPutChar('E', 66 - j * 9, 118, WHITE, BLACK);
+        LCDPutChar('r', 66 - j * 9, 124, WHITE, BLACK);
       }
     }
   }

@@ -17,10 +17,10 @@ void LCDInit(void) {
   volatile uint32_t i;
 
 //  Reset
-  Chip_GPIO_SetPinState(LPC_GPIO_PORT,0,RESET_PIN,false);
-  for(i=0;i<12000;i++){};
-  Chip_GPIO_SetPinState(LPC_GPIO_PORT,0,RESET_PIN,true);
-  for(i=0;i<600000;i++){};
+  Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, RESET_PIN, false);
+  for (i = 0; i < 12000; i++) {};
+  Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, RESET_PIN, true);
+  for(i = 0; i < 600000; i++) {};
 
   // Sleep out (command 0x11)
   spi0Transfer(SLEEPOUT);
@@ -58,7 +58,7 @@ void LCDInit(void) {
 void LCDClearScreenBlack(void) {
   uint32_t i;
 
-  LCDSetWindow(START_X,START_Y,END_X,END_Y);
+  LCDSetWindow(START_X, START_Y, END_X, END_Y);
 
 #ifdef _8BITCOLOR
   for (i = 0; i < ((MAX_X * MAX_Y)); i++) {
@@ -98,7 +98,7 @@ void LCDSetWindow(int32_t x1, int32_t y1,int32_t x2, int32_t y2) {
 
 void LCDSetPixel(int32_t x, int32_t y, int32_t color) {
 
-  LCDSetWindow(x,y,x,y);
+  LCDSetWindow(x, y, x, y);
 
 #ifdef _8BITCOLOR
   spi0Transfer((color & 0xFF) | 0x100);
@@ -134,7 +134,7 @@ void LCDPutChar(char c, int32_t x, int32_t y, int32_t fColor, int32_t bColor) {
   // get pointer to the last byte of the desired character
   pChar = pFont + (nBytes * (c - 0x1F)) + nBytes - 1;
 
-  LCDSetWindow(x,y,x + nRows - 1,y + nCols - 1);
+  LCDSetWindow(x, y, x + nRows - 1, y + nCols - 1);
 
   // loop on each row, working backwards from the bottom to the top
   for (i = nRows - 1; i >= 0; i--) {
@@ -207,7 +207,7 @@ void LCDSetup8BitColor(void) {
 
   spi0Transfer(RGBSET);  // Define Color Table  (command 0x2D)
 
-  for(i=0;i<48;i++) {
+  for (i = 0; i < 48; i++) {
     spi0Transfer(RGB8ColorMap_Nokia6020[i] | 0x100);
   }
 }
