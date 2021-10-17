@@ -10,14 +10,10 @@
  */
 
 #include "chip.h"
+#include "board.h"
 #include "2_5_digits_indicator.h"
 
-#define LED_PIN 17
-
 extern uint32_t SystemCoreClock;
-
-const uint32_t OscRateIn = 12000000;
-const uint32_t ExtRateIn = 0;
 
 typedef struct {
   uint8_t MSEL;
@@ -51,22 +47,22 @@ MODE modes[] = {
   {5,1,1},// 72 MHz overclocked
 };
 
-volatile uint32_t counter=0;
+volatile uint32_t counter = 0;
 
 void MRT_IRQHandler(void) {
 
   if (Chip_MRT_IntPending(LPC_MRT_CH0)) {
     Chip_MRT_IntClear(LPC_MRT_CH0);
     counter++;
-    if(counter%500==0)
-      Chip_GPIO_SetPinToggle(LPC_GPIO_PORT, 0, LED_PIN);
+    if (counter % 500 == 0)
+      Board_LED_Toggle(0);
   }
 }
 
 void delay_ms(uint32_t msec) {
 
-  counter=0;
-  while(counter<msec){};
+  counter = 0;
+  while (counter < msec) {};
 }
 
 int main(void) {
@@ -77,48 +73,49 @@ int main(void) {
   // Read clock settings and update SystemCoreClock variable
   SystemCoreClockUpdate();
 
-  Chip_Clock_EnablePeriphClock(SYSCTL_CLOCK_GPIO);
-  Chip_GPIO_SetPinDIROutput(LPC_GPIO_PORT, 0, LED_PIN);
+  Board_Init();
 
-  Init_2_5_Digits_Indicator();
+  Init_2_5_Digits_Indicator(4, 0);
 
   // init MRT
   Chip_MRT_Init();
 // Channel0 for miliseconds delay
   Chip_MRT_SetMode(LPC_MRT_CH0,MRT_MODE_REPEAT);
-  Chip_MRT_SetInterval(LPC_MRT_CH0, SystemCoreClock/1000 | MRT_INTVAL_LOAD);
+  Chip_MRT_SetInterval(LPC_MRT_CH0, SystemCoreClock / 1000 | MRT_INTVAL_LOAD);
   Chip_MRT_SetEnabled(LPC_MRT_CH0);
   NVIC_EnableIRQ(MRT_IRQn);
 
-  IndicatorDisplayMinus();
+  Indicator_Display_Minus();
   delay_ms(2000);
 
   // go from 2 to 72 Mhz
-  for(j=0;j<sizeof(modes)/sizeof(MODE);j++) {
+  for (j = 0; j < sizeof(modes) / sizeof(MODE); j++) {
 
     // setup new clock speed using PLL
     // power down PLL when changing MSEL and PSEL, chapter 4.7.4.3.3 in LPC81x User manual (UM10601)
-
     Chip_Clock_SetMainClockSource(SYSCTL_MAINCLKSRC_IRC);
     Chip_SYSCTL_PowerDown(SYSCTL_SLPWAKE_SYSPLL_PD);
-    Chip_Clock_SetupSystemPLL(modes[j].MSEL,modes[j].PSEL);
+    Chip_Clock_SetupSystemPLL(modes[j].MSEL, modes[j].PSEL);
     Chip_SYSCTL_PowerUp(SYSCTL_SLPWAKE_SYSPLL_PD);
-    while(!Chip_Clock_IsSystemPLLLocked()){};
+    while (!Chip_Clock_IsSystemPLLLocked()) {};
     Chip_Clock_SetSysClockDiv(modes[j].DIV);
     Chip_Clock_SetMainClockSource(SYSCTL_MAINCLKSRC_PLLOUT);
 
     SystemCoreClockUpdate();
 
-    clk=SystemCoreClock/1000;
+    clk = SystemCoreClock / 1000;
 
     // Set new millisecond interval because clock speed changed
     Chip_MRT_SetInterval(LPC_MRT_CH0, clk | MRT_INTVAL_LOAD);
 
-    clk=SystemCoreClock/1000000;
+    clk = SystemCoreClock / 1000000;
 
-    IndicatorDisplayDec(clk);
+    Indicator_Display_Dec(clk);
 
     delay_ms(1000);
   }
+  
+  Chip_Clock_SetMainClockSource(SYSCTL_MAINCLKSRC_IRC);
+  
   while(1){};
 }
