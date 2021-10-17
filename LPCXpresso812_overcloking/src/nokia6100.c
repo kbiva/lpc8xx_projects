@@ -14,9 +14,9 @@
 void LCDInit(void) {
 
 //  Reset
-  Chip_GPIO_SetPinState(LPC_GPIO_PORT,0,RESET_PIN,false);
+  Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, RESET_PIN, false);
   delay_ms(5);
-  Chip_GPIO_SetPinState(LPC_GPIO_PORT,0,RESET_PIN,true);
+  Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, RESET_PIN, true);
   delay_ms(20);
 
   // Sleep out (command 0x11)
@@ -70,7 +70,7 @@ void LCDSetWindow(int32_t x1, int32_t y1,int32_t x2, int32_t y2) {
 
 void LCDSetPixel(int32_t x, int32_t y, int32_t color) {
 
-  LCDSetWindow(x,y,x,y);
+  LCDSetWindow(x, y, x, y);
 
 #ifdef _8BITCOLOR
   spi0Transfer((color & 0xFF) | 0x100);
@@ -107,7 +107,7 @@ void LCDPutChar(char c, int32_t x, int32_t y) {
   // get pointer to the last byte of the desired character
   pChar = pFont + (nBytes * (c - 0x1F)) + nBytes - 1;
 
-  LCDSetWindow(x,y,x + nRows - 1,y + nCols - 1);
+  LCDSetWindow(x, y, x + nRows - 1, y + nCols - 1);
 
   // loop on each row, working backwards from the bottom to the top
   for (i = nRows - 1; i >= 0; i--) {
@@ -182,7 +182,7 @@ void LCDSetup8BitColor(void) {
 
   spi0Transfer(RGBSET);  // Define Color Table  (command 0x2D)
 
-  for(i=0;i<20;i++) {
+  for (i = 0; i < 20; i++) {
     spi0Transfer(RGB8ColorMap[i] | 0x100);
   }
 }
@@ -201,7 +201,7 @@ void LCDRect(int32_t x0, int32_t y0, int32_t x1, int32_t y1, int32_t color) {
     ymax = (y0 > y1) ? y0 : y1;
 
     // specify the controller drawing box according to those limits
-    LCDSetWindow(xmin,ymin,xmax,ymax);
+    LCDSetWindow(xmin, ymin, xmax, ymax);
 
 #ifdef _8BITCOLOR
     // loop on total number of pixels

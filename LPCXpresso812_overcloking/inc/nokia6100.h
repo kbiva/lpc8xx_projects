@@ -27,9 +27,9 @@
 //#define _12BITCOLOR 12
 //#define _16BITCOLOR 16
 
-#define RESET_PIN 15
-#define CLK_PIN 12
-#define MOSI_PIN 14
+#define RESET_PIN 1
+#define CLK_PIN 4
+#define MOSI_PIN 0
 
 #define MAX_X 132
 #define MAX_Y 132
