@@ -11,9 +11,9 @@ LPC800 Mini-Kit: shows temperatures of DS18B20 digital thermometers on LCD.
 LPC800 Mini-Kit: shows how to dinamically change MCU clock speed.
 Overclocks MCU up to 72Mhz.
 
-* LPC800_mini_RC5
+* LPC800_mini_RC5_NokiaLCD
 
-LPC800 Mini-Kit: shows decoded RC5 codes from IR receiver on LCD.
+LPC800 Mini-Kit: shows decoded RC5 codes from IR receiver on Nokia 6100 LCD.
 
 * LPC812_microboard_7segment_DS18B20
 
