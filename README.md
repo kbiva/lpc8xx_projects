@@ -35,6 +35,10 @@ Blinking one LED.
 
 LPC812 microboard: shows decoded RC5 codes from IR receiver on 2.5 digits indicator.
 
+* LPC812_microboard_RC5_NokiaLCD 
+
+LPC812 microboard: shows decoded RC5 codes from IR receiver on Nokia 6100 LCD.
+
 * LPC812_clock
 
 Custom made clock with LPC812 microcontroler.
