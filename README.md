@@ -31,6 +31,10 @@ Overclocking LCP812 from 1Mhz to 72Mhz. Showing frequency on 2.5 digits indicato
 
 Blinking one LED.
 
+* LPC812_microboard_RC5_7segment 
+
+LPC812 microboard: shows decoded RC5 codes from IR receiver on 2.5 digits indicator.
+
 * LPC812_clock
 
 Custom made clock with LPC812 microcontroler.
