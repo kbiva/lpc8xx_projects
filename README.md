@@ -15,13 +15,17 @@ Overclocks MCU up to 72Mhz.
 
 LPC800 Mini-Kit: shows decoded RC5 codes from IR receiver on Nokia 6100 LCD.
 
+* LPC800_mini_RC5_7segment 
+
+LPC800 Mini-Kit: shows decoded RC5 codes from IR receiver on 2.5 digits indicator.
+
 * LPC812_microboard_7segment_DS18B20
 
 Showing temperature on 2.5 digit indicator.
 
 * LPC812_microboard_7segment_oc
 
-Overclocking LCP812 from 1Mhz to 72Mhz. Showing frequency on 2.5 digit indicator.
+Overclocking LCP812 from 1Mhz to 72Mhz. Showing frequency on 2.5 digits indicator.
 
 * LPC812_microboard_blinky
 

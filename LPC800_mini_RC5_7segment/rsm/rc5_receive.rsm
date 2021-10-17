@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StateMachine>
+<Global key="Name" value="rc5_receive"/>
+<Global key="SCT h file" value="sct_fsm.h"/>
+<Global key="Target" value="LPC8xx"/>
+<Global key="Header in sct_user.h" value="LPC8xx.h"/>
+<Global key="SCT c file" value="sct_fsm.c"/>
+<Global key="User h file" value="sct_user.h"/>
+<Global key="Init function prefix" value="sct_fsm"/>
+<Global key="Main output file" value="rc5_receive.smd"/>
+<Input IMemento.internal.id="SmInput" Name="Input pin 0" Permissions="6" Source="CTIN_0" Type="0"/>
+<Input IMemento.internal.id="SmInput" Name="Input pin 1" Permissions="6" Source="CTIN_1" Type="0"/>
+<Input IMemento.internal.id="SmInput" Name="Input pin 2" Permissions="6" Source="CTIN_2" Type="0"/>
+<Input IMemento.internal.id="SmInput" Name="Input pin 3" Permissions="6" Source="CTIN_3" Type="0"/>
+<Input IMemento.internal.id="SmInput" Name="MATCH0" Permissions="0" Source="match_val" Type="9"/>
+<Input IMemento.internal.id="SmInput" Name="match_val" Permissions="0" Source="12000" Type="6"/>
+<Output IMemento.internal.id="SmOutput" Name="Output pin 0" Permissions="6" Source="CTOUT_0" Type="0"/>
+<Output IMemento.internal.id="SmOutput" Name="Output pin 1" Permissions="6" Source="CTOUT_1" Type="0"/>
+<Output IMemento.internal.id="SmOutput" Name="Output pin 2" Permissions="6" Source="CTOUT_2" Type="0"/>
+<Output IMemento.internal.id="SmOutput" Name="Output pin 3" Permissions="6" Source="CTOUT_3" Type="0"/>
+<Output IMemento.internal.id="SmOutput" Name="Limit unified counter" Permissions="6" Source="U_LIMIT" Type="2"/>
+<Output IMemento.internal.id="SmOutput" Name="Start unified counter" Permissions="6" Source="U_START" Type="2"/>
+<Output IMemento.internal.id="SmOutput" Name="Stop unified counter" Permissions="6" Source="U_STOP" Type="2"/>
+<Output IMemento.internal.id="SmOutput" Name="Halt unified counter" Permissions="6" Source="U_HALT" Type="2"/>
+<Output IMemento.internal.id="SmOutput" Name="Limit low counter" Permissions="6" Source="L_LIMIT" Type="2"/>
+<Output IMemento.internal.id="SmOutput" Name="Start low counter" Permissions="6" Source="L_START" Type="2"/>
+<Output IMemento.internal.id="SmOutput" Name="Stop low counter" Permissions="6" Source="L_STOP" Type="2"/>
+<Output IMemento.internal.id="SmOutput" Name="Halt low counter" Permissions="6" Source="L_HALT" Type="2"/>
+<Output IMemento.internal.id="SmOutput" Name="Limit high counter" Permissions="6" Source="H_LIMIT" Type="2"/>
+<Output IMemento.internal.id="SmOutput" Name="Start high counter" Permissions="6" Source="H_START" Type="2"/>
+<Output IMemento.internal.id="SmOutput" Name="Stop high counter" Permissions="6" Source="H_STOP" Type="2"/>
+<Output IMemento.internal.id="SmOutput" Name="Halt high counter" Permissions="6" Source="H_HALT" Type="2"/>
+<Output IMemento.internal.id="SmOutput" Name="SCT_IRQ" Permissions="6" Source="IRQ" Type="2"/>
+<Output IMemento.internal.id="SmOutput" Name="CAPTURE1" Permissions="0" Source="UNIFIED" Type="3"/>
+<Output IMemento.internal.id="SmOutput" Name="CAPTURE2" Permissions="0" Source="UNIFIED" Type="3"/>
+<State h="35" name="U_ENTRY" w="65" x="210" y="143"/>
+<Action description="" name="EVENT0" numElements="2">
+<ActionElement name="Limit unified counter" op="2" order="1"/>
+<ActionElement name="SCT_IRQ" op="2" order="2"/>
+</Action>
+<Action description="" name="EVENT1" numElements="3">
+<ActionElement name="Limit unified counter" op="2" order="1"/>
+<ActionElement name="SCT_IRQ" op="2" order="2"/>
+<ActionElement name="CAPTURE1" op="4" order="3"/>
+</Action>
+<Action description="" name="EVENT2" numElements="2">
+<ActionElement name="CAPTURE2" op="4" order="1"/>
+<ActionElement name="Limit unified counter" op="2" order="2"/>
+</Action>
+<SmLogical IMemento.internal.id="SmSignal" SML_DESC="" SML_NAME="match0">
+<SmLogical IMemento.internal.id="SmLogicalBool" IOTYPE="0" SML_NAME="MATCH0" SML_TYPE="1"/>
+</SmLogical>
+<SmLogical IMemento.internal.id="SmSignal" SML_DESC="" SML_NAME="CTIN0 falling edge">
+<SmLogical IMemento.internal.id="SmLogicalBool" IOTYPE="0" SML_NAME="Input pin 0" SML_TYPE="3"/>
+</SmLogical>
+<SmLogical IMemento.internal.id="SmSignal" SML_DESC="" SML_NAME="CTIN0 rising edge">
+<SmLogical IMemento.internal.id="SmLogicalBool" IOTYPE="0" SML_NAME="Input pin 0" SML_TYPE="2"/>
+</SmLogical>
+<Transition action="EVENT0" current="U_ENTRY" h="60" next="U_ENTRY" priority="0" signal="match0" w="150" x="180" y="48">
+<curve num="3">
+<point d1x="14" d1y="-37" d2x="14" d2y="-37" index="0" weight="0.5"/>
+<point d1x="0" d1y="-47" d2x="0" d2y="-47" index="1" weight="0.5"/>
+<point d1x="-14" d1y="-39" d2x="-14" d2y="-39" index="2" weight="0.5"/>
+</curve>
+</Transition>
+<Transition action="EVENT1" current="U_ENTRY" h="60" next="U_ENTRY" priority="0" signal="CTIN0 falling edge" w="192" x="67" y="179">
+<curve num="3">
+<point d1x="-19" d1y="33" d2x="-19" d2y="33" index="0" weight="0.5"/>
+<point d1x="-60" d1y="32" d2x="-60" d2y="32" index="1" weight="0.5"/>
+<point d1x="-57" d1y="11" d2x="-57" d2y="11" index="2" weight="0.5"/>
+</curve>
+</Transition>
+<Transition action="EVENT2" current="U_ENTRY" h="60" next="U_ENTRY" priority="0" signal="CTIN0 rising edge" w="192" x="312" y="188">
+<curve num="4">
+<point d1x="50" d1y="6" d2x="50" d2y="6" index="0" weight="0.5"/>
+<point d1x="62" d1y="25" d2x="62" d2y="25" index="1" weight="0.5"/>
+<point d1x="42" d1y="36" d2x="42" d2y="36" index="2" weight="0.5"/>
+<point d1x="16" d1y="29" d2x="16" d2y="29" index="3" weight="0.5"/>
+</curve>
+</Transition>
+<SmSpecification IMemento.internal.id="SmSCTv1" isUnified="true"/>
+</StateMachine>
