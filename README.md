@@ -31,10 +31,6 @@ Overclocking LCP812 from 1Mhz to 72Mhz. Showing frequency on 2.5 digits indicato
 
 Blinking one LED.
 
-* LPC812_microboard_blinky_tneo
-
-Blinking 8 LEDs using real-time kernel (TNeo).
-
 * LPC812_clock
 
 Custom made clock with LPC812 microcontroler.
