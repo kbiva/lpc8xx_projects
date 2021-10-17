@@ -47,3 +47,7 @@ Custom made clock with LPC812 microcontroler.
 
 LPCXpresso LPC812: shows how to dinamically change MCU clock speed.
 Overclocks MCU up to 72Mhz.
+
+* LPCXpresso812_RC5_7segment
+
+LPCXpresso LPC812: shows decoded RC5 codes from IR receiver on 2.5 digits indicator.
