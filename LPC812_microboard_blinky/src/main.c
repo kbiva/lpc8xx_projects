@@ -7,25 +7,21 @@
  */
 
 #include "chip.h"
-
-#define PIN_LED 17
-
-extern uint32_t SystemCoreClock;
+#include "board.h"
 
 int main(void) {
 
   volatile uint32_t i;
 
-  Chip_Clock_EnablePeriphClock(SYSCTL_CLOCK_GPIO);
-  Chip_GPIO_SetPinDIROutput(LPC_GPIO_PORT, 0, PIN_LED);
-
+  Board_Init();
+  
   while (1) {
 
-    Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, PIN_LED, false);
+    Board_LED_Set(0, true);
 
-    for(i=0;i<1000000;i++){};
-    Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, PIN_LED, true);
+    for (i = 0; i < 500000; i++) {};
+    Board_LED_Set(0, false);
 
-    for(i=0;i<1000000;i++){};
+    for (i = 0; i < 500000; i++) {};
   }
 }

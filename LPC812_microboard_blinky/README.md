@@ -13,15 +13,9 @@ Used peripherals:
 
 * GPIO.
 
-Following options we used:
-"Use MicroLIB", "Optimization: Level 2(-O2)", "One ELF Section per Function"
-
 Project uses external libraries:
 
-* LPCOpen 2.19 library for LPC8xx
-
-The libraries were built with the following options:
-"Optimization: Level 3(-O3)", "One ELF Section per Function".
+* LPCOpen 3.02 library for LPC8xx
 
 Links
 =
