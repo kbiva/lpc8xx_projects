@@ -457,7 +457,7 @@ static void display_clock(void) {
   uint32_t i;
   uint32_t month, day;
 
-  switch(blink) {
+  switch (blink) {
     case BLINK_OFF:break;
     case BLINK_ON:
       if (birthday) {
@@ -480,7 +480,7 @@ static void display_clock(void) {
       break;
   }
 
-  if(clock_interrupt) {
+  if (clock_interrupt) {
     
     clock_interrupt = false;
 
@@ -574,7 +574,7 @@ static void display_clock(void) {
         buffer_LCD[scroll_position + 2] = FROM_BCD_HIGH(time_and_date[4]) + 0xb0;
         buffer_LCD[scroll_position + 3] = FROM_BCD_LOW(time_and_date[4]) + 0xb0;
         buffer_LCD[scroll_position + 4] = ':' + 0x80;
-        if( separator_flip ) {
+        if (separator_flip ) {
           if (sep_flip )
             buffer_LCD[scroll_position + 4] = '-' + 0x80;
           sep_flip = !sep_flip;
@@ -708,14 +708,14 @@ static void display_clock(void) {
       case DISPLAYFORMAT_MIDD_HHMM:
         if (scroll) {
           if (scroll_direction) {
-            if( scroll_position == 1) {
+            if (scroll_position == 1) {
               scroll_direction = false;
               scroll_position--;
             }
             else scroll_position++;
           }
           else {
-            if(scroll_position == 0) {
+            if (scroll_position == 0) {
               scroll_direction = true;
               scroll_position++;
             }
@@ -805,7 +805,7 @@ static void display_clock(void) {
     WRITE_LCD(buffer_LCD)
   }
 
-  switch(blink) {
+  switch (blink) {
     case BLINK_OFF:break;
     case BLINK_ON:
     case BLINK_1MIN:
@@ -845,7 +845,7 @@ static void display_info(void) {
   information[62] = separator_flip + 0x30;
   information[63] = aging_offset + 0x30;
 
-  switch(sleep){
+  switch (sleep){
     case PMU_MCU_SLEEP:
       information[12] = 'S';
       information[13] = 'l';
@@ -1361,13 +1361,14 @@ int main(void)
   //write register 0x19 ( aging offset )
   buf[0] = aging_offset;
   write_clock(PCA2129T_I2C_ADDR_7BIT, PCA2129T_AGING_OFFSET_REGISTER, PCA2129T_OFFSET_LENGHT, buf);
+  
   Chip_SYSCTL_EnablePINTWakeup(1);
   Chip_SYSCTL_EnablePINTWakeup(2);
   Chip_SYSCTL_EnablePINTWakeup(3);
   Chip_SYSCTL_EnablePINTWakeup(4);
 
   Chip_SYSCTL_SetDeepSleepPD(SYSCTL_DEEPSLP_BOD_PD | SYSCTL_DEEPSLP_WDTOSC_PD);
-  Chip_SYSCTL_SetWakeup(~(SYSCTL_SLPWAKE_IRCOUT_PD | SYSCTL_SLPWAKE_IRC_PD | SYSCTL_SLPWAKE_FLASH_PD ));
+  Chip_SYSCTL_SetWakeup(~(SYSCTL_SLPWAKE_IRCOUT_PD | SYSCTL_SLPWAKE_IRC_PD | SYSCTL_SLPWAKE_FLASH_PD));
   Chip_PMU_DisableDeepPowerDown(LPC_PMU);
 
   i = 0;
