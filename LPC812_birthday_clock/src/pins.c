@@ -18,13 +18,13 @@ volatile bool clock_interrupt = false;
 
 void PIN_INT1_IRQHandler(void) {
 
-	Chip_PININT_ClearIntStatus(LPC_PININT, PININTCH1);
+  Chip_PININT_ClearIntStatus(LPC_PININT, PININTCH1);
 
   uint8_t MSB = Chip_GPIO_ReadPortBit(LPC_GPIO_PORT, 0, 1);
   uint8_t LSB = Chip_GPIO_ReadPortBit(LPC_GPIO_PORT, 0, 9);
 
-	uint8_t encoded = (uint8_t)((MSB << 1) | LSB);
-	uint8_t sum = (uint8_t)((last_encoded << 2) | encoded);
+  uint8_t encoded = (uint8_t)((MSB << 1) | LSB);
+  uint8_t sum = (uint8_t)((last_encoded << 2) | encoded);
 
   if (sum == 0b1101 || sum == 0b0100 || sum == 0b0010 || sum == 0b1011) counter--;
   if (sum == 0b1110 || sum == 0b0111 || sum == 0b0001 || sum == 0b1000) counter++;
@@ -34,13 +34,13 @@ void PIN_INT1_IRQHandler(void) {
 
 void PIN_INT3_IRQHandler(void) {
 
-	Chip_PININT_ClearIntStatus(LPC_PININT, PININTCH3);
+  Chip_PININT_ClearIntStatus(LPC_PININT, PININTCH3);
 
   uint8_t MSB = Chip_GPIO_ReadPortBit(LPC_GPIO_PORT, 0, 1);
   uint8_t LSB = Chip_GPIO_ReadPortBit(LPC_GPIO_PORT, 0, 9);
 
-	uint8_t encoded = (MSB << 1) | LSB;
-	uint8_t sum = (last_encoded << 2) | encoded;
+  uint8_t encoded = (MSB << 1) | LSB;
+  uint8_t sum = (last_encoded << 2) | encoded;
 
   if (sum == 0b1101 || sum == 0b0100 || sum == 0b0010 || sum == 0b1011) counter--;
   if (sum == 0b1110 || sum == 0b0111 || sum == 0b0001 || sum == 0b1000) counter++;
@@ -163,20 +163,20 @@ void init_pins(void) {
   Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, PIN_LED2, false);
 
   // encoder A interrupt
-	Chip_SYSCTL_SetPinInterrupt(1,1);
-	Chip_PININT_SetPinModeEdge(LPC_PININT, PININTCH1);
+  Chip_SYSCTL_SetPinInterrupt(1,1);
+  Chip_PININT_SetPinModeEdge(LPC_PININT, PININTCH1);
   Chip_PININT_EnableIntLow(LPC_PININT, PININTCH1);
-	Chip_PININT_EnableIntHigh(LPC_PININT, PININTCH1);
+  Chip_PININT_EnableIntHigh(LPC_PININT, PININTCH1);
 
   // encoder B interrupt
-	Chip_SYSCTL_SetPinInterrupt(3,9);
-	Chip_PININT_SetPinModeEdge(LPC_PININT, PININTCH3);
+  Chip_SYSCTL_SetPinInterrupt(3,9);
+  Chip_PININT_SetPinModeEdge(LPC_PININT, PININTCH3);
   Chip_PININT_EnableIntLow(LPC_PININT, PININTCH3);
-	Chip_PININT_EnableIntHigh(LPC_PININT, PININTCH3);
+  Chip_PININT_EnableIntHigh(LPC_PININT, PININTCH3);
 
   // encoder button
-	Chip_SYSCTL_SetPinInterrupt(2,15);
-	Chip_PININT_SetPinModeEdge(LPC_PININT, PININTCH2);
+  Chip_SYSCTL_SetPinInterrupt(2,15);
+  Chip_PININT_SetPinModeEdge(LPC_PININT, PININTCH2);
   Chip_PININT_EnableIntLow(LPC_PININT, PININTCH2);
 
   // clock interrupt
@@ -185,8 +185,8 @@ void init_pins(void) {
   Chip_PININT_EnableIntLow(LPC_PININT, PININTCH4);
 
   NVIC_EnableIRQ(PIN_INT1_IRQn);
-	NVIC_EnableIRQ(PIN_INT2_IRQn);
-	NVIC_EnableIRQ(PIN_INT3_IRQn);
+  NVIC_EnableIRQ(PIN_INT2_IRQn);
+  NVIC_EnableIRQ(PIN_INT3_IRQn);
   NVIC_EnableIRQ(PIN_INT4_IRQn);
 
   Chip_Clock_DisablePeriphClock(SYSCTL_CLOCK_IOCON);
