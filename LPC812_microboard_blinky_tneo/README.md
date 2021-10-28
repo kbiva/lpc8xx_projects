@@ -19,6 +19,7 @@ P0_0 -> resistor -> LED -> 3.3V
 P0_6 -> resistor -> LED -> 3.3V
 P0_7 -> resistor -> LED -> 3.3V
 P0_8 -> resistor -> LED -> 3.3V
+P0_9 -> resistor -> LED -> 3.3V
 P0_1 -> resistor -> LED -> 3.3V
 
 Software
