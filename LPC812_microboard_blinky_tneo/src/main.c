@@ -224,7 +224,8 @@ void appl_init(void) {
 
 //-- idle callback that is called periodically from idle task
 void idle_task_callback (void) {
-
+  // put MCU to sleep
+   __WFI();
 }
 
 //-- create first application task(s)
