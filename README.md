@@ -47,6 +47,10 @@ LPC812 microboard: shows decoded RC5 codes from IR receiver on Nokia 6100 LCD.
 
 Blinking one LED.
 
+* LPC812_microboard_blinky_tneo 
+
+Blinking 8 LEDs using real-time kernel (TNeo)
+
 * LPCXpresso812_RC5_7segment
 
 LPCXpresso LPC812: shows decoded RC5 codes from IR receiver on 2.5 digits indicator.
