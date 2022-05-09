@@ -59,8 +59,4 @@ typedef struct {
    WRITE_LCD(str)\
    SLEEP
 
-#define SET_MENU(str,num) for (uint32_t _i = 0; _i < PCF2103_LCD_WIDTH; _i++) {\
-                            str[_i+2] = strMenu[num][_i+2];\
-                          }
-
 #endif

@@ -227,12 +227,19 @@ static uint8_t buf[16];
 // time and date read from PCA2129T
 static uint8_t time_and_date[9];
 
+static void set_menu(uint8_t* str, uint32_t num) {
+
+   for (uint32_t i = 0; i < PCF2103_LCD_WIDTH; i++) {
+      str[i + 2] = strMenu[num][i + 2];
+   }
+}
+
 static void set_aging_offset(void) {
 
   uint32_t displayed_offset;
   uint32_t sign;
 
-  SET_MENU(buffer_LCD, 32)
+  set_menu(buffer_LCD, 32);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -278,7 +285,7 @@ static void set_date(void) {
   set_month = FROM_BCD(buf[3]);
   set_year = FROM_BCD(buf[4]);
 
-  SET_MENU(buffer_LCD, 52)
+  set_menu(buffer_LCD, 52);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -298,7 +305,7 @@ static void set_date(void) {
     WRITE_LCD_SLEEP(buffer_LCD)
   }
 
-  SET_MENU(buffer_LCD, 53)
+  set_menu(buffer_LCD, 53);
 
   button_state = true;
 
@@ -322,7 +329,7 @@ static void set_date(void) {
 
   button_state = true;
 
-  SET_MENU(buffer_LCD, 54)
+  set_menu(buffer_LCD, 54);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -344,7 +351,7 @@ static void set_date(void) {
 
   button_state = true;
 
-  SET_MENU(buffer_LCD, 55)
+  set_menu(buffer_LCD, 55);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -382,7 +389,7 @@ static void set_time(void) {
   set_minute = FROM_BCD(buf[2]);
   set_second = FROM_BCD(buf[1]);
 
-  SET_MENU(buffer_LCD, 56)
+  set_menu(buffer_LCD, 56);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -404,7 +411,7 @@ static void set_time(void) {
 
   button_state = true;
 
-  SET_MENU(buffer_LCD, 57)
+  set_menu(buffer_LCD, 57);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -426,7 +433,7 @@ static void set_time(void) {
 
   button_state = true;
 
-  SET_MENU(buffer_LCD, 58)
+  set_menu(buffer_LCD, 58);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -1092,7 +1099,7 @@ static void edit_birthdays(void) {
   uint32_t month,day;
   uint32_t current_position;
 
-  SET_MENU(buffer_LCD, 46)
+  set_menu(buffer_LCD, 46);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -1136,7 +1143,7 @@ static void edit_birthdays(void) {
 
   month = FROM_BCD(birthdays[birthday_nr].date[0]);
 
-  SET_MENU(buffer_LCD, 47)
+  set_menu(buffer_LCD, 47);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -1159,7 +1166,7 @@ static void edit_birthdays(void) {
 
   day = FROM_BCD(birthdays[birthday_nr].date[1]);
 
-  SET_MENU(buffer_LCD, 48)
+  set_menu(buffer_LCD, 48);
 
   while (button_state) {
     if (counter > old_counter) {
