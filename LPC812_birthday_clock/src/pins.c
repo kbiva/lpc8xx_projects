@@ -68,6 +68,7 @@ void configure_SWD(bool value) {
     Chip_SWM_EnableFixedPin(SWM_FIXED_SWCLK);
   }
   else {
+    Chip_Clock_EnablePeriphClock(SYSCTL_CLOCK_IOCON);
     Chip_SWM_DisableFixedPin(SWM_FIXED_SWDIO);
     Chip_GPIO_SetPinDIROutput(LPC_GPIO_PORT, 0, 2);
     Chip_IOCON_PinSetMode(LPC_IOCON, IOCON_PIO2, PIN_MODE_INACTIVE);
@@ -76,6 +77,7 @@ void configure_SWD(bool value) {
     Chip_GPIO_SetPinDIROutput(LPC_GPIO_PORT, 0, 3);
     Chip_IOCON_PinSetMode(LPC_IOCON, IOCON_PIO3, PIN_MODE_INACTIVE);
     Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, 3, false);
+    Chip_Clock_DisablePeriphClock(SYSCTL_CLOCK_IOCON);
   }
   Chip_SWM_Deinit();
 }
