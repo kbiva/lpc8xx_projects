@@ -43,7 +43,8 @@ Notes
 * Between updates, microcontroller is in Power-down sleep mode.
 * The board is powered from 2 Li-Ion rechargable batteries (capacity 2400mAh)
 * Average current consumption is 65µA (optional backlight adds 10µA)
-
+* Stack size is increased from 0x100 bytes to 0x200 bytes.
+* ARM Compiler 6.16 because when project is compiled by 6.18 the resulting binary is too big.
 
 Project uses external library LPCOpen Software Development Platform 3.02
 that is available freely from NXP.
