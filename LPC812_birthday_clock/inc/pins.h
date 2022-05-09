@@ -8,6 +8,7 @@
 #define PINS_H_
 
 #include <stdint.h>
+#include <stdbool.h>
 
 #define PIN_PCA2129T_INTERRUPT  4
 
