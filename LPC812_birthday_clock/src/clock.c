@@ -1022,7 +1022,7 @@ static void display_icons(void) {
   WRITE_LCD(icons)
 }
 
-static void load_EEPROM (void) {
+static void load_settings(void) {
 
   read_EEPROM(_24C32WI_I2C_ADDR_7BIT, _24C32WI_SETTINGS_ADDRESS, _24C32WI_SETTINGS_LENGTH, buf);
 
@@ -1045,7 +1045,7 @@ static void load_EEPROM (void) {
   aging_offset = buf[8];
 }
 
-static void save_EEPROM (void) {
+static void save_settings(void) {
 
   if ((old_scroll != scroll) ||
       (old_format != format) ||
@@ -1071,7 +1071,7 @@ static void save_EEPROM (void) {
   }
 }
 
-static void read_birthdays(void) {
+static void load_birthdays(void) {
 
   uint32_t i, j;
 
@@ -1334,7 +1334,7 @@ int main(void)
 
   WRITE_LCD(icons)
 
-  load_EEPROM();
+  load_settings();
 
   //write register 0x0f (CLKOUT disabled)
   buf[0] = 0x07;
@@ -1376,7 +1376,7 @@ int main(void)
 
   old_counter = counter;
 
-  read_birthdays();
+  load_birthdays();
 
   while (1) {
 
@@ -1430,7 +1430,7 @@ int main(void)
           case 7: operating_state = true;
                   buf[0] = freq;
                   write_clock(PCA2129T_I2C_ADDR_7BIT, PCA2129T_CONTROL1_REGISTER, PCA2129T_CONTROL1_LENGTH, buf);
-                  save_EEPROM();
+                  save_settings();
                   break;
           case 8: set_date(); break;
           case 9: set_time(); break;
