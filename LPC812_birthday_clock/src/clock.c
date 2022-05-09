@@ -234,6 +234,20 @@ static void set_menu(uint8_t* str, uint32_t num) {
    }
 }
 
+static void clear_icons(void) {
+
+  for (uint32_t i = 2; i < PCF2103_LCD_SEND_WIDTH; i++){
+    icons[i] = 0x00;
+  }
+}
+
+static void clear_lcd(void) {
+
+  for (uint32_t i = 2; i < PCF2103_LCD_SEND_WIDTH; i++){
+    buffer_LCD[i] = 0x20;
+  }
+}
+
 static void set_aging_offset(void) {
 
   uint32_t displayed_offset;
@@ -526,10 +540,8 @@ static void display_clock(void) {
       old_day = time_and_date[5];
     }
 
-    for (i = 2; i < PCF2103_LCD_SEND_WIDTH; i++){
-      icons[i] = 0x00;
-      buffer_LCD[i] = 0x20;
-    }
+    clear_icons();
+    clear_lcd();
 
     switch (icons_mode) {
       case ICONSMODE_POWER:
@@ -557,7 +569,7 @@ static void display_clock(void) {
         break;
     }
 
-    write_LCD(PCF2103_I2C_ADDR_7BIT, 0x80, PCF2103_LCD_SEND_WIDTH, icons);
+    WRITE_LCD(icons)
 
     switch (format){
       // HHMM_SEP
@@ -998,13 +1010,9 @@ static void display_icons(void) {
     {12,0x04},{13,0x10},{12,0x02},{12,0x08},{12,0x01},{12,0x10},
   };
 
-  for (i = 2; i < PCF2103_LCD_SEND_WIDTH; i++){
-    buffer_LCD[i] = 0x20;
-    icons[i] = 0x00;
-  }
-
-  write_LCD(PCF2103_I2C_ADDR_7BIT, 0x80, PCF2103_LCD_SEND_WIDTH, icons);
-  write_LCD(PCF2103_I2C_ADDR_7BIT, 0x80, PCF2103_LCD_SEND_WIDTH, buffer_LCD);
+  clear_icons();
+  clear_lcd();
+  WRITE_LCD(buffer_LCD)
 
   while (button_state) {
     if (counter > old_counter) {
@@ -1023,9 +1031,8 @@ static void display_icons(void) {
     }
     WRITE_LCD_SLEEP(icons)
   }
-  for (i = 2; i < PCF2103_LCD_SEND_WIDTH; i++){
-    icons[i] = 0x00;
-  }
+
+  clear_icons();
   WRITE_LCD(icons)
 }
 
@@ -1293,9 +1300,8 @@ static void display_birthdays(void) {
   }
 }
 
-int main(void)
-{
-  volatile uint32_t i,j;
+int main(void) {
+
   uint32_t idle = 0;
 
   // Read clock settings and update SystemCoreClock variable
@@ -1335,10 +1341,7 @@ int main(void)
   write_LCD(PCF2103_I2C_ADDR_7BIT, 0x00, 8, buf);
 
   // clear icons
-  for (i = 2; i < PCF2103_LCD_SEND_WIDTH; i++){
-    icons[i] = 0x00;
-  }
-
+  clear_icons();
   WRITE_LCD(icons)
 
   load_settings();
@@ -1378,9 +1381,6 @@ int main(void)
   Chip_SYSCTL_SetWakeup(~(SYSCTL_SLPWAKE_IRCOUT_PD | SYSCTL_SLPWAKE_IRC_PD | SYSCTL_SLPWAKE_FLASH_PD));
   Chip_PMU_DisableDeepPowerDown(LPC_PMU);
 
-  i = 0;
-  j = 0;
-
   old_counter = counter;
 
   load_birthdays();
@@ -1394,9 +1394,7 @@ int main(void)
       if (!button_state) {
         // entering settings if button is pressed
         // clear icons
-        for (i = 2; i < PCF2103_LCD_SEND_WIDTH; i++){
-          icons[i] = 0x00;
-        }
+        clear_icons();
         WRITE_LCD(icons)
         menu_position = 0;
         WRITE_LCD(strMenu[menu_position])
