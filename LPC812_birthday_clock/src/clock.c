@@ -59,7 +59,7 @@ static uint8_t strMenu[][PCF2103_LCD_SEND_WIDTH]={
     //16 Sep. flip
     {0x8C,0x40,'S'+0x80,'e'+0x80,'p'+0x80,'.'+0x80,0x20,'f'+0x80,'l'+0x80,'i'+0x80,'p'+0x80,0x20,0x20,0x77},
     //17 SWD Port
-    {0x8C,0x40,'S'+0x80,'W'+0x80,'D'+0x80,0x20,'P'+0x80,'o'+0x80,'r'+0x80,'t'+0x80,0x20,0x20,0x20,0x77},  
+    {0x8C,0x40,'S'+0x80,'W'+0x80,'D'+0x80,0x20,'P'+0x80,'o'+0x80,'r'+0x80,'t'+0x80,0x20,0x20,0x20,0x77},
     //18 Back
     {0x8C,0x40,'B'+0x80,'a'+0x80,'c'+0x80,'k'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x77},
 
@@ -113,7 +113,7 @@ static uint8_t strMenu[][PCF2103_LCD_SEND_WIDTH]={
     {0x8C,0x40,'O'+0x80,'n'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
     //40 Off Sep. flip
     {0x8C,0x40,'O'+0x80,'f'+0x80,'f'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
-    
+
     //41 Off SWD Port
     {0x8C,0x40,'O'+0x80,'f'+0x80,'f'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
     //42 On SWD Port
@@ -179,7 +179,7 @@ static uint8_t icons[PCF2103_LCD_SEND_WIDTH]=
 static uint8_t buffer_LCD[PCF2103_LCD_SEND_WIDTH]=
   {0x8C,0x40,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20};
 
-// settings  
+// settings
 static DISPLAYFORMAT format, old_format;
 static bool separator_flip, old_separator_flip;
 static UPDATEFREQ freq, old_freq;
@@ -192,10 +192,10 @@ static bool swd, old_swd;
 
 // current state of separator
 static bool sep_flip;
-  
+
 static uint32_t scroll_position;
 static bool scroll_direction = true;
-  
+
 static uint8_t menu_forward[] = {
   1, 2, 3, 4, 5, 6, 7, 0, 9,10,
  11,12,13,14,15,16,17,18, 8,20,
@@ -481,7 +481,7 @@ static void display_clock(void) {
   }
 
   if (clock_interrupt) {
-    
+
     clock_interrupt = false;
 
     read_clock(PCA2129T_I2C_ADDR_7BIT, PCA2129T_CONTROL3_REGISTER, PCA2129T_CONTROL3_LENGTH + PCA2129T_TIMEDATE_LENGHT + 1, time_and_date);
@@ -582,7 +582,7 @@ static void display_clock(void) {
         buffer_LCD[scroll_position + 5] = FROM_BCD_HIGH(time_and_date[3]) + 0xb0;
         buffer_LCD[scroll_position + 6] = FROM_BCD_LOW(time_and_date[3]) + 0xb0;
         break;
-        
+
       // HHMMSS_SEP
       case DISPLAYFORMAT_HHMMSS_SEP:
         if (scroll) {
@@ -617,7 +617,7 @@ static void display_clock(void) {
         buffer_LCD[scroll_position + 8] = FROM_BCD_HIGH(time_and_date[2]) + 0xb0;
         buffer_LCD[scroll_position + 9] = FROM_BCD_LOW(time_and_date[2]) + 0xb0;
         break;
-        
+
       // HHMMSS
       case DISPLAYFORMAT_HHMMSS:
         if (scroll) {
@@ -643,7 +643,7 @@ static void display_clock(void) {
         buffer_LCD[scroll_position + 6] = FROM_BCD_HIGH(time_and_date[2]) + 0xb0;
         buffer_LCD[scroll_position + 7] = FROM_BCD_LOW(time_and_date[2]) + 0xb0;
         break;
-        
+
       // HHMM
       case DISPLAYFORMAT_HHMM:
         if (scroll) {
@@ -667,7 +667,7 @@ static void display_clock(void) {
         buffer_LCD[scroll_position + 4] = FROM_BCD_HIGH(time_and_date[3]) + 0xb0;
         buffer_LCD[scroll_position + 5] = FROM_BCD_LOW(time_and_date[3]) + 0xb0;
         break;
-        
+
       // HHMM_MIDD
       case DISPLAYFORMAT_HHMM_MIDD:
         if (scroll) {
@@ -703,7 +703,7 @@ static void display_clock(void) {
         buffer_LCD[scroll_position + 11] = FROM_BCD_HIGH(time_and_date[5]) + 0xb0;
         buffer_LCD[scroll_position + 12] = FROM_BCD_LOW(time_and_date[5]) + 0xb0;
         break;
-        
+
       // MIDD_HHMM
       case DISPLAYFORMAT_MIDD_HHMM:
         if (scroll) {
@@ -739,7 +739,7 @@ static void display_clock(void) {
         buffer_LCD[scroll_position + 11] = FROM_BCD_HIGH(time_and_date[3]) + 0xb0;
         buffer_LCD[scroll_position + 12] = FROM_BCD_LOW(time_and_date[3]) + 0xb0;
         break;
-        
+
       // HHMMSS MIDD
       case DISPLAYFORMAT_HHMMSS_MIDD:
         if (scroll) {
@@ -769,7 +769,7 @@ static void display_clock(void) {
         buffer_LCD[scroll_position + 11] = FROM_BCD_HIGH(time_and_date[5]) + 0xb0;
         buffer_LCD[scroll_position + 12] = FROM_BCD_LOW(time_and_date[5]) + 0xb0;
         break;
-        
+
       //  HHMMSSYYMIDD
       case DISPLAYFORMAT_HHMMSSYYMIDD:
         buffer_LCD[2] = FROM_BCD_HIGH(time_and_date[4]) + 0xb0;
@@ -785,7 +785,7 @@ static void display_clock(void) {
         buffer_LCD[12] = FROM_BCD_HIGH(time_and_date[5]) + 0xb0;
         buffer_LCD[13] = FROM_BCD_LOW(time_and_date[5]) + 0xb0;
         break;
-      
+
       //  YYMIDDHHMMSS
       case DISPLAYFORMAT_YYMIDDHHMMSS:
         buffer_LCD[2] = FROM_BCD_HIGH(time_and_date[8]) + 0xb0;
@@ -1178,7 +1178,7 @@ static void edit_birthdays(void) {
     buffer_LCD[7] = (day % 10) + 0xb0;
     WRITE_LCD_SLEEP(buffer_LCD)
   }
-  
+
   button_state = true;
 
   if ((month == 0) && (day == 0)) {
@@ -1361,7 +1361,7 @@ int main(void)
   //write register 0x19 ( aging offset )
   buf[0] = aging_offset;
   write_clock(PCA2129T_I2C_ADDR_7BIT, PCA2129T_AGING_OFFSET_REGISTER, PCA2129T_OFFSET_LENGHT, buf);
-  
+
   Chip_SYSCTL_EnablePINTWakeup(1);
   Chip_SYSCTL_EnablePINTWakeup(2);
   Chip_SYSCTL_EnablePINTWakeup(3);

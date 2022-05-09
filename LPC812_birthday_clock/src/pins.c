@@ -55,13 +55,13 @@ void PIN_INT2_IRQHandler(void) {
 }
 
 void PIN_INT4_IRQHandler(void) {
-  
+
   Chip_PININT_ClearIntStatus(LPC_PININT, PININTCH4);
   clock_interrupt = true;
 }
 
 void configure_SWD(bool value) {
-  
+
   Chip_SWM_Init();
   if (value) {
     Chip_SWM_EnableFixedPin(SWM_FIXED_SWDIO);
@@ -77,7 +77,7 @@ void configure_SWD(bool value) {
     Chip_IOCON_PinSetMode(LPC_IOCON, IOCON_PIO3, PIN_MODE_INACTIVE);
     Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, 3, false);
   }
-  Chip_SWM_Deinit();    
+  Chip_SWM_Deinit();
 }
 
 
@@ -100,7 +100,7 @@ void init_pins(void) {
 
   // will be configured later
   // 2 SWDIO enabled by default
-  // 3 SWCLK enabled by default  
+  // 3 SWCLK enabled by default
 
   // 4 clock interrupt input (default pull-up)
   Chip_GPIO_SetPinDIRInput(LPC_GPIO_PORT, 0, PIN_PCA2129T_INTERRUPT);
