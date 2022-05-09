@@ -840,7 +840,7 @@ static void display_clock(void) {
 
 static void display_info(void) {
 
-  uint32_t i = 0;
+  uint32_t i = 0, j;
 
   information[30] = ((LPC_SYSCTL->DEVICEID >> 12) & 0x0F) + 0x30;
   information[31] = ((LPC_SYSCTL->DEVICEID >> 8) & 0x0F) + 0x30;
@@ -915,18 +915,9 @@ static void display_info(void) {
         if (i > 0) i--;
       }
     }
-    buffer_LCD[2] = information[i] + 0x80;
-    buffer_LCD[3] = information[i+1] + 0x80;
-    buffer_LCD[4] = information[i+2] + 0x80;
-    buffer_LCD[5] = information[i+3] + 0x80;
-    buffer_LCD[6] = information[i+4] + 0x80;
-    buffer_LCD[7] = information[i+5] + 0x80;
-    buffer_LCD[8] = information[i+6] + 0x80;
-    buffer_LCD[9] = information[i+7] + 0x80;
-    buffer_LCD[10] = information[i+8] + 0x80;
-    buffer_LCD[11] = information[i+9] + 0x80;
-    buffer_LCD[12] = information[i+10] + 0x80;
-    buffer_LCD[13] = information[i+11] + 0x80;
+    for (j = 0; j < 12; j++) {
+      buffer_LCD[j + 2] = information[i + j] + 0x80;
+    }
     WRITE_LCD_SLEEP(buffer_LCD)
   }
 }
@@ -966,7 +957,7 @@ static void display_font(void) {
 
 static void display_about(void) {
 
-  uint32_t i = 0;
+  uint32_t i = 0, j;
 
   while (button_state) {
     if (counter > old_counter) {
@@ -981,18 +972,9 @@ static void display_about(void) {
         if (i > 0) i--;
       }
     }
-    buffer_LCD[2] = about[i] + 0x80;
-    buffer_LCD[3] = about[i + 1] + 0x80;
-    buffer_LCD[4] = about[i + 2] + 0x80;
-    buffer_LCD[5] = about[i + 3] + 0x80;
-    buffer_LCD[6] = about[i + 4] + 0x80;
-    buffer_LCD[7] = about[i + 5] + 0x80;
-    buffer_LCD[8] = about[i + 6] + 0x80;
-    buffer_LCD[9] = about[i + 7] + 0x80;
-    buffer_LCD[10] = about[i + 8] + 0x80;
-    buffer_LCD[11] = about[i + 9] + 0x80;
-    buffer_LCD[12] = about[i + 10] + 0x80;
-    buffer_LCD[13] = about[i + 11] + 0x80;
+    for (j = 0; j < 12; j++) {
+      buffer_LCD[j + 2] = about[i + j] + 0x80;
+    }
     WRITE_LCD_SLEEP(buffer_LCD)
   }
 }
