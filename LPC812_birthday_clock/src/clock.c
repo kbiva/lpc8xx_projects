@@ -33,8 +33,8 @@ static uint8_t strMenu[][PCF2103_LCD_SEND_WIDTH]={
     {0x8C,0x40,'I'+0x80,'n'+0x80,'f'+0x80,'o'+0x80,'r'+0x80,'m'+0x80,'a'+0x80,'t'+0x80,'i'+0x80,'o'+0x80,'n'+0x80,0x77},
     //4 Birthdays
     {0x8C,0x40,'B'+0x80,'i'+0x80,'r'+0x80,'t'+0x80,'h'+0x80,'d'+0x80,'a'+0x80,'y'+0x80,'s'+0x80,0x20,0x20,0x77},
-    //5 LCD Test
-    {0x8C,0x40,'L'+0x80,'C'+0x80,'D'+0x80,0x20,'T'+0x80,'e'+0x80,'s'+0x80,'t'+0x80,0x20,0x20,0x20,0x77},
+    //5 Tests
+    {0x8C,0x40,'T'+0x80,'e'+0x80,'s'+0x80,'t'+0x80,'s'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x77},
     //6 About
     {0x8C,0x40,'A'+0x80,'b'+0x80,'o'+0x80,'u'+0x80,'t'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x77},
     //7 Exit
@@ -137,22 +137,24 @@ static uint8_t strMenu[][PCF2103_LCD_SEND_WIDTH]={
     {0x8C,0x40,'F'+0x80,'o'+0x80,'n'+0x80,'t'+0x80,0x20,'t'+0x80,'a'+0x80,'b'+0x80,'l'+0x80,'e'+0x80,0x20,0x77},
     //50 Icons
     {0x8C,0x40,'I'+0x80,'c'+0x80,'o'+0x80,'n'+0x80,'s'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x77},
-    //51 Back
+    //51 LEDs
+    {0x8C,0x40,'L'+0x80,'E'+0x80,'D'+0x80,'s'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x77},
+    //52 Back
     {0x8C,0x40,'B'+0x80,'a'+0x80,'c'+0x80,'k'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x77},
 
-    //52 Year:
+    //53 Year:
     {0x8C,0x40,'Y'+0x80,'e'+0x80,'a'+0x80,'r'+0x80,':'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //53 Month:
+    //54 Month:
     {0x8C,0x40,'M'+0x80,'o'+0x80,'n'+0x80,'t'+0x80,'h'+0x80,':'+0x80,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //54 Day:
+    //55 Day:
     {0x8C,0x40,'D'+0x80,'a'+0x80,'y'+0x80,':'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //55 Weekday:
+    //56 Weekday:
     {0x8C,0x40,'W'+0x80,'e'+0x80,'e'+0x80,'k'+0x80,'d'+0x80,'a'+0x80,'y'+0x80,':'+0x80,0x20,0x20,0x20,0x1f},
-    //56 Hour:
+    //57 Hour:
     {0x8C,0x40,'H'+0x80,'o'+0x80,'u'+0x80,'r'+0x80,':'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //57 Minute:
+    //58 Minute:
     {0x8C,0x40,'M'+0x80,'i'+0x80,'n'+0x80,'u'+0x80,'t'+0x80,'e'+0x80,':'+0x80,0x20,0x20,0x20,0x20,0x1f},
-    //58 Second:
+    //59 Second:
     {0x8C,0x40,'S'+0x80,'e'+0x80,'c'+0x80,'o'+0x80,'n'+0x80,'d'+0x80,':'+0x80,0x20,0x20,0x20,0x20,0x1f},
   };
 
@@ -202,7 +204,7 @@ static uint8_t menu_forward[] = {
  21,22,23,24,25,26,27,19,29,28,
  31,30, 0,34,35,33,37,38,36,40,
  39,42,41,44,45,43, 0, 0, 0,50,
- 51,49, 0, 0, 0, 0, 0, 0, 0
+ 51,52,49, 0, 0, 0, 0, 0, 0, 0
 };
 
 static uint8_t menu_backward[ ]= {
@@ -210,8 +212,8 @@ static uint8_t menu_backward[ ]= {
   9,10,11,12,13,14,15,16,17,27,
  19,20,21,22,23,24,25,26,29,28,
  31,30, 0,35,33,34,38,36,37,40,
- 39,42,41,45,43,44, 0, 0, 0,51,
- 49,50, 0, 0, 0, 0, 0, 0, 0
+ 39,42,41,45,43,44, 0, 0, 0,52,
+ 49,50,51, 0, 0, 0, 0, 0, 0, 0
 };
 
 static uint8_t menu_enter[] = {
@@ -220,7 +222,7 @@ static uint8_t menu_enter[] = {
  10,10,10,10,10,10,10,10,11,11,
  12,12, 1,14,14,14,15,15,15,16,
  16,17,17, 2, 2, 2, 0, 0, 0,49,
- 50, 5, 0, 0, 0, 0, 0, 0, 0
+ 50,51, 5, 0, 0, 0, 0, 0, 0, 0
 };
 
 static uint8_t buf[16];
@@ -299,7 +301,7 @@ static void set_date(void) {
   set_month = FROM_BCD(buf[3]);
   set_year = FROM_BCD(buf[4]);
 
-  set_menu(buffer_LCD, 52);
+  set_menu(buffer_LCD, 53);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -319,7 +321,7 @@ static void set_date(void) {
     WRITE_LCD_SLEEP(buffer_LCD)
   }
 
-  set_menu(buffer_LCD, 53);
+  set_menu(buffer_LCD, 54);
 
   button_state = true;
 
@@ -343,7 +345,7 @@ static void set_date(void) {
 
   button_state = true;
 
-  set_menu(buffer_LCD, 54);
+  set_menu(buffer_LCD, 55);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -365,7 +367,7 @@ static void set_date(void) {
 
   button_state = true;
 
-  set_menu(buffer_LCD, 55);
+  set_menu(buffer_LCD, 56);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -403,7 +405,7 @@ static void set_time(void) {
   set_minute = FROM_BCD(buf[2]);
   set_second = FROM_BCD(buf[1]);
 
-  set_menu(buffer_LCD, 56);
+  set_menu(buffer_LCD, 57);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -425,7 +427,7 @@ static void set_time(void) {
 
   button_state = true;
 
-  set_menu(buffer_LCD, 57);
+  set_menu(buffer_LCD, 58);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -447,7 +449,7 @@ static void set_time(void) {
 
   button_state = true;
 
-  set_menu(buffer_LCD, 58);
+  set_menu(buffer_LCD, 59);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -1018,6 +1020,49 @@ static void display_icons(void) {
   WRITE_LCD(icons)
 }
 
+static void display_leds(void) {
+
+  uint32_t stateLED;
+
+  clear_lcd();
+  WRITE_LCD(buffer_LCD)
+
+  while (button_state) {
+
+    if (counter > old_counter) {
+      if (counter - 3 > old_counter) {
+        old_counter = counter;
+        stateLED = Chip_GPIO_GetPinState(LPC_GPIO_PORT, 0, PIN_LED1) |
+                   (Chip_GPIO_GetPinState(LPC_GPIO_PORT, 0, PIN_LED2) << 1);
+      }
+    }
+    else if (counter < old_counter) {
+      if (counter + 3 < old_counter) {
+        old_counter = counter;
+        stateLED = Chip_GPIO_GetPinState(LPC_GPIO_PORT, 0, PIN_LED1) |
+                   (Chip_GPIO_GetPinState(LPC_GPIO_PORT, 0, PIN_LED2) << 1);
+      }
+    }
+
+    switch (stateLED) {
+      case 0: LED1_ON
+              break;
+      case 1: LED1_OFF
+              LED2_ON
+              break;
+      case 2: LED1_ON
+              break;
+      case 3: LED1_OFF
+              LED2_OFF
+              break;
+    }
+
+    SLEEP
+  }
+  LED1_OFF
+  LED2_OFF
+}
+
 static void load_settings(void) {
 
   read_EEPROM(_24C32WI_I2C_ADDR_7BIT, _24C32WI_SETTINGS_ADDRESS, _24C32WI_SETTINGS_LENGTH, buf);
@@ -1383,7 +1428,7 @@ int main(void) {
         operating_state = false;
         button_state = true;
         old_counter = counter;
-        idle=0;
+        idle = 0;
         old_format = format;
         old_freq = freq;
         old_sleep = sleep;
@@ -1450,6 +1495,7 @@ int main(void) {
           case 45: sleep = PMU_MCU_SLEEP; break;
           case 49: display_font(); break;
           case 50: display_icons(); break;
+          case 51: display_leds(); break;
           default: break;
         }
         button_state = true;
