@@ -1437,8 +1437,6 @@ int main(void) {
         old_icons_mode = icons_mode;
         old_separator_flip = separator_flip;
         old_aging_offset = aging_offset;
-        buf[0] = UPDATEFREQ_1_SEC;
-        write_clock(PCA2129T_I2C_ADDR_7BIT, PCA2129T_CONTROL1_REGISTER, PCA2129T_CONTROL1_LENGTH, buf);
       }
       else {
         display_clock();
