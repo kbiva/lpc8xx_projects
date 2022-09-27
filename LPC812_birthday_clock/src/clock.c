@@ -20,7 +20,7 @@ extern volatile bool clock_interrupt;
 static uint32_t menu_position;
 
 // true:clock, false:settings
-static volatile bool operating_state = true;
+static volatile bool clock_mode = true;
 
 static uint8_t strMenu[][PCF2103_LCD_SEND_WIDTH]={
     //0 Birthdays today
@@ -1416,7 +1416,7 @@ int main(void) {
 
     SLEEP
 
-    if (operating_state) {
+    if (clock_mode) {
       // clock mode
       if (!button_state) {
         // entering settings if button is pressed
@@ -1425,7 +1425,7 @@ int main(void) {
         WRITE_LCD(icons)
         menu_position = 0;
         WRITE_LCD(strMenu[menu_position])
-        operating_state = false;
+        clock_mode = false;
         button_state = true;
         old_counter = counter;
         idle = 0;
@@ -1459,11 +1459,6 @@ int main(void) {
           case 3: display_info(); break;
           case 4: edit_birthdays(); break;
           case 6: display_about(); break;
-          case 7: operating_state = true;
-                  buf[0] = freq;
-                  write_clock(PCA2129T_I2C_ADDR_7BIT, PCA2129T_CONTROL1_REGISTER, PCA2129T_CONTROL1_LENGTH, buf);
-                  save_settings();
-                  break;
           case 8: set_date(); break;
           case 9: set_time(); break;
           case 13: set_aging_offset(); break;
@@ -1499,8 +1494,41 @@ int main(void) {
           default: break;
         }
         button_state = true;
-        menu_position = menu_enter[menu_position];
-        WRITE_LCD(strMenu[menu_position])
+        if (menu_position == 7) { // exit settings
+          clock_mode = true;
+          if (old_freq != freq) {
+            buf[0] = freq;
+            write_clock(PCA2129T_I2C_ADDR_7BIT, PCA2129T_CONTROL1_REGISTER, PCA2129T_CONTROL1_LENGTH, buf);
+          }
+          save_settings();
+          clock_interrupt = true;
+          display_clock();
+        }
+        else {
+          menu_position = menu_enter[menu_position];
+          switch (menu_position) {
+            case 19: menu_position += format; break;
+            case 28:
+              switch (freq) {
+                case UPDATEFREQ_1_SEC: break;
+                case UPDATEFREQ_1_MIN: menu_position = 29; break;
+                default: break;
+              }; break;
+            case 30: if (!scroll) menu_position = 31; break;
+            case 33: menu_position += blink; break;
+            case 36: menu_position += icons_mode; break;
+            case 39: if (!separator_flip) menu_position = 40; break;
+            case 43:
+              switch (sleep) {
+                case PMU_MCU_POWER_DOWN: break;
+                case PMU_MCU_DEEP_SLEEP: menu_position = 44; break;
+                case PMU_MCU_SLEEP: menu_position = 45; break;
+                default: break;
+              }; break;
+            default: break;
+          }
+          WRITE_LCD(strMenu[menu_position])
+        }
       } else if (counter > old_counter) {
         if (counter - 3 > old_counter) {
           idle = 0;
