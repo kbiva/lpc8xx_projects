@@ -573,7 +573,7 @@ static void display_clock(void) {
 
     WRITE_LCD(icons)
 
-    switch (format){
+    switch (format) {
       // HHMM_SEP
       case DISPLAYFORMAT_HHMM_SEP:
         if (scroll) {
@@ -595,8 +595,8 @@ static void display_clock(void) {
         buffer_LCD[scroll_position + 2] = FROM_BCD_HIGH(time_and_date[4]) + 0xb0;
         buffer_LCD[scroll_position + 3] = FROM_BCD_LOW(time_and_date[4]) + 0xb0;
         buffer_LCD[scroll_position + 4] = ':' + 0x80;
-        if (separator_flip ) {
-          if (sep_flip )
+        if (separator_flip) {
+          if (sep_flip)
             buffer_LCD[scroll_position + 4] = '-' + 0x80;
           sep_flip = !sep_flip;
         }
