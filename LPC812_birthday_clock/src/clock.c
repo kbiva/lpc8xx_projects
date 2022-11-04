@@ -165,8 +165,7 @@ static uint8_t about[]=
 
 static uint8_t information[]=
   "Power Mode: xxxxxxxxx DEV-ID: xxxx Speed: xx Mhz "
-  "Debug: xxxxxxxx "
-  "I2C Addresses: LCD:0x74, Clock:0xA2, EEPROM:0xA0";
+  "Debug: xxxxxxxx";
 
 static uint8_t birthday_record[15];
 static bool birthday = false;
@@ -908,7 +907,7 @@ static void display_info(void) {
     if (counter > old_counter) {
       if (counter - 3 > old_counter) {
         old_counter = counter;
-        if (i < 101) i++;
+        if (i < 52) i++;
       }
     }
     else if (counter < old_counter) {
