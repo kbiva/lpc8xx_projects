@@ -1367,10 +1367,6 @@ int main(void) {
   buf[7] = 0x02;//Return home
   write_LCD(PCF2103_I2C_ADDR_7BIT, 0x00, 8, buf);
 
-  // clear icons
-  clear_icons();
-  WRITE_LCD(icons)
-
   load_settings();
 
   //write register 0x0f (CLKOUT disabled)
