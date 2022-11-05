@@ -559,14 +559,16 @@ static void set_format(void) {
     }
   }
 
-  max_scroll_position = 0;
   for (i = 0; i < 12; i++) {
     if (buffer_LCD[2 + i] == 0x3D)
       settings.s.format[i] = ' ';
-    else {
-      settings.s.format[i] = buffer_LCD[2 + i] - 0x80;
-      max_scroll_position = 11 - i;
-    }
+  }
+  
+  max_scroll_position = 0;
+  for (int32_t k = 11; k >= 0; k--) {
+    if (settings.s.format[k] == ' ')
+      max_scroll_position = 12 - k;
+    else break;
   }
   scroll_position = max_scroll_position;
 }
@@ -1021,10 +1023,12 @@ static void load_settings(void) {
   read_EEPROM(_24C32WI_I2C_ADDR_7BIT, _24C32WI_SETTINGS_ADDRESS, _24C32WI_SETTINGS_LENGTH, settings.buf);
   
   max_scroll_position = 0;
-  for (uint32_t i = 0; i < 12; i++) {
+  for (int32_t i = 11; i >= 0; i--) {
     if (settings.s.format[i] == ' ')
-      max_scroll_position = 11 - i;
+      max_scroll_position = 12 - i;
+    else break;
   }
+  scroll_position = max_scroll_position;
 }
 
 static void save_settings(void) {
