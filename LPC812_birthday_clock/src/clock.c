@@ -1262,8 +1262,7 @@ int main(void) {
   // startup delay 0.5s
   Chip_MRT_SetInterval(LPC_MRT_CH1,(500000*12-3));
 
-  init_pins();
-  configure_SWD(false);
+  init_pins();  
 
   /* Allocate I2C handle, setup I2C rate, and initialize I2C
      clocking */
@@ -1293,6 +1292,7 @@ int main(void) {
   write_LCD(PCF2103_I2C_ADDR_7BIT, 0x00, 8, buf);
 
   load_settings();
+  configure_SWD(settings.s.swd);
 
   //write register 0x0f (CLKOUT disabled)
   buf[0] = 0x07;
