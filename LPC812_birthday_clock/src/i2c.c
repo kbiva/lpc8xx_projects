@@ -156,18 +156,20 @@ void read_EEPROM(uint8_t AddressI2C, uint16_t reg, uint8_t cnt, uint8_t* val) {
   I2C_RESULT_T result;
   ErrorCode_t error_code;  
   uint8_t sendData[3];
+  uint8_t readData[_24C32WI_PAGE_SIZE + 1];
+  uint32_t index = 1;
   
   sendData[0] = AddressI2C | 0x01;
   sendData[1] = reg >> 8;
   sendData[2] = (uint8_t)reg;
   
-  val[0] = AddressI2C | 0x01;
+  readData[0] = AddressI2C | 0x01;
   
   /* Setup parameters for transfer */
   param.num_bytes_send  = 3;
   param.buffer_ptr_send = &sendData[0];
   param.num_bytes_rec   = cnt+1;  
-  param.buffer_ptr_rec  = &val[0];
+  param.buffer_ptr_rec  = &readData[0];
   param.stop_flag       = 1;
 
   /* Set timeout (much) greater than the transfer length */
@@ -180,6 +182,9 @@ void read_EEPROM(uint8_t AddressI2C, uint16_t reg, uint8_t cnt, uint8_t* val) {
   if (error_code != LPC_OK) {
     /* Likely cause is NAK */
     errorI2C();
+  }
+  while (cnt--) {
+    *val++ = readData[index++];
   }
 }
 

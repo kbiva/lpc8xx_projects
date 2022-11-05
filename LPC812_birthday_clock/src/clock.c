@@ -63,100 +63,79 @@ static uint8_t strMenu[][PCF2103_LCD_SEND_WIDTH]={
     //18 Back
     {0x8C,0x40,'B'+0x80,'a'+0x80,'c'+0x80,'k'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x77},
 
-    //19 HH:MM:SS
-    {0x8C,0x40,'H'+0x80,'H'+0x80,':'+0x80,'M'+0x80,'M'+0x80,':'+0x80,'S'+0x80,'S'+0x80,0x20,0x20,0x20,0x20},
-    //20 HH:MM
-    {0x8C,0x40,'H'+0x80,'H'+0x80,':'+0x80,'M'+0x80,'M'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20},
-    //21 HHMMSS
-    {0x8C,0x40,'H'+0x80,'H'+0x80,'M'+0x80,'M'+0x80,'S'+0x80,'S'+0x80,0x20,0x20,0x20,0x20,0x20,0x20},
-    //22 HHMM
-    {0x8C,0x40,'H'+0x80,'H'+0x80,'M'+0x80,'M'+0x80,0x020,0x20,0x20,0x20,0x20,0x20,0x20,0x20},
-    //23 HH:MM MI.DD
-    {0x8C,0x40,'H'+0x80,'H'+0x80,':'+0x80,'M'+0x80,'M'+0x80,0x20,'M'+0x80,'I'+0x80,'.'+0x80,'D'+0x80,'D'+0x80,0x20},
-    //24 MI.DD HH:MM
-    {0x8C,0x40,'M'+0x80,'I'+0x80,'.'+0x80,'D'+0x80,'D'+0x80,0x20,'H'+0x80,'H'+0x80,':'+0x80,'M'+0x80,'M'+0x80,0x20},
-    //25 HHMMSS MIDD
-    {0x8C,0x40,'H'+0x80,'H'+0x80,'M'+0x80,'M'+0x80,'S'+0x80,'S'+0x80,0x20,'M'+0x80,'I'+0x80,'D'+0x80,'D'+0x80,0x20},
-    //26 HHMMSSDDMIYY
-    {0x8C,0x40,'H'+0x80,'H'+0x80,'M'+0x80,'M'+0x80,'S'+0x80,'S'+0x80,'D'+0x80,'D'+0x80,'M'+0x80,'I'+0x80,'Y'+0x80,'Y'+0x80},
-    //27 DDMIYYHHMMSS
-    {0x8C,0x40,'D'+0x80,'D'+0x80,'M'+0x80,'I'+0x80,'Y'+0x80,'Y'+0x80,'H'+0x80,'H'+0x80,'M'+0x80,'M'+0x80,'S'+0x80,'S'+0x80},
-    //28 HH:MM WW DD
-    {0x8C,0x40,'H'+0x80,'H'+0x80,':'+0x80,'M'+0x80,'M'+0x80,0x20,'W'+0x80,'W'+0x80,' '+0x80,'D'+0x80,'D'+0x80,0x20},
-
-    //29 1 sec
+    //19 1 sec
     {0x8C,0x40,'1'+0x80,0x20,'s'+0x80,'e'+0x80,'c'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //30 1 min
+    //20 1 min
     {0x8C,0x40,'1'+0x80,0x20,'m'+0x80,'i'+0x80,'n'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
 
-    //31 On scroll
+    //21 On scroll
     {0x8C,0x40,'O'+0x80,'n'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //32 Off scroll
+    //22 Off scroll
     {0x8C,0x40,'O'+0x80,'f'+0x80,'f'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
 
-    //33 ppm offset:
+    //23 ppm offset:
     {0x8C,0x40,'O'+0x80,'f'+0x80,'f'+0x80,'s'+0x80,'e'+0x80,'t'+0x80,':'+0x80,0x20,0x20,0x20,0x20,0x20},
 
-    //34 On blink
+    //24 On blink
     {0x8C,0x40,'O'+0x80,'n'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //35 Off blink
+    //25 Off blink
     {0x8C,0x40,'O'+0x80,'f'+0x80,'f'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //36 Every minute
+    //26 Every minute
     {0x8C,0x40,'E'+0x80,'v'+0x80,'e'+0x80,'r'+0x80,'y'+0x80,0x20,'m'+0x80,'i'+0x80,'n'+0x80,0x20,0x20,0x1f},
 
-    //37 Show Power
+    //27 Show Power
     {0x8C,0x40,'S'+0x80,'h'+0x80,'o'+0x80,'w'+0x80,0x20,'p'+0x80,'o'+0x80,'w'+0x80,'e'+0x80,'r'+0x80,0x20,0x1f},
-    //38 Weekdays
+    //28 Weekdays
     {0x8C,0x40,'W'+0x80,'e'+0x80,'e'+0x80,'k'+0x80,'d'+0x80,'a'+0x80,'y'+0x80,'s'+0x80,0x20,0x20,0x20,0x1f},
-    //39 None
+    //29 None
     {0x8C,0x40,'N'+0x80,'o'+0x80,'n'+0x80,'e'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
 
-    //40 On Sep. flip
+    //30 On Sep. flip
     {0x8C,0x40,'O'+0x80,'n'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //41 Off Sep. flip
+    //31 Off Sep. flip
     {0x8C,0x40,'O'+0x80,'f'+0x80,'f'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
 
-    //42 Off SWD Port
+    //32 Off SWD Port
     {0x8C,0x40,'O'+0x80,'f'+0x80,'f'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //43 On SWD Port
+    //33 On SWD Port
     {0x8C,0x40,'O'+0x80,'n'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
 
-    //44 Power-down
+    //34 Power-down
     {0x8C,0x40,'P'+0x80,'o'+0x80,'w'+0x80,'e'+0x80,'r'+0x80,'-'+0x80,'d'+0x80,'o'+0x80,'w'+0x80,'n'+0x80,0x20,0x1f},
-    //45 Deep-sleep
+    //35 Deep-sleep
     {0x8C,0x40,'D'+0x80,'e'+0x80,'e'+0x80,'p'+0x80,'-'+0x80,'s'+0x80,'l'+0x80,'e'+0x80,'e'+0x80,'p'+0x80,0x20,0x1f},
-    //46 Sleep
+    //36 Sleep
     {0x8C,0x40,'S'+0x80,'l'+0x80,'e'+0x80,'e'+0x80,'p'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
 
-    //47 Birthday nr:
+    //37 Birthday nr:
     {0x8C,0x40,0x20,0x20,':'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //48 Month:
+    //38 Month:
     {0x8C,0x40,'M'+0x80,'o'+0x80,'n'+0x80,'t'+0x80,'h'+0x80,':'+0x80,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //49 Day:
+    //39 Day:
     {0x8C,0x40,'D'+0x80,'a'+0x80,'y'+0x80,':'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
 
-    //50 Font table
+    //40 Font table
     {0x8C,0x40,'F'+0x80,'o'+0x80,'n'+0x80,'t'+0x80,0x20,'t'+0x80,'a'+0x80,'b'+0x80,'l'+0x80,'e'+0x80,0x20,0x77},
-    //51 Icons
+    //41 Icons
     {0x8C,0x40,'I'+0x80,'c'+0x80,'o'+0x80,'n'+0x80,'s'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x77},
-    //52 LEDs
+    //42 LEDs
     {0x8C,0x40,'L'+0x80,'E'+0x80,'D'+0x80,'s'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x77},
-    //53 Back
+    //43 Back
     {0x8C,0x40,'B'+0x80,'a'+0x80,'c'+0x80,'k'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x77},
 
-    //54 Year:
+    //44 Year:
     {0x8C,0x40,'Y'+0x80,'e'+0x80,'a'+0x80,'r'+0x80,':'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //55 Month:
+    //45 Month:
     {0x8C,0x40,'M'+0x80,'o'+0x80,'n'+0x80,'t'+0x80,'h'+0x80,':'+0x80,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //56 Day:
+    //46 Day:
     {0x8C,0x40,'D'+0x80,'a'+0x80,'y'+0x80,':'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //57 Weekday:
+    //47 Weekday:
     {0x8C,0x40,'W'+0x80,'e'+0x80,'e'+0x80,'k'+0x80,'d'+0x80,'a'+0x80,'y'+0x80,':'+0x80,0x20,0x20,0x20,0x1f},
-    //58 Hour:
+    //48 Hour:
     {0x8C,0x40,'H'+0x80,'o'+0x80,'u'+0x80,'r'+0x80,':'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //59 Minute:
+    //49 Minute:
     {0x8C,0x40,'M'+0x80,'i'+0x80,'n'+0x80,'u'+0x80,'t'+0x80,'e'+0x80,':'+0x80,0x20,0x20,0x20,0x20,0x1f},
-    //60 Second:
+    //50 Second:
     {0x8C,0x40,'S'+0x80,'e'+0x80,'c'+0x80,'o'+0x80,'n'+0x80,'d'+0x80,':'+0x80,0x20,0x20,0x20,0x20,0x1f},
   };
 
@@ -167,7 +146,7 @@ static uint8_t about[]=
 
 static uint8_t information[]=
   "Power Mode: xxxxxxxxx DEV-ID: xxxx Speed: xx Mhz "
-  "Debug: xxxxxxxx";
+  "Debug: xxxxxxxxxxxxxxxxxxxx";
 
 static uint8_t birthday_record[15];
 static bool birthday = false;
@@ -182,17 +161,46 @@ static uint8_t icons[PCF2103_LCD_SEND_WIDTH]=
 static uint8_t buffer_LCD[PCF2103_LCD_SEND_WIDTH]=
   {0x8C,0x40,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20};
 
-// settings
-static DISPLAYFORMAT format, old_format;
-static bool separator_flip, old_separator_flip;
-static UPDATEFREQ freq, old_freq;
-static CHIP_PMU_MCUPOWER_T sleep, old_sleep;
-static bool scroll, old_scroll;
-static BLINK blink, old_blink;
-static uint32_t icons_mode, old_icons_mode;
-static uint32_t aging_offset, old_aging_offset;
-static bool swd, old_swd;
+typedef struct {
+  uint8_t c;
+  uint8_t size;
+} FORMAT_CHAR;  
+  
+static FORMAT_CHAR format_chars[]=
+  {{0x3D    ,1}, // space (separator)
+   {'H'+0x80,2}, // hour
+   {'M'+0x80,2}, // minute
+   {'S'+0x80,2}, // second
+   {'D'+0x80,2}, // day
+   {'W'+0x80,2}, // weekday
+   {'O'+0x80,2}, // month
+   {'Y'+0x80,2}, // year
+   {'1'+0x80,1}, // : or - (separator)
+   {'2'+0x80,1}};// . (separator)
+   
+  
+static uint32_t format_chars_array_size = sizeof(format_chars) / sizeof(format_chars[0]);
+   
+typedef struct _PACKED {
+  bool separator_flip;
+  uint8_t freq;
+  uint8_t sleep;
+  bool scroll;
+  uint8_t blink;
+  uint8_t icons_mode;
+  uint8_t aging_offset;
+  bool swd;
+  uint8_t format[12];
+} PARAMETERS;
 
+typedef union {
+  PARAMETERS s;
+  uint8_t buf[_24C32WI_SETTINGS_LENGTH];
+} SETTINGS;
+
+SETTINGS settings, old_settings;
+uint32_t max_scroll_position;    
+    
 // current state of separator
 static bool sep_flip;
 
@@ -202,36 +210,44 @@ static bool scroll_direction = true;
 static uint8_t menu_forward[] = {
   1, 2, 3, 4, 5, 6, 7, 0, 9,10,
  11,12,13,14,15,16,17,18, 8,20,
- 21,22,23,24,25,26,27,28,19,30,
- 29,32,31, 0,35,36,34,38,39,37,
- 41,40,43,42,45,46,44, 0, 0, 0,
- 51,52,53,50, 0, 0, 0, 0, 0, 0,
+ 19,22,21, 0,25,26,24,28,29,27,
+ 31,30,33,32,35,36,34, 0, 0, 0,
+ 41,42,43,40, 0, 0, 0, 0, 0, 0,
  0
 };
 
 static uint8_t menu_backward[ ]= {
   7, 0, 1, 2, 3, 4, 5, 6,18, 8,
-  9,10,11,12,13,14,15,16,17,28,
- 19,20,21,22,23,24,25,26,27,30,
- 29,32,31, 0,36,34,35,39,37,38,
- 41,40,43,42,46,44,45, 0, 0, 0,
- 53,50,51,52, 0, 0, 0, 0, 0, 0,
+  9,10,11,12,13,14,15,16,17,20,
+ 19,22,21, 0,26,24,25,29,27,28,
+ 31,30,33,32,36,34,35, 0, 0, 0,
+ 43,40,41,42, 0, 0, 0, 0, 0, 0,
  0
 };
 
 static uint8_t menu_enter[] = {
-  0, 8,44, 3, 4,50, 6, 0, 8, 9,
- 19,29,31,13,34,37,40,42, 1,10,
- 10,10,10,10,10,10,10,10,10,11,
+  0, 8,34, 3, 4,40, 6, 0, 8, 9,
+ 10,19,21,13,24,27,30,32, 1,11,
  11,12,12, 1,14,14,14,15,15,15,
  16,16,17,17, 2, 2, 2, 0, 0, 0,
- 50,51,52, 5, 0, 0, 0, 0, 0, 0,
+ 40,41,42, 5, 0, 0, 0, 0, 0, 0,
  0
 };
 
 static uint8_t buf[16];
 // time and date read from PCA2129T
 static uint8_t time_and_date[9];
+
+#define LED1_OFF Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, PIN_LED1, false);
+#define LED1_ON Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, PIN_LED1, true);
+#define LED2_OFF Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, PIN_LED2, false);
+#define LED2_ON Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, PIN_LED2, true);
+#define SLEEP Chip_PMU_Sleep(LPC_PMU, (CHIP_PMU_MCUPOWER_T)settings.s.sleep);
+#define WRITE_LCD(str) write_LCD(PCF2103_I2C_ADDR_7BIT, 0x80, PCF2103_LCD_SEND_WIDTH, str);
+
+#define WRITE_LCD_SLEEP(str) \
+   WRITE_LCD(str)\
+   SLEEP
 
 static void set_menu(uint8_t* str, uint32_t num) {
 
@@ -259,27 +275,27 @@ static void set_aging_offset(void) {
   uint32_t displayed_offset;
   uint32_t sign;
 
-  set_menu(buffer_LCD, 33);
+  set_menu(buffer_LCD, 23);
 
   while (button_state) {
     if (counter > old_counter) {
       if (counter - 3 > old_counter) {
         old_counter = counter;
-        if (aging_offset > PCA2129T_MIN_OFFSET) aging_offset--;
+        if (settings.s.aging_offset > PCA2129T_MIN_OFFSET) settings.s.aging_offset--;
       }
     }
     else if (counter < old_counter) {
       if (counter + 3 < old_counter) {
         old_counter = counter;
-        if (aging_offset < PCA2129T_MAX_OFFSET) aging_offset++;
+        if (settings.s.aging_offset < PCA2129T_MAX_OFFSET) settings.s.aging_offset++;
       }
     }
-    if (aging_offset > 8) {
-      displayed_offset = aging_offset - 8;
+    if (settings.s.aging_offset > 8) {
+      displayed_offset = settings.s.aging_offset - 8;
       sign = '-' + 0x80;
     }
-    else if (aging_offset < 8) {
-      displayed_offset = 8 - aging_offset;
+    else if (settings.s.aging_offset < 8) {
+      displayed_offset = 8 - settings.s.aging_offset;
       sign = '+' + 0x80;
     }
     else {
@@ -290,7 +306,7 @@ static void set_aging_offset(void) {
     buffer_LCD[10] = displayed_offset + 0xb0;
     WRITE_LCD_SLEEP(buffer_LCD)
   }
-  buf[0] = aging_offset;
+  buf[0] = settings.s.aging_offset;
   write_clock(PCA2129T_I2C_ADDR_7BIT, PCA2129T_AGING_OFFSET_REGISTER, PCA2129T_OFFSET_LENGHT, buf);
 }
 
@@ -305,7 +321,7 @@ static void set_date(void) {
   set_month = FROM_BCD(buf[3]);
   set_year = FROM_BCD(buf[4]);
 
-  set_menu(buffer_LCD, 54);
+  set_menu(buffer_LCD, 44);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -325,7 +341,7 @@ static void set_date(void) {
     WRITE_LCD_SLEEP(buffer_LCD)
   }
 
-  set_menu(buffer_LCD, 55);
+  set_menu(buffer_LCD, 45);
 
   button_state = true;
 
@@ -349,7 +365,7 @@ static void set_date(void) {
 
   button_state = true;
 
-  set_menu(buffer_LCD, 56);
+  set_menu(buffer_LCD, 46);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -371,7 +387,7 @@ static void set_date(void) {
 
   button_state = true;
 
-  set_menu(buffer_LCD, 57);
+  set_menu(buffer_LCD, 47);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -409,7 +425,7 @@ static void set_time(void) {
   set_minute = FROM_BCD(buf[2]);
   set_second = FROM_BCD(buf[1]);
 
-  set_menu(buffer_LCD, 58);
+  set_menu(buffer_LCD, 48);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -431,7 +447,7 @@ static void set_time(void) {
 
   button_state = true;
 
-  set_menu(buffer_LCD, 59);
+  set_menu(buffer_LCD, 49);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -453,7 +469,7 @@ static void set_time(void) {
 
   button_state = true;
 
-  set_menu(buffer_LCD, 60);
+  set_menu(buffer_LCD, 50);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -479,12 +495,88 @@ static void set_time(void) {
   write_clock(PCA2129T_I2C_ADDR_7BIT, PCA2129T_TIME_REGISTER, PCA2129T_TIME_LENGHT, buf);
 }
 
+static void set_format(void) {
+  
+  uint32_t i, j, current_position_lcd, current_position_format, format_char_size;
+  
+  clear_lcd();
+  format_char_size = 1;
+  buffer_LCD[2] = 0x3D;
+  WRITE_LCD(buffer_LCD)
+  
+  current_position_lcd = 0;
+  current_position_format = 0;
+
+  while (current_position_lcd < 12) {
+    while (button_state) {
+      if (counter > old_counter) {
+        if (counter - 3 > old_counter) {
+          old_counter = counter;
+
+          do {
+            current_position_format++;            
+            if (current_position_format >= format_chars_array_size)
+              current_position_format = 0;
+            format_char_size = format_chars[current_position_format].size;
+          }  while (current_position_lcd + format_char_size > 12 );
+            
+          for (i = current_position_lcd; i < current_position_lcd + format_char_size; i++) {
+            buffer_LCD[2 + i] = format_chars[current_position_format].c;
+          }
+          for (j = i; j < 12; j++) {
+            buffer_LCD[2 + j] = ' ' + 0x80;
+          }            
+        }
+      } 
+      else if (counter < old_counter) {
+        if (counter + 3 < old_counter) {
+          old_counter = counter;
+            
+          do {
+            if (current_position_format == 0)
+              current_position_format = format_chars_array_size;
+            current_position_format--;
+            format_char_size = format_chars[current_position_format].size;
+          }  while (current_position_lcd + format_char_size > 12 );
+            
+          for (i = current_position_lcd; i < current_position_lcd + format_char_size; i++) {
+             buffer_LCD[2 + i] = format_chars[current_position_format].c;
+          }
+          for (j = i; j < 12; j++) {
+            buffer_LCD[2 + j] = ' ' + 0x80;
+          }
+        }
+      }
+      WRITE_LCD_SLEEP(buffer_LCD)
+    }
+    button_state = true;
+    current_position_lcd += format_char_size;
+    format_char_size = 1;
+    if(current_position_lcd < 12) {
+      buffer_LCD[2 + current_position_lcd] = 0x3D;
+      current_position_format = 0;
+      WRITE_LCD(buffer_LCD)
+    }
+  }
+
+  max_scroll_position = 0;
+  for (i = 0; i < 12; i++) {
+    if (buffer_LCD[2 + i] == 0x3D)
+      settings.s.format[i] = ' ';
+    else {
+      settings.s.format[i] = buffer_LCD[2 + i] - 0x80;
+      max_scroll_position = 11 - i;
+    }
+  }
+  scroll_position = max_scroll_position;
+}
+
 static void display_clock(void) {
 
   uint32_t i;
   uint32_t month, day;
 
-  switch (blink) {
+  switch (settings.s.blink) {
     case BLINK_OFF:break;
     case BLINK_ON:
       if (birthday) {
@@ -495,8 +587,8 @@ static void display_clock(void) {
       }
       break;
     case BLINK_1MIN:
-      if ((freq == UPDATEFREQ_1_SEC) && (time_and_date[2] == 0x59) ||
-          (freq == UPDATEFREQ_1_MIN) ) {
+      if ((settings.s.freq == UPDATEFREQ_1_SEC) && (time_and_date[2] == 0x59) ||
+          (settings.s.freq == UPDATEFREQ_1_MIN) ) {
         if (birthday) {
           LED2_ON
         }
@@ -523,7 +615,7 @@ static void display_clock(void) {
       for (i = 0; i < BIRTHDAYS_COUNT; i++ ) {
         if ((birthdays[i].date[0] == month) && (birthdays[i].date[1] == day)) {
           birthday = true;
-          switch (blink) {
+          switch (settings.s.blink) {
             case BLINK_OFF: break;
             case BLINK_ON:
             case BLINK_1MIN:
@@ -535,7 +627,7 @@ static void display_clock(void) {
       }
       if (i == BIRTHDAYS_COUNT) {
         birthday = false;
-        switch (blink) {
+        switch (settings.s.blink) {
           case BLINK_OFF: break;
           case BLINK_ON:
           case BLINK_1MIN:
@@ -549,11 +641,11 @@ static void display_clock(void) {
     clear_icons();
     clear_lcd();
 
-    switch (icons_mode) {
+    switch (settings.s.icons_mode) {
       case ICONSMODE_POWER:
         icons[12] = time_and_date[1] & 0x04 ? 0x04 : 0x1F;
         icons[13] = 0x10;
-        switch (sleep) {
+        switch (settings.s.sleep) {
           case PMU_MCU_SLEEP: icons[2] = 0x10; break;
           case PMU_MCU_DEEP_SLEEP: icons[2] = 0x1C; break;
           case PMU_MCU_POWER_DOWN: icons[2] = 0x1F; break;
@@ -576,328 +668,120 @@ static void display_clock(void) {
     }
 
     WRITE_LCD(icons)
-
-    switch (format) {
-      // HHMM_SEP
-      case DISPLAYFORMAT_HHMM_SEP:
-        if (scroll) {
-          if (scroll_direction) {
-            if (scroll_position == 7) {
-              scroll_direction = false;
-              scroll_position--;
-            }
-            else scroll_position++;
+    
+    i = 0;
+    while (i < 12 - scroll_position) {
+      switch (settings.s.format[i]) {
+        case 'H':
+          buffer_LCD[scroll_position + 2 + i] = FROM_BCD_HIGH(time_and_date[4]) + 0xb0;
+          buffer_LCD[scroll_position + 3 + i] = FROM_BCD_LOW(time_and_date[4]) + 0xb0;
+          i += 2;
+          break;
+        case 'M':
+          buffer_LCD[scroll_position + 2 + i] = FROM_BCD_HIGH(time_and_date[3]) + 0xb0;
+          buffer_LCD[scroll_position + 3 + i] = FROM_BCD_LOW(time_and_date[3]) + 0xb0;
+          i += 2;
+          break;
+        case 'S':
+          buffer_LCD[scroll_position + 2 + i] = FROM_BCD_HIGH(time_and_date[2]) + 0xb0;
+          buffer_LCD[scroll_position + 3 + i] = FROM_BCD_LOW(time_and_date[2]) + 0xb0;
+          i += 2;
+          break;
+        case 'O':
+          buffer_LCD[scroll_position + 2 + i] = FROM_BCD_HIGH(time_and_date[7]) + 0xb0;
+          buffer_LCD[scroll_position + 3 + i] = FROM_BCD_LOW(time_and_date[7]) + 0xb0;
+          i += 2;
+          break;
+        case 'D':
+          buffer_LCD[scroll_position + 2 + i] = FROM_BCD_HIGH(time_and_date[5]) + 0xb0;
+          buffer_LCD[scroll_position + 3 + i] = FROM_BCD_LOW(time_and_date[5]) + 0xb0;
+          i += 2;
+          break;
+        case 'Y':
+          buffer_LCD[scroll_position + 2 + i] = FROM_BCD_HIGH(time_and_date[8]) + 0xb0;
+          buffer_LCD[scroll_position + 3 + i] = FROM_BCD_LOW(time_and_date[8]) + 0xb0;
+          i += 2;
+          break;
+        case 'W':
+          switch (time_and_date[6]) {
+            case 0:
+              buffer_LCD[scroll_position + 2 + i] = 'S' + 0x80;
+              buffer_LCD[scroll_position + 3 + i] = 'u' + 0x80;
+              break;
+            case 1:
+              buffer_LCD[scroll_position + 2 + i] = 'M' + 0x80;
+              buffer_LCD[scroll_position + 3 + i] = 'o' + 0x80;
+              break;
+            case 2:
+              buffer_LCD[scroll_position + 2 + i] = 'T' + 0x80;
+              buffer_LCD[scroll_position + 3 + i] = 'u' + 0x80;
+              break;
+            case 3:
+              buffer_LCD[scroll_position + 2 + i] = 'W' + 0x80;
+              buffer_LCD[scroll_position + 3 + i] = 'e' + 0x80;
+              break;
+            case 4:
+              buffer_LCD[scroll_position + 2 + i] = 'T' + 0x80;
+              buffer_LCD[scroll_position + 3 + i] = 'h' + 0x80;
+              break;
+            case 5:
+              buffer_LCD[scroll_position + 2 + i] = 'F' + 0x80;
+              buffer_LCD[scroll_position + 3 + i] = 'r' + 0x80;
+              break;
+            case 6:
+              buffer_LCD[scroll_position + 2 + i] = 'S' + 0x80;
+              buffer_LCD[scroll_position + 3 + i] = 'a' + 0x80;
+              break;
           }
-          else {
-            if (scroll_position == 0) {
-              scroll_direction = true;
-              scroll_position++;
-            }
-            else scroll_position--;
+          i += 2;
+          break;
+        case '1':
+          if (settings.s.separator_flip) {
+            if (sep_flip)
+              buffer_LCD[scroll_position + 2 + i] = '-' + 0x80;
+            else 
+              buffer_LCD[scroll_position + 2 + i] = ':' + 0x80;
+            sep_flip = !sep_flip;
           }
-        }
-        buffer_LCD[scroll_position + 2] = FROM_BCD_HIGH(time_and_date[4]) + 0xb0;
-        buffer_LCD[scroll_position + 3] = FROM_BCD_LOW(time_and_date[4]) + 0xb0;
-        buffer_LCD[scroll_position + 4] = ':' + 0x80;
-        if (separator_flip) {
-          if (sep_flip)
-            buffer_LCD[scroll_position + 4] = '-' + 0x80;
-          sep_flip = !sep_flip;
-        }
-        buffer_LCD[scroll_position + 5] = FROM_BCD_HIGH(time_and_date[3]) + 0xb0;
-        buffer_LCD[scroll_position + 6] = FROM_BCD_LOW(time_and_date[3]) + 0xb0;
-        break;
-
-      // HHMMSS_SEP
-      case DISPLAYFORMAT_HHMMSS_SEP:
-        if (scroll) {
-          if (scroll_direction) {
-            if (scroll_position == 4) {
-              scroll_direction = false;
-              scroll_position--;
-            }
-            else scroll_position++;
-          }
-          else {
-            if (scroll_position == 0) {
-              scroll_direction = true;
-              scroll_position++;
-            }
-            else scroll_position--;
-          }
-        }
-        buffer_LCD[scroll_position + 2] = FROM_BCD_HIGH(time_and_date[4]) + 0xb0;
-        buffer_LCD[scroll_position + 3] = FROM_BCD_LOW(time_and_date[4]) + 0xb0;
-        buffer_LCD[scroll_position + 4] = ':' + 0x80;
-        buffer_LCD[scroll_position + 7] = ':' + 0x80;
-        if (separator_flip) {
-          if (sep_flip) {
-            buffer_LCD[scroll_position + 4] = '-' + 0x80;
-            buffer_LCD[scroll_position + 7] = '-' + 0x80;
-          }
-          sep_flip = !sep_flip;
-        }
-        buffer_LCD[scroll_position + 5] = FROM_BCD_HIGH(time_and_date[3]) + 0xb0;
-        buffer_LCD[scroll_position + 6] = FROM_BCD_LOW(time_and_date[3]) + 0xb0;
-        buffer_LCD[scroll_position + 8] = FROM_BCD_HIGH(time_and_date[2]) + 0xb0;
-        buffer_LCD[scroll_position + 9] = FROM_BCD_LOW(time_and_date[2]) + 0xb0;
-        break;
-
-      // HHMMSS
-      case DISPLAYFORMAT_HHMMSS:
-        if (scroll) {
-          if (scroll_direction) {
-            if (scroll_position == 6) {
-              scroll_direction = false;
-              scroll_position--;
-            }
-            else scroll_position++;
-          }
-          else {
-            if (scroll_position == 0) {
-              scroll_direction = true;
-              scroll_position++;
-            }
-            else scroll_position--;
-          }
-        }
-        buffer_LCD[scroll_position + 2] = FROM_BCD_HIGH(time_and_date[4]) + 0xb0;
-        buffer_LCD[scroll_position + 3] = FROM_BCD_LOW(time_and_date[4]) + 0xb0;
-        buffer_LCD[scroll_position + 4] = FROM_BCD_HIGH(time_and_date[3]) + 0xb0;
-        buffer_LCD[scroll_position + 5] = FROM_BCD_LOW(time_and_date[3]) + 0xb0;
-        buffer_LCD[scroll_position + 6] = FROM_BCD_HIGH(time_and_date[2]) + 0xb0;
-        buffer_LCD[scroll_position + 7] = FROM_BCD_LOW(time_and_date[2]) + 0xb0;
-        break;
-
-      // HHMM
-      case DISPLAYFORMAT_HHMM:
-        if (scroll) {
-          if (scroll_direction) {
-            if (scroll_position == 8) {
-              scroll_direction = false;
-              scroll_position--;
-            }
-            else scroll_position++;
-          }
-          else {
-            if (scroll_position == 0) {
-              scroll_direction = true;
-              scroll_position++;
-            }
-            else scroll_position--;
-          }
-        }
-        buffer_LCD[scroll_position + 2] = FROM_BCD_HIGH(time_and_date[4]) + 0xb0;
-        buffer_LCD[scroll_position + 3] = FROM_BCD_LOW(time_and_date[4]) + 0xb0;
-        buffer_LCD[scroll_position + 4] = FROM_BCD_HIGH(time_and_date[3]) + 0xb0;
-        buffer_LCD[scroll_position + 5] = FROM_BCD_LOW(time_and_date[3]) + 0xb0;
-        break;
-
-      // HHMM_MIDD
-      case DISPLAYFORMAT_HHMM_MIDD:
-        if (scroll) {
-          if (scroll_direction) {
-            if (scroll_position == 1) {
-              scroll_direction = false;
-              scroll_position--;
-            }
-            else scroll_position++;
-          }
-          else {
-            if (scroll_position == 0) {
-              scroll_direction = true;
-              scroll_position++;
-            }
-            else scroll_position--;
-          }
-        }
-        buffer_LCD[scroll_position + 2] = FROM_BCD_HIGH(time_and_date[4]) + 0xb0;
-        buffer_LCD[scroll_position + 3] = FROM_BCD_LOW(time_and_date[4]) + 0xb0;
-        buffer_LCD[scroll_position + 4] = ':' + 0x80;
-        if (separator_flip) {
-          if (sep_flip)
-            buffer_LCD[scroll_position + 4] = '-' + 0x80;
-          sep_flip = !sep_flip;
-        }
-        buffer_LCD[scroll_position + 5] = FROM_BCD_HIGH(time_and_date[3]) + 0xb0;
-        buffer_LCD[scroll_position + 6] = FROM_BCD_LOW(time_and_date[3]) + 0xb0;
-        buffer_LCD[scroll_position + 7] = 0x20;
-        buffer_LCD[scroll_position + 8] = FROM_BCD_HIGH(time_and_date[7]) + 0xb0;
-        buffer_LCD[scroll_position + 9] = FROM_BCD_LOW(time_and_date[7]) + 0xb0;
-        buffer_LCD[scroll_position + 10] = '.' + 0x80;
-        buffer_LCD[scroll_position + 11] = FROM_BCD_HIGH(time_and_date[5]) + 0xb0;
-        buffer_LCD[scroll_position + 12] = FROM_BCD_LOW(time_and_date[5]) + 0xb0;
-        break;
-
-      // MIDD_HHMM
-      case DISPLAYFORMAT_MIDD_HHMM:
-        if (scroll) {
-          if (scroll_direction) {
-            if (scroll_position == 1) {
-              scroll_direction = false;
-              scroll_position--;
-            }
-            else scroll_position++;
-          }
-          else {
-            if (scroll_position == 0) {
-              scroll_direction = true;
-              scroll_position++;
-            }
-            else scroll_position--;
-          }
-        }
-        buffer_LCD[scroll_position + 2] = FROM_BCD_HIGH(time_and_date[7]) + 0xb0;
-        buffer_LCD[scroll_position + 3] = FROM_BCD_LOW(time_and_date[7]) + 0xb0;
-        buffer_LCD[scroll_position + 4] = '.' + 0x80;
-        buffer_LCD[scroll_position + 5] = FROM_BCD_HIGH(time_and_date[5]) + 0xb0;
-        buffer_LCD[scroll_position + 6] = FROM_BCD_LOW(time_and_date[5]) + 0xb0;
-        buffer_LCD[scroll_position + 7] = 0x20;
-        buffer_LCD[scroll_position + 8] = FROM_BCD_HIGH(time_and_date[4]) + 0xb0;
-        buffer_LCD[scroll_position + 9] = FROM_BCD_LOW(time_and_date[4]) + 0xb0;
-        buffer_LCD[scroll_position + 10] = ':' + 0x80;
-        if (separator_flip) {
-          if (sep_flip)
-            buffer_LCD[scroll_position + 10] = '-' + 0x80;
-          sep_flip = !sep_flip;
-        }
-        buffer_LCD[scroll_position + 11] = FROM_BCD_HIGH(time_and_date[3]) + 0xb0;
-        buffer_LCD[scroll_position + 12] = FROM_BCD_LOW(time_and_date[3]) + 0xb0;
-        break;
-
-      // HHMMSS MIDD
-      case DISPLAYFORMAT_HHMMSS_MIDD:
-        if (scroll) {
-          if (scroll_direction) {
-            if (scroll_position == 1) {
-              scroll_direction = false;
-              scroll_position--;
-            }
-            else scroll_position++;
-          }
-          else {
-            if (scroll_position == 0) {
-              scroll_direction = true;
-              scroll_position++;
-            }
-            else scroll_position--;
-          }
-        }
-        buffer_LCD[scroll_position + 2] = FROM_BCD_HIGH(time_and_date[4]) + 0xb0;
-        buffer_LCD[scroll_position + 3] = FROM_BCD_LOW(time_and_date[4]) + 0xb0;
-        buffer_LCD[scroll_position + 4] = FROM_BCD_HIGH(time_and_date[3]) + 0xb0;
-        buffer_LCD[scroll_position + 5] = FROM_BCD_LOW(time_and_date[3]) + 0xb0;
-        buffer_LCD[scroll_position + 6] = FROM_BCD_HIGH(time_and_date[2]) + 0xb0;
-        buffer_LCD[scroll_position + 7] = FROM_BCD_LOW(time_and_date[2]) + 0xb0;
-        buffer_LCD[scroll_position + 9] = FROM_BCD_HIGH(time_and_date[7]) + 0xb0;
-        buffer_LCD[scroll_position + 10] = FROM_BCD_LOW(time_and_date[7]) + 0xb0;
-        buffer_LCD[scroll_position + 11] = FROM_BCD_HIGH(time_and_date[5]) + 0xb0;
-        buffer_LCD[scroll_position + 12] = FROM_BCD_LOW(time_and_date[5]) + 0xb0;
-        break;
-
-      //  HHMMSSYYMIDD
-      case DISPLAYFORMAT_HHMMSSYYMIDD:
-        buffer_LCD[2] = FROM_BCD_HIGH(time_and_date[4]) + 0xb0;
-        buffer_LCD[3] = FROM_BCD_LOW(time_and_date[4]) + 0xb0;
-        buffer_LCD[4] = FROM_BCD_HIGH(time_and_date[3]) + 0xb0;
-        buffer_LCD[5] = FROM_BCD_LOW(time_and_date[3]) + 0xb0;
-        buffer_LCD[6] = FROM_BCD_HIGH(time_and_date[2]) + 0xb0;
-        buffer_LCD[7] = FROM_BCD_LOW(time_and_date[2]) + 0xb0;
-        buffer_LCD[8] = FROM_BCD_HIGH(time_and_date[8]) + 0xb0;
-        buffer_LCD[9] = FROM_BCD_LOW(time_and_date[8]) + 0xb0;
-        buffer_LCD[10] = FROM_BCD_HIGH(time_and_date[7]) + 0xb0;
-        buffer_LCD[11] = FROM_BCD_LOW(time_and_date[7]) + 0xb0;
-        buffer_LCD[12] = FROM_BCD_HIGH(time_and_date[5]) + 0xb0;
-        buffer_LCD[13] = FROM_BCD_LOW(time_and_date[5]) + 0xb0;
-        break;
-
-      //  YYMIDDHHMMSS
-      case DISPLAYFORMAT_YYMIDDHHMMSS:
-        buffer_LCD[2] = FROM_BCD_HIGH(time_and_date[8]) + 0xb0;
-        buffer_LCD[3] = FROM_BCD_LOW(time_and_date[8]) + 0xb0;
-        buffer_LCD[4] = FROM_BCD_HIGH(time_and_date[7]) + 0xb0;
-        buffer_LCD[5] = FROM_BCD_LOW(time_and_date[7]) + 0xb0;
-        buffer_LCD[6] = FROM_BCD_HIGH(time_and_date[5]) + 0xb0;
-        buffer_LCD[7] = FROM_BCD_LOW(time_and_date[5]) + 0xb0;
-        buffer_LCD[8] = FROM_BCD_HIGH(time_and_date[4]) + 0xb0;
-        buffer_LCD[9] = FROM_BCD_LOW(time_and_date[4]) + 0xb0;
-        buffer_LCD[10] = FROM_BCD_HIGH(time_and_date[3]) + 0xb0;
-        buffer_LCD[11] = FROM_BCD_LOW(time_and_date[3]) + 0xb0;
-        buffer_LCD[12] = FROM_BCD_HIGH(time_and_date[2]) + 0xb0;
-        buffer_LCD[13] = FROM_BCD_LOW(time_and_date[2]) + 0xb0;
-        break;
-      
-      //  HHMM_WWDD
-      case DISPLAYFORMAT_HHMM_WWDD:
-        if (scroll) {
-          if (scroll_direction) {
-            if (scroll_position == 1) {
-              scroll_direction = false;
-              scroll_position--;
-            }
-            else scroll_position++;
-          }
-          else {
-            if (scroll_position == 0) {
-              scroll_direction = true;
-              scroll_position++;
-            }
-            else scroll_position--;
-          }
-        }
-
-        buffer_LCD[scroll_position + 2] = FROM_BCD_HIGH(time_and_date[4]) + 0xb0;
-        buffer_LCD[scroll_position + 3] = FROM_BCD_LOW(time_and_date[4]) + 0xb0;
-        buffer_LCD[scroll_position + 4] = ':' + 0x80;
-        if (separator_flip) {
-          if (sep_flip)
-            buffer_LCD[scroll_position + 4] = '-' + 0x80;
-          sep_flip = !sep_flip;
-        }
-        buffer_LCD[scroll_position + 5] = FROM_BCD_HIGH(time_and_date[3]) + 0xb0;
-        buffer_LCD[scroll_position + 6] = FROM_BCD_LOW(time_and_date[3]) + 0xb0;
-        buffer_LCD[scroll_position + 7] = 0x20;
-        
-        switch (time_and_date[6]) {
-          case 0:
-            buffer_LCD[scroll_position + 8] = 'S' + 0x80;
-            buffer_LCD[scroll_position + 9] = 'u' + 0x80;
-            break;
-          case 1:
-            buffer_LCD[scroll_position + 8] = 'M' + 0x80;
-            buffer_LCD[scroll_position + 9] = 'o' + 0x80;
-            break;
-          case 2:
-            buffer_LCD[scroll_position + 8] = 'T' + 0x80;
-            buffer_LCD[scroll_position + 9] = 'u' + 0x80;
-            break;
-          case 3:
-            buffer_LCD[scroll_position + 8] = 'W' + 0x80;
-            buffer_LCD[scroll_position + 9] = 'e' + 0x80;
-            break;
-          case 4:
-            buffer_LCD[scroll_position + 8] = 'T' + 0x80;
-            buffer_LCD[scroll_position + 9] = 'h' + 0x80;
-            break;
-          case 5:
-            buffer_LCD[scroll_position + 8] = 'F' + 0x80;
-            buffer_LCD[scroll_position + 9] = 'r' + 0x80;
-            break;
-          case 6:
-            buffer_LCD[scroll_position + 8] = 'S' + 0x80;
-            buffer_LCD[scroll_position + 9] = 'a' + 0x80;
-            break;
-        }
-         
-        buffer_LCD[scroll_position + 10] = ' ' + 0x80;
-        buffer_LCD[scroll_position + 11] = FROM_BCD_HIGH(time_and_date[5]) + 0xb0;
-        buffer_LCD[scroll_position + 12] = FROM_BCD_LOW(time_and_date[5]) + 0xb0;
-        break;
+          else 
+            buffer_LCD[scroll_position + 2 + i] = ':' + 0x80;
+          i++;
+          break;
+        case '2':
+          buffer_LCD[scroll_position + 2 + i] = '.' + 0x80;
+          i++;
+          break;
+        case ' ':
+          buffer_LCD[scroll_position + 2 + i] = ' ' + 0x80;
+          i++;
+          break;
+        default:
+          i++;
+          break;
+      }
     }
+    
     WRITE_LCD(buffer_LCD)
+    
+    if (settings.s.scroll && max_scroll_position) {
+      if (scroll_direction) {
+        if (scroll_position == max_scroll_position) {
+           scroll_direction = false;
+           scroll_position--;
+        }
+        else scroll_position++;
+      }
+      else {
+        if (scroll_position == 0) {
+          scroll_direction = true;
+          scroll_position++;
+        }
+        else scroll_position--;
+      }
+    }
   }
 
-  switch (blink) {
+  switch (settings.s.blink) {
     case BLINK_OFF:break;
     case BLINK_ON:
     case BLINK_1MIN:
@@ -928,16 +812,14 @@ static void display_info(void) {
   information[42] = (uint8_t)(((SystemCoreClock / 1000000) / 10) + 0x30);
   information[43] = (uint8_t)(((SystemCoreClock / 1000000) % 10) + 0x30);
 
-  information[56] = format + 0x30;
-  information[57] = freq + 0x30;
-  information[58] = sleep + 0x30;
-  information[59] = scroll + 0x30;
-  information[60] = blink + 0x30;
-  information[61] = icons_mode + 0x30;
-  information[62] = separator_flip + 0x30;
-  information[63] = aging_offset + 0x30;
+  for (j = 0; j < 8; j++) {
+    information[56 + j] = settings.buf[j] + 0x30;
+  }
+  for (j = 8; j < 20; j++) {
+    information[56 + j] = settings.buf[j] ? settings.buf[j] : 0x20;
+  }
 
-  switch (sleep){
+  switch (settings.s.sleep){
     case PMU_MCU_SLEEP:
       information[12] = 'S';
       information[13] = 'l';
@@ -979,7 +861,7 @@ static void display_info(void) {
     if (counter > old_counter) {
       if (counter - 3 > old_counter) {
         old_counter = counter;
-        if (i < 52) i++;
+        if (i < 64) i++;
       }
     }
     else if (counter < old_counter) {
@@ -1030,7 +912,7 @@ static void display_font(void) {
 
 static void display_about(void) {
 
-  uint32_t i = 0, j;
+  uint32_t i = 0;
 
   while (button_state) {
     if (counter > old_counter) {
@@ -1045,7 +927,7 @@ static void display_about(void) {
         if (i > 0) i--;
       }
     }
-    for (j = 0; j < 12; j++) {
+    for (uint32_t j = 0; j < 12; j++) {
       buffer_LCD[j + 2] = about[i + j] + 0x80;
     }
     WRITE_LCD_SLEEP(buffer_LCD)
@@ -1054,7 +936,7 @@ static void display_about(void) {
 
 static void display_icons(void) {
 
-  uint32_t i = 0,j = 0;
+  uint32_t j = 0;
   uint8_t icon[][2] = {
     {2,0x10},{2,0x08},{2,0x04},{2,0x02},{2,0x01},
     {4,0x02},{4,0x04},{4,0x08},{4,0x10},
@@ -1135,64 +1017,36 @@ static void display_leds(void) {
 }
 
 static void load_settings(void) {
-
-  read_EEPROM(_24C32WI_I2C_ADDR_7BIT, _24C32WI_SETTINGS_ADDRESS, _24C32WI_SETTINGS_LENGTH, buf);
-
-  if ((buf[1] == 0) || (buf[1] > 10)) buf[1] = 1;
-  if ((buf[2] == 0) || (buf[2] > 2)) buf[2] = 1;
-  if (buf[3] > 2) buf[3] = 0;
-  if (buf[4] > 1) buf[4] = 0;
-  if (buf[5] > 2) buf[5] = 0;
-  if (buf[6] > 2) buf[6] = 0;
-  if (buf[7] > 1) buf[7] = 0;
-  if (buf[8] > 15) buf[8] = 8;
-
-  format = buf[1];
-  freq = buf[2];
-  sleep = (CHIP_PMU_MCUPOWER_T)buf[3];
-  scroll = buf[4];
-  blink = buf[5];
-  icons_mode = buf[6];
-  separator_flip = buf[7];
-  aging_offset = buf[8];
+  
+  read_EEPROM(_24C32WI_I2C_ADDR_7BIT, _24C32WI_SETTINGS_ADDRESS, _24C32WI_SETTINGS_LENGTH, settings.buf);
+  
+  max_scroll_position = 0;
+  for (uint32_t i = 0; i < 12; i++) {
+    if (settings.s.format[i] == ' ')
+      max_scroll_position = 11 - i;
+  }
 }
 
 static void save_settings(void) {
 
-  if ((old_scroll != scroll) ||
-      (old_format != format) ||
-      (old_sleep != sleep) ||
-      (old_freq != freq) ||
-      (old_blink != blink) ||
-      (old_icons_mode != icons_mode) ||
-      (old_separator_flip != separator_flip) ||
-      (old_aging_offset != aging_offset) ) {
-
-    buf[0] = (uint8_t)format;
-    buf[1] = (uint8_t)freq;
-    buf[2] = (uint8_t)sleep;
-    buf[3] = scroll;
-    buf[4] = (uint8_t)blink;
-    buf[5] = icons_mode;
-    buf[6] = separator_flip;
-    buf[7] = aging_offset;
-
-    Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, PIN_EEPROM_WP, false);
-    write_EEPROM(_24C32WI_I2C_ADDR_7BIT, _24C32WI_SETTINGS_ADDRESS, _24C32WI_SETTINGS_LENGTH, buf);
-    Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, PIN_EEPROM_WP, true);
+  for (uint32_t i = 0; i < _24C32WI_SETTINGS_LENGTH + 1; i++ ) {
+    if (settings.buf[i] != old_settings.buf[i]) {
+      Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, PIN_EEPROM_WP, false);
+      write_EEPROM(_24C32WI_I2C_ADDR_7BIT, _24C32WI_SETTINGS_ADDRESS, _24C32WI_SETTINGS_LENGTH, settings.buf);
+      Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, PIN_EEPROM_WP, true);
+      return;
+    }      
   }
 }
 
 static void load_birthdays(void) {
 
-  uint32_t i, j;
-
-  for (i = 0; i < BIRTHDAYS_COUNT; i++) {
+  for (uint32_t i = 0; i < BIRTHDAYS_COUNT; i++) {
     read_EEPROM(_24C32WI_I2C_ADDR_7BIT, _24C32WI_BIRTHDAYS_ADDRESS + _24C32WI_BIRTHDAY_LENGTH * i, BIRTHDAY_RECORD_LENGTH + 1, birthday_record);
     birthdays[i].date[0] = birthday_record[1];
     birthdays[i].date[1] = birthday_record[2];
-    for (j = 0; j < BIRTHDAY_NAME_LENGTH; j++ ) {
-      birthdays[i].name[j]=birthday_record[j + 3];
+    for (uint32_t j = 0; j < BIRTHDAY_NAME_LENGTH; j++ ) {
+      birthdays[i].name[j] = birthday_record[j + 3];
     }
   }
 }
@@ -1204,7 +1058,7 @@ static void edit_birthdays(void) {
   uint32_t month,day;
   uint32_t current_position;
 
-  set_menu(buffer_LCD, 47);
+  set_menu(buffer_LCD, 37);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -1248,7 +1102,7 @@ static void edit_birthdays(void) {
 
   month = FROM_BCD(birthdays[birthday_nr].date[0]);
 
-  set_menu(buffer_LCD, 48);
+  set_menu(buffer_LCD, 38);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -1271,7 +1125,7 @@ static void edit_birthdays(void) {
 
   day = FROM_BCD(birthdays[birthday_nr].date[1]);
 
-  set_menu(buffer_LCD, 49);
+  set_menu(buffer_LCD, 39);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -1449,7 +1303,7 @@ int main(void) {
   write_clock(PCA2129T_I2C_ADDR_7BIT, PCA2129T_WATHCDOG_TIMER_CONTROL_REGISTER, PCA2129T_WATHCDOG_TIMER_CONTROL_LENGHT, buf);
 
   //write register 0 ( set seconds interrupt=1, minutes=2)
-  buf[0] = (uint8_t)freq;
+  buf[0] = (uint8_t)settings.s.freq;
   write_clock(PCA2129T_I2C_ADDR_7BIT, PCA2129T_CONTROL1_REGISTER, PCA2129T_CONTROL1_LENGTH, buf);
 
   buf[0] = 0x00;
@@ -1463,7 +1317,7 @@ int main(void) {
   write_clock(PCA2129T_I2C_ADDR_7BIT, PCA2129T_TIMESTAMP_CONTROL_REGISTER, PCA2129T_TIMESTAMP_CONTROL_LENGTH, buf);
 
   //write register 0x19 ( aging offset )
-  buf[0] = aging_offset;
+  buf[0] = settings.s.aging_offset;
   write_clock(PCA2129T_I2C_ADDR_7BIT, PCA2129T_AGING_OFFSET_REGISTER, PCA2129T_OFFSET_LENGHT, buf);
 
   Chip_SYSCTL_EnablePINTWakeup(1);
@@ -1496,14 +1350,9 @@ int main(void) {
         button_state = true;
         old_counter = counter;
         idle = 0;
-        old_format = format;
-        old_freq = freq;
-        old_sleep = sleep;
-        old_scroll = scroll;
-        old_blink = blink;
-        old_icons_mode = icons_mode;
-        old_separator_flip = separator_flip;
-        old_aging_offset = aging_offset;
+        for (uint32_t i = 0; i < _24C32WI_SETTINGS_LENGTH; i++) {
+          old_settings.buf[i] = settings.buf[i];
+        }
       }
       else {
         display_clock();
@@ -1526,44 +1375,35 @@ int main(void) {
           case 6: display_about(); break;
           case 8: set_date(); break;
           case 9: set_time(); break;
+          case 10: set_format(); break;
           case 13: set_aging_offset(); break;
-          case 19: format = DISPLAYFORMAT_HHMMSS_SEP; scroll_position = 0; break;
-          case 20: format = DISPLAYFORMAT_HHMM_SEP; scroll_position = 0; break;
-          case 21: format = DISPLAYFORMAT_HHMMSS; scroll_position = 0; break;
-          case 22: format = DISPLAYFORMAT_HHMM; scroll_position = 0; break;
-          case 23: format = DISPLAYFORMAT_HHMM_MIDD; scroll_position = 0; break;
-          case 24: format = DISPLAYFORMAT_MIDD_HHMM; scroll_position = 0; break;
-          case 25: format = DISPLAYFORMAT_HHMMSS_MIDD; scroll_position = 0; break;
-          case 26: format = DISPLAYFORMAT_HHMMSSYYMIDD; scroll_position = 0; break;
-          case 27: format = DISPLAYFORMAT_YYMIDDHHMMSS; scroll_position = 0; break;
-          case 28: format = DISPLAYFORMAT_HHMM_WWDD; scroll_position = 0; break;
-          case 29: freq = UPDATEFREQ_1_SEC; break;
-          case 30: freq = UPDATEFREQ_1_MIN; break;
-          case 31: scroll = true; break;
-          case 32: scroll = false; scroll_position = 0; break;
-          case 34: blink = BLINK_ON; break;
-          case 35: blink = BLINK_OFF; break;
-          case 36: blink = BLINK_1MIN; break;
-          case 37: icons_mode = ICONSMODE_POWER; break;
-          case 38: icons_mode = ICONSMODE_WEEKDAYS; break;
-          case 39: icons_mode = ICONSMODE_NONE; break;
-          case 40: separator_flip = true; break;
-          case 41: separator_flip = false; break;
-          case 42: configure_SWD(false); break;
-          case 43: configure_SWD(true); break;
-          case 44: sleep = PMU_MCU_POWER_DOWN; break;
-          case 45: sleep = PMU_MCU_DEEP_SLEEP; break;
-          case 46: sleep = PMU_MCU_SLEEP; break;
-          case 50: display_font(); break;
-          case 51: display_icons(); break;
-          case 52: display_leds(); break;
+          case 19: settings.s.freq = UPDATEFREQ_1_SEC; break;
+          case 20: settings.s.freq = UPDATEFREQ_1_MIN; break;
+          case 21: settings.s.scroll = true; break;
+          case 22: settings.s.scroll = false; scroll_position = 0; break;
+          case 24: settings.s.blink = BLINK_ON; break;
+          case 25: settings.s.blink = BLINK_OFF; break;
+          case 26: settings.s.blink = BLINK_1MIN; break;
+          case 27: settings.s.icons_mode = ICONSMODE_POWER; break;
+          case 28: settings.s.icons_mode = ICONSMODE_WEEKDAYS; break;
+          case 29: settings.s.icons_mode = ICONSMODE_NONE; break;
+          case 30: settings.s.separator_flip = true; break;
+          case 31: settings.s.separator_flip = false; break;
+          case 32: settings.s.swd = false; configure_SWD(false); break;
+          case 33: settings.s.swd = true; configure_SWD(true); break;
+          case 34: settings.s.sleep = PMU_MCU_POWER_DOWN; break;
+          case 35: settings.s.sleep = PMU_MCU_DEEP_SLEEP; break;
+          case 36: settings.s.sleep = PMU_MCU_SLEEP; break;
+          case 40: display_font(); break;
+          case 41: display_icons(); break;
+          case 42: display_leds(); break;
           default: break;
         }
         button_state = true;
         if (menu_position == 7) { // exit settings
           clock_mode = true;
-          if (old_freq != freq) {
-            buf[0] = freq;
+          if (old_settings.s.freq != settings.s.freq) {
+            buf[0] = settings.s.freq;
             write_clock(PCA2129T_I2C_ADDR_7BIT, PCA2129T_CONTROL1_REGISTER, PCA2129T_CONTROL1_LENGTH, buf);
           }
           save_settings();
@@ -1573,22 +1413,22 @@ int main(void) {
         else {
           menu_position = menu_enter[menu_position];
           switch (menu_position) {
-            case 19: menu_position += format; break;
-            case 29:
-              switch (freq) {
+            case 19:
+              switch (settings.s.freq) {
                 case UPDATEFREQ_1_SEC: break;
-                case UPDATEFREQ_1_MIN: menu_position = 30; break;
+                case UPDATEFREQ_1_MIN: menu_position = 20; break;
                 default: break;
               }; break;
-            case 31: if (!scroll) menu_position = 32; break;
-            case 34: menu_position += blink; break;
-            case 37: menu_position += icons_mode; break;
-            case 40: if (!separator_flip) menu_position = 41; break;
-            case 44:
-              switch (sleep) {
+            case 21: if (!settings.s.scroll) menu_position = 22; break;
+            case 24: menu_position += settings.s.blink; break;
+            case 27: menu_position += settings.s.icons_mode; break;
+            case 30: if (!settings.s.separator_flip) menu_position = 31; break;
+            case 32: if (settings.s.swd) menu_position = 33; break;  
+            case 34:
+              switch (settings.s.sleep) {
                 case PMU_MCU_POWER_DOWN: break;
-                case PMU_MCU_DEEP_SLEEP: menu_position = 45; break;
-                case PMU_MCU_SLEEP: menu_position = 46; break;
+                case PMU_MCU_DEEP_SLEEP: menu_position = 35; break;
+                case PMU_MCU_SLEEP: menu_position = 36; break;
                 default: break;
               }; break;
             default: break;
