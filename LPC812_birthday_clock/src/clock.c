@@ -495,6 +495,16 @@ static void set_time(void) {
   write_clock(PCA2129T_I2C_ADDR_7BIT, PCA2129T_TIME_REGISTER, PCA2129T_TIME_LENGHT, buf);
 }
 
+static void update_max_scroll_position(void) {
+  
+  max_scroll_position = 0;
+  for (int32_t i = 11; i >= 0; i--) {
+    if (settings.s.format[i] == ' ')
+      max_scroll_position = 12 - i;
+    else break;
+  }
+}
+
 static void set_format(void) {
   
   uint32_t i, j, current_position_lcd, current_position_format, format_char_size;
@@ -564,12 +574,7 @@ static void set_format(void) {
       settings.s.format[i] = ' ';
   }
   
-  max_scroll_position = 0;
-  for (int32_t k = 11; k >= 0; k--) {
-    if (settings.s.format[k] == ' ')
-      max_scroll_position = 12 - k;
-    else break;
-  }
+  update_max_scroll_position();
   scroll_position = max_scroll_position;
 }
 
@@ -1022,12 +1027,7 @@ static void load_settings(void) {
   
   read_EEPROM(_24C32WI_I2C_ADDR_7BIT, _24C32WI_SETTINGS_ADDRESS, _24C32WI_SETTINGS_LENGTH, settings.buf);
   
-  max_scroll_position = 0;
-  for (int32_t i = 11; i >= 0; i--) {
-    if (settings.s.format[i] == ' ')
-      max_scroll_position = 12 - i;
-    else break;
-  }
+  update_max_scroll_position();
   scroll_position = max_scroll_position;
 }
 
