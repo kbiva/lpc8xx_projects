@@ -1018,10 +1018,10 @@ static void load_birthdays(void) {
 
   for (uint32_t i = 0; i < BIRTHDAYS_COUNT; i++) {
     read_EEPROM(_24C32WI_I2C_ADDR_7BIT, _24C32WI_BIRTHDAYS_ADDRESS + _24C32WI_BIRTHDAY_LENGTH * i, BIRTHDAY_RECORD_LENGTH + 1, birthday_record);
-    birthdays[i].date[0] = birthday_record[1];
-    birthdays[i].date[1] = birthday_record[2];
+    birthdays[i].date[0] = birthday_record[0];
+    birthdays[i].date[1] = birthday_record[1];
     for (uint32_t j = 0; j < BIRTHDAY_NAME_LENGTH; j++ ) {
-      birthdays[i].name[j] = birthday_record[j + 3];
+      birthdays[i].name[j] = birthday_record[j + 2];
     }
   }
 }
