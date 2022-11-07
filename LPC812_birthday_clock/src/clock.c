@@ -585,6 +585,8 @@ static void set_format(void) {
   for (i = 0; i < 12; i++) {
     if (buffer_LCD[2 + i] == 0x3D)
       settings.s.format[i] = ' ';
+    else
+      settings.s.format[i] = buffer_LCD[2 + i] - 0x80;
   }
   
   update_max_scroll_position();
