@@ -177,8 +177,8 @@ static uint8_t buffer_LCD[PCF2103_LCD_SEND_WIDTH]=
 typedef struct {
   uint8_t c;
   uint8_t size;
-} FORMAT_CHAR;  
-  
+} FORMAT_CHAR;
+
 static FORMAT_CHAR format_chars[]=
   {{0x3D    ,1}, // space (separator)
    {'H'+0x80,2}, // hour
@@ -190,10 +190,10 @@ static FORMAT_CHAR format_chars[]=
    {'Y'+0x80,2}, // year
    {'1'+0x80,1}, // : or - (separator)
    {'2'+0x80,1}};// . (separator)
-   
-  
+
+
 static uint32_t format_chars_array_size = sizeof(format_chars) / sizeof(format_chars[0]);
-   
+
 typedef struct _PACKED {
   bool separator_flip;
   uint8_t freq;
@@ -212,8 +212,8 @@ typedef union {
 } SETTINGS;
 
 SETTINGS settings, old_settings;
-uint32_t max_scroll_position;    
-    
+uint32_t max_scroll_position;
+
 // current state of separator
 static bool sep_flip;
 
@@ -509,7 +509,7 @@ static void set_time(void) {
 }
 
 static void update_max_scroll_position(void) {
-  
+
   max_scroll_position = 0;
   for (int32_t i = 11; i >= 0; i--) {
     if (settings.s.format[i] == ' ')
@@ -519,14 +519,14 @@ static void update_max_scroll_position(void) {
 }
 
 static void set_format(void) {
-  
+
   uint32_t i, j, current_position_lcd, current_position_format, format_char_size;
-  
+
   clear_lcd();
   format_char_size = 1;
   buffer_LCD[2] = 0x3D;
   WRITE_LCD(buffer_LCD)
-  
+
   current_position_lcd = 0;
   current_position_format = 0;
 
@@ -537,31 +537,31 @@ static void set_format(void) {
           old_counter = counter;
 
           do {
-            current_position_format++;            
+            current_position_format++;
             if (current_position_format >= format_chars_array_size)
               current_position_format = 0;
             format_char_size = format_chars[current_position_format].size;
           }  while (current_position_lcd + format_char_size > 12 );
-            
+
           for (i = current_position_lcd; i < current_position_lcd + format_char_size; i++) {
             buffer_LCD[2 + i] = format_chars[current_position_format].c;
           }
           for (j = i; j < 12; j++) {
             buffer_LCD[2 + j] = ' ' + 0x80;
-          }            
+          }
         }
-      } 
+      }
       else if (counter < old_counter) {
         if (counter + 3 < old_counter) {
           old_counter = counter;
-            
+
           do {
             if (current_position_format == 0)
               current_position_format = format_chars_array_size;
             current_position_format--;
             format_char_size = format_chars[current_position_format].size;
           }  while (current_position_lcd + format_char_size > 12 );
-            
+
           for (i = current_position_lcd; i < current_position_lcd + format_char_size; i++) {
              buffer_LCD[2 + i] = format_chars[current_position_format].c;
           }
@@ -588,7 +588,7 @@ static void set_format(void) {
     else
       settings.s.format[i] = buffer_LCD[2 + i] - 0x80;
   }
-  
+
   update_max_scroll_position();
   scroll_position = max_scroll_position;
 }
@@ -690,7 +690,7 @@ static void display_clock(void) {
     }
 
     WRITE_LCD(icons)
-    
+
     i = 0;
     while (i < 12 - scroll_position) {
       switch (settings.s.format[i]) {
@@ -718,7 +718,7 @@ static void display_clock(void) {
           buffer_LCD[scroll_position + 2 + i] = months[FROM_BCD(time_and_date[7])][0];
           buffer_LCD[scroll_position + 3 + i] = months[FROM_BCD(time_and_date[7])][1];
           buffer_LCD[scroll_position + 4 + i] = months[FROM_BCD(time_and_date[7])][2];
-          i += 3;  
+          i += 3;
           break;
         case 'D':
           buffer_LCD[scroll_position + 2 + i] = FROM_BCD_HIGH(time_and_date[5]) + 0xb0;
@@ -734,11 +734,11 @@ static void display_clock(void) {
           if (settings.s.separator_flip) {
             if (sep_flip)
               buffer_LCD[scroll_position + 2 + i] = '-' + 0x80;
-            else 
+            else
               buffer_LCD[scroll_position + 2 + i] = ':' + 0x80;
             sep_flip = !sep_flip;
           }
-          else 
+          else
             buffer_LCD[scroll_position + 2 + i] = ':' + 0x80;
           i++;
           break;
@@ -755,9 +755,9 @@ static void display_clock(void) {
           break;
       }
     }
-    
+
     WRITE_LCD(buffer_LCD)
-    
+
     if (settings.s.scroll && max_scroll_position) {
       if (scroll_direction) {
         if (scroll_position == max_scroll_position) {
@@ -994,9 +994,9 @@ static void display_leds(void) {
 }
 
 static void load_settings(void) {
-  
+
   read_EEPROM(_24C32WI_I2C_ADDR_7BIT, _24C32WI_SETTINGS_ADDRESS, _24C32WI_SETTINGS_LENGTH, settings.buf);
-  
+
   update_max_scroll_position();
   scroll_position = max_scroll_position;
 }
@@ -1009,7 +1009,7 @@ static void save_settings(void) {
       write_EEPROM(_24C32WI_I2C_ADDR_7BIT, _24C32WI_SETTINGS_ADDRESS, _24C32WI_SETTINGS_LENGTH, settings.buf);
       Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, PIN_EEPROM_WP, true);
       return;
-    }      
+    }
   }
 }
 
@@ -1236,7 +1236,7 @@ int main(void) {
   // startup delay 0.5s
   Chip_MRT_SetInterval(LPC_MRT_CH1,(500000*12-3));
 
-  init_pins();  
+  init_pins();
 
   /* Allocate I2C handle, setup I2C rate, and initialize I2C
      clocking */
@@ -1397,7 +1397,7 @@ int main(void) {
             case 24: menu_position += settings.s.blink; break;
             case 27: menu_position += settings.s.icons_mode; break;
             case 30: if (!settings.s.separator_flip) menu_position = 31; break;
-            case 32: if (settings.s.swd) menu_position = 33; break;  
+            case 32: if (settings.s.swd) menu_position = 33; break;
             case 34:
               switch (settings.s.sleep) {
                 case PMU_MCU_POWER_DOWN: break;

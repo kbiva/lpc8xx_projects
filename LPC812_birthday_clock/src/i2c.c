@@ -45,7 +45,7 @@ void setup_I2C_master(void) {
 
 /* Master transmit in polling mode */
 void write_clock(uint8_t AddressI2C, uint8_t reg, uint8_t cnt, uint8_t* val) {
-  
+
   uint8_t SendData[16];
   I2C_PARAM_T param;
   I2C_RESULT_T result;
@@ -67,8 +67,8 @@ void write_clock(uint8_t AddressI2C, uint8_t reg, uint8_t cnt, uint8_t* val) {
   param.num_bytes_send  = index;
   param.buffer_ptr_send = &SendData[0];
   param.num_bytes_rec   = 0;
-  param.stop_flag       = 1;  
-  
+  param.stop_flag       = 1;
+
   /* Set timeout (much) greater than the transfer length */
   error_code=LPC_I2CD_API->i2c_set_timeout(i2cHandleMaster, 100000);
 
@@ -112,7 +112,7 @@ void read_clock(uint8_t AddressI2C, uint8_t reg, uint8_t cnt, uint8_t* val) {
 }
 
 void write_LCD(uint8_t AddressI2C, uint8_t reg, uint8_t cnt, uint8_t* val) {
-  
+
   uint8_t SendData[PCF2103_LCD_SEND_WIDTH + 2];
   I2C_PARAM_T param;
   I2C_RESULT_T result;
@@ -134,8 +134,8 @@ void write_LCD(uint8_t AddressI2C, uint8_t reg, uint8_t cnt, uint8_t* val) {
   param.num_bytes_send  = index;
   param.buffer_ptr_send = &SendData[0];
   param.num_bytes_rec   = 0;
-  param.stop_flag       = 1;  
-  
+  param.stop_flag       = 1;
+
   /* Set timeout (much) greater than the transfer length */
   error_code=LPC_I2CD_API->i2c_set_timeout(i2cHandleMaster, 100000);
 
@@ -154,21 +154,21 @@ void read_EEPROM(uint8_t AddressI2C, uint16_t reg, uint8_t cnt, uint8_t* val) {
 
   I2C_PARAM_T param;
   I2C_RESULT_T result;
-  ErrorCode_t error_code;  
+  ErrorCode_t error_code;
   uint8_t sendData[3];
   uint8_t readData[_24C32WI_PAGE_SIZE + 1];
   uint32_t index = 1;
-  
+
   sendData[0] = AddressI2C | 0x01;
   sendData[1] = reg >> 8;
   sendData[2] = (uint8_t)reg;
-  
+
   readData[0] = AddressI2C | 0x01;
-  
+
   /* Setup parameters for transfer */
   param.num_bytes_send  = 3;
   param.buffer_ptr_send = &sendData[0];
-  param.num_bytes_rec   = cnt+1;  
+  param.num_bytes_rec   = cnt+1;
   param.buffer_ptr_rec  = &readData[0];
   param.stop_flag       = 1;
 
@@ -189,7 +189,7 @@ void read_EEPROM(uint8_t AddressI2C, uint16_t reg, uint8_t cnt, uint8_t* val) {
 }
 
 void write_EEPROM(uint8_t AddressI2C, uint16_t reg, uint8_t cnt, uint8_t* val) {
-  
+
   uint8_t SendData[_24C32WI_PAGE_SIZE + 3];
   I2C_PARAM_T param;
   I2C_RESULT_T result;
@@ -200,7 +200,7 @@ void write_EEPROM(uint8_t AddressI2C, uint16_t reg, uint8_t cnt, uint8_t* val) {
   SendData[0] = AddressI2C;
   SendData[1] = reg >> 8;
   SendData[2] = (uint8_t)reg;
-  
+
   while (cnt--) {
     SendData[index++] = *val++;
   }
@@ -213,8 +213,8 @@ void write_EEPROM(uint8_t AddressI2C, uint16_t reg, uint8_t cnt, uint8_t* val) {
   param.num_bytes_send  = index;
   param.buffer_ptr_send = &SendData[0];
   param.num_bytes_rec   = 0;
-  param.stop_flag       = 1;  
-  
+  param.stop_flag       = 1;
+
   /* Set timeout (much) greater than the transfer length */
   error_code=LPC_I2CD_API->i2c_set_timeout(i2cHandleMaster, 100000);
 
