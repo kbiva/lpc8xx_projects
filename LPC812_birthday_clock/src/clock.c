@@ -148,7 +148,8 @@ static uint8_t information[]=
   "Power Mode: xxx DEV-ID: xxxx Speed: xx Mhz "
   "Debug: xxxxxxxxxxxxxxxxxxxx";
 
-static uint8_t months[][3]={{'J'+0x80,'a'+0x80,'n'+0x80},
+static uint8_t months[][3]={{},
+                            {'J'+0x80,'a'+0x80,'n'+0x80},
                             {'F'+0x80,'e'+0x80,'b'+0x80},
                             {'M'+0x80,'a'+0x80,'r'+0x80},
                             {'A'+0x80,'p'+0x80,'r'+0x80},
