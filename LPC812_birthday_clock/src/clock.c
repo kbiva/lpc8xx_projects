@@ -148,6 +148,19 @@ static uint8_t information[]=
   "Power Mode: xxx DEV-ID: xxxx Speed: xx Mhz "
   "Debug: xxxxxxxxxxxxxxxxxxxx";
 
+static uint8_t months[][3]={{'J'+0x80,'a'+0x80,'n'+0x80},
+                            {'F'+0x80,'e'+0x80,'b'+0x80},
+                            {'M'+0x80,'a'+0x80,'r'+0x80},
+                            {'A'+0x80,'p'+0x80,'r'+0x80},
+                            {'M'+0x80,'a'+0x80,'y'+0x80},
+                            {'J'+0x80,'u'+0x80,'n'+0x80},
+                            {'J'+0x80,'u'+0x80,'l'+0x80},
+                            {'A'+0x80,'u'+0x80,'g'+0x80},
+                            {'S'+0x80,'e'+0x80,'p'+0x80},
+                            {'O'+0x80,'c'+0x80,'t'+0x80},
+                            {'N'+0x80,'o'+0x80,'v'+0x80},
+                            {'D'+0x80,'e'+0x80,'c'+0x80}};
+
 static uint8_t birthday_record[15];
 static bool birthday = false;
 static uint32_t old_day;
@@ -172,8 +185,8 @@ static FORMAT_CHAR format_chars[]=
    {'M'+0x80,2}, // minute
    {'S'+0x80,2}, // second
    {'D'+0x80,2}, // day
-   {'W'+0x80,2}, // weekday
-   {'O'+0x80,2}, // month
+   {'O'+0x80,2}, // month number
+   {'N'+0x80,3}, // month 3 letters
    {'Y'+0x80,2}, // year
    {'1'+0x80,1}, // : or - (separator)
    {'2'+0x80,1}};// . (separator)
@@ -699,6 +712,12 @@ static void display_clock(void) {
           buffer_LCD[scroll_position + 3 + i] = FROM_BCD_LOW(time_and_date[7]) + 0xb0;
           i += 2;
           break;
+        case 'N':
+          buffer_LCD[scroll_position + 2 + i] = months[FROM_BCD(time_and_date[7])][0];
+          buffer_LCD[scroll_position + 3 + i] = months[FROM_BCD(time_and_date[7])][1];
+          buffer_LCD[scroll_position + 4 + i] = months[FROM_BCD(time_and_date[7])][2];
+          i += 3;  
+          break;
         case 'D':
           buffer_LCD[scroll_position + 2 + i] = FROM_BCD_HIGH(time_and_date[5]) + 0xb0;
           buffer_LCD[scroll_position + 3 + i] = FROM_BCD_LOW(time_and_date[5]) + 0xb0;
@@ -707,39 +726,6 @@ static void display_clock(void) {
         case 'Y':
           buffer_LCD[scroll_position + 2 + i] = FROM_BCD_HIGH(time_and_date[8]) + 0xb0;
           buffer_LCD[scroll_position + 3 + i] = FROM_BCD_LOW(time_and_date[8]) + 0xb0;
-          i += 2;
-          break;
-        case 'W':
-          switch (time_and_date[6]) {
-            case 0:
-              buffer_LCD[scroll_position + 2 + i] = 'S' + 0x80;
-              buffer_LCD[scroll_position + 3 + i] = 'u' + 0x80;
-              break;
-            case 1:
-              buffer_LCD[scroll_position + 2 + i] = 'M' + 0x80;
-              buffer_LCD[scroll_position + 3 + i] = 'o' + 0x80;
-              break;
-            case 2:
-              buffer_LCD[scroll_position + 2 + i] = 'T' + 0x80;
-              buffer_LCD[scroll_position + 3 + i] = 'u' + 0x80;
-              break;
-            case 3:
-              buffer_LCD[scroll_position + 2 + i] = 'W' + 0x80;
-              buffer_LCD[scroll_position + 3 + i] = 'e' + 0x80;
-              break;
-            case 4:
-              buffer_LCD[scroll_position + 2 + i] = 'T' + 0x80;
-              buffer_LCD[scroll_position + 3 + i] = 'h' + 0x80;
-              break;
-            case 5:
-              buffer_LCD[scroll_position + 2 + i] = 'F' + 0x80;
-              buffer_LCD[scroll_position + 3 + i] = 'r' + 0x80;
-              break;
-            case 6:
-              buffer_LCD[scroll_position + 2 + i] = 'S' + 0x80;
-              buffer_LCD[scroll_position + 3 + i] = 'a' + 0x80;
-              break;
-          }
           i += 2;
           break;
         case '1':
