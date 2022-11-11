@@ -189,8 +189,8 @@ static FORMAT_CHAR format_chars[]=
    {'O'+0x80,2}, // month number
    {'N'+0x80,3}, // month 3 letters
    {'Y'+0x80,2}, // year
-   {'1'+0x80,1}, // : or - (separator)
-   {'2'+0x80,1}};// . (separator)
+   {':'+0x80,1}, // : or - (separator)
+   {'.'+0x80,1}};// . (separator)
 
 
 static uint32_t format_chars_array_size = sizeof(format_chars) / sizeof(format_chars[0]);
@@ -731,7 +731,7 @@ static void display_clock(void) {
           buffer_LCD[scroll_position + 3 + i] = FROM_BCD_LOW(time_and_date[8]) + 0xb0;
           i += 2;
           break;
-        case '1':
+        case ':':
           if (settings.s.separator_flip) {
             if (sep_flip)
               buffer_LCD[scroll_position + 2 + i] = '-' + 0x80;
@@ -743,7 +743,7 @@ static void display_clock(void) {
             buffer_LCD[scroll_position + 2 + i] = ':' + 0x80;
           i++;
           break;
-        case '2':
+        case '.':
           buffer_LCD[scroll_position + 2 + i] = '.' + 0x80;
           i++;
           break;
