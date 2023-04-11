@@ -1,5 +1,5 @@
 /*
- * clock_display.c
+ * display_clock.c
  *
  *      Author: Kestutis Bivainis
  */
