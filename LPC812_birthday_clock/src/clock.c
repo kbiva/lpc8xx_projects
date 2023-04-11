@@ -477,6 +477,7 @@ static void update_max_scroll_position(void) {
       max_scroll_position = 12 - i;
     else break;
   }
+  scroll_position = max_scroll_position;
 }
 
 static void set_format(void) {
@@ -551,7 +552,6 @@ static void set_format(void) {
   }
 
   update_max_scroll_position();
-  scroll_position = max_scroll_position;
 }
 
 static void display_info(void) {
@@ -762,7 +762,6 @@ static void load_settings(void) {
   read_EEPROM(_24C32WI_I2C_ADDR_7BIT, _24C32WI_SETTINGS_ADDRESS, _24C32WI_SETTINGS_LENGTH, settings.buf);
 
   update_max_scroll_position();
-  scroll_position = max_scroll_position;
 }
 
 static void save_settings(void) {
