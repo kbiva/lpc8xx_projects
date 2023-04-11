@@ -58,8 +58,4 @@ typedef union {
 #define SLEEP Chip_PMU_Sleep(LPC_PMU, (CHIP_PMU_MCUPOWER_T)settings.s.sleep);
 #define WRITE_LCD(str) write_LCD(PCF2103_I2C_ADDR_7BIT, 0x80, PCF2103_LCD_SEND_WIDTH, str);
 
-#define WRITE_LCD_SLEEP(str) \
-   WRITE_LCD(str)\
-   SLEEP
-
 #endif

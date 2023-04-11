@@ -221,6 +221,22 @@ static uint8_t menu_enter[] = {
 
 extern void display_clock(void);
 
+static uint32_t idle_count;
+static uint32_t idle_threshhold;
+
+static void write_LCD_sleep(uint8_t *str) {
+
+   WRITE_LCD(str)
+   idle_count = 0;
+   do {
+     clock_interrupt = 0;
+     SLEEP
+     if (clock_interrupt) idle_count++;
+     if (idle_count > idle_threshhold) break;
+   }
+   while (clock_interrupt);
+}
+
 static uint8_t buf[16];
 
 static void set_menu(uint8_t* str, uint32_t num) {
@@ -278,7 +294,8 @@ static void set_aging_offset(void) {
     }
     buffer_LCD[9] = sign;
     buffer_LCD[10] = displayed_offset + 0xb0;
-    WRITE_LCD_SLEEP(buffer_LCD)
+    write_LCD_sleep(buffer_LCD);
+    if (idle_count > idle_threshhold) return;
   }
   buf[0] = settings.s.aging_offset;
   write_clock(PCA2129T_I2C_ADDR_7BIT, PCA2129T_AGING_OFFSET_REGISTER, PCA2129T_OFFSET_LENGHT, buf);
@@ -312,7 +329,8 @@ static void set_date(void) {
     }
     buffer_LCD[7] = TENS_PLACE_DIGIT(set_year);
     buffer_LCD[8] = ONES_PLACE_DIGIT(set_year);
-    WRITE_LCD_SLEEP(buffer_LCD)
+    write_LCD_sleep(buffer_LCD);
+    if (idle_count > idle_threshhold) return;
   }
 
   set_menu(buffer_LCD, 45);
@@ -334,7 +352,8 @@ static void set_date(void) {
     }
     buffer_LCD[8] = TENS_PLACE_DIGIT(set_month);
     buffer_LCD[9] = ONES_PLACE_DIGIT(set_month);
-    WRITE_LCD_SLEEP(buffer_LCD)
+    write_LCD_sleep(buffer_LCD);
+    if (idle_count> idle_threshhold) return;
   }
 
   button_state = true;
@@ -356,7 +375,8 @@ static void set_date(void) {
     }
     buffer_LCD[6] = TENS_PLACE_DIGIT(set_day);
     buffer_LCD[7] = ONES_PLACE_DIGIT(set_day);
-    WRITE_LCD_SLEEP(buffer_LCD)
+    write_LCD_sleep(buffer_LCD);
+    if (idle_count > idle_threshhold) return;
   }
 
   button_state = true;
@@ -377,7 +397,8 @@ static void set_date(void) {
       }
     }
     buffer_LCD[10] = set_wday + 0xb0;
-    WRITE_LCD_SLEEP(buffer_LCD)
+    write_LCD_sleep(buffer_LCD);
+    if (idle_count > idle_threshhold) return;
   }
 
   buf[0] = (uint8_t)TO_BCD(set_day);
@@ -416,7 +437,8 @@ static void set_time(void) {
     }
     buffer_LCD[7] = TENS_PLACE_DIGIT(set_hour);
     buffer_LCD[8] = ONES_PLACE_DIGIT(set_hour);
-    WRITE_LCD_SLEEP(buffer_LCD)
+    write_LCD_sleep(buffer_LCD);
+    if (idle_count > idle_threshhold) return;
   }
 
   button_state = true;
@@ -438,7 +460,8 @@ static void set_time(void) {
     }
     buffer_LCD[9] = TENS_PLACE_DIGIT(set_minute);
     buffer_LCD[10] = ONES_PLACE_DIGIT(set_minute);
-    WRITE_LCD_SLEEP(buffer_LCD)
+    write_LCD_sleep(buffer_LCD);
+    if (idle_count > idle_threshhold) return;
   }
 
   button_state = true;
@@ -460,7 +483,8 @@ static void set_time(void) {
     }
     buffer_LCD[9] = TENS_PLACE_DIGIT(set_second);
     buffer_LCD[10] = ONES_PLACE_DIGIT(set_second);
-    WRITE_LCD_SLEEP(buffer_LCD)
+    write_LCD_sleep(buffer_LCD);
+    if (idle_count > idle_threshhold) return;
   }
 
   buf[0] = (uint8_t)TO_BCD(set_second);
@@ -532,7 +556,8 @@ static void set_format(void) {
           }
         }
       }
-      WRITE_LCD_SLEEP(buffer_LCD)
+      write_LCD_sleep(buffer_LCD);
+      if (idle_count > idle_threshhold) return;
     }
     button_state = true;
     current_position_lcd += format_char_size;
@@ -614,7 +639,8 @@ static void display_info(void) {
     for (j = 0; j < 12; j++) {
       buffer_LCD[j + 2] = information[i + j] + 0x80;
     }
-    WRITE_LCD_SLEEP(buffer_LCD)
+    write_LCD_sleep(buffer_LCD);
+    if (idle_count > idle_threshhold) return;
   }
 }
 
@@ -647,7 +673,8 @@ static void display_font(void) {
     buffer_LCD[11] = i + 5;
     buffer_LCD[12] = i + 6;
     buffer_LCD[13] = i + 7;
-    WRITE_LCD_SLEEP(buffer_LCD)
+    write_LCD_sleep(buffer_LCD);
+    if (idle_count > idle_threshhold) return;
   }
 }
 
@@ -671,7 +698,8 @@ static void display_about(void) {
     for (uint32_t j = 0; j < 12; j++) {
       buffer_LCD[j + 2] = about[i + j] + 0x80;
     }
-    WRITE_LCD_SLEEP(buffer_LCD)
+    write_LCD_sleep(buffer_LCD);
+    if (idle_count > idle_threshhold) return;
   }
 }
 
@@ -707,7 +735,8 @@ static void display_icons(void) {
         if (j > 0) j--;
       }
     }
-    WRITE_LCD_SLEEP(icons)
+    write_LCD_sleep(icons);
+    if (idle_count > idle_threshhold) break;
   }
 
   clear_icons();
@@ -751,7 +780,8 @@ static void display_leds(void) {
               break;
     }
 
-    SLEEP
+    write_LCD_sleep(buffer_LCD);
+    if (idle_count > idle_threshhold) break;
   }
   LED1_OFF
   LED2_OFF
@@ -833,7 +863,8 @@ static void edit_birthdays(void) {
       buffer_LCD[11] = 0x20;
       buffer_LCD[12] = 0x20;
     }
-    WRITE_LCD_SLEEP(buffer_LCD)
+    write_LCD_sleep(buffer_LCD);
+    if (idle_count > idle_threshhold) return;
   }
   button_state = true;
 
@@ -856,7 +887,8 @@ static void edit_birthdays(void) {
     }
     buffer_LCD[8] = (month / 10) + 0xb0;
     buffer_LCD[9] = (month % 10) + 0xb0;
-    WRITE_LCD_SLEEP(buffer_LCD)
+    write_LCD_sleep(buffer_LCD);
+    if (idle_count > idle_threshhold) return;
   }
   button_state = true;
 
@@ -879,7 +911,8 @@ static void edit_birthdays(void) {
     }
     buffer_LCD[6] = (day / 10) + 0xb0;
     buffer_LCD[7] = (day % 10) + 0xb0;
-    WRITE_LCD_SLEEP(buffer_LCD)
+    write_LCD_sleep(buffer_LCD);
+    if (idle_count > idle_threshhold) return;
   }
 
   button_state = true;
@@ -920,7 +953,8 @@ static void edit_birthdays(void) {
         for (i = 0; i < PCF2103_LCD_WIDTH; i++) {
           buffer_LCD[i + 2] = birthdays[birthday_nr].name[i];
         }
-        WRITE_LCD_SLEEP(buffer_LCD)
+        write_LCD_sleep(buffer_LCD);
+        if (idle_count > idle_threshhold) return;
       }
       button_state = true;
       current_position++;
@@ -975,7 +1009,8 @@ static void display_birthdays(void) {
           for (j = 0; j < PCF2103_LCD_WIDTH; j++) {
             buffer_LCD[j + 2] = birthdays[i].name[j] ? birthdays[i].name[j] : 0x20;
           }
-          WRITE_LCD_SLEEP(buffer_LCD)
+          write_LCD_sleep(buffer_LCD);
+          if (idle_count > idle_threshhold) return;
           break;
         }
       }
@@ -984,7 +1019,8 @@ static void display_birthdays(void) {
       birthday_nr--;
     }
     if (birthday_count == 0) {
-      WRITE_LCD_SLEEP(no_birthday)
+      write_LCD_sleep(no_birthday);
+      if (idle_count > idle_threshhold) return;
     }
   }
 }
@@ -1087,6 +1123,8 @@ int main(void) {
         for (uint32_t i = 0; i < _24C32WI_SETTINGS_LENGTH; i++) {
           old_settings.buf[i] = settings.buf[i];
         }
+        // idle threshhold 1 minute or 60 seconds
+        idle_threshhold = (settings.s.freq == UPDATEFREQ_1_MIN) ? 1 : 60;
       }
       else {
         display_clock();
@@ -1126,6 +1164,10 @@ int main(void) {
           case 41: display_icons(); break;
           case 42: display_leds(); break;
           default: break;
+        }
+        if (idle_count > idle_threshhold) {
+          idle_count = 0;
+          menu_position = 7;
         }
         button_state = true;
         if (menu_position == 7) { // exit settings
