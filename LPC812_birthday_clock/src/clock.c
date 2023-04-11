@@ -12,6 +12,10 @@
 #include "pins.h"
 #include "clock.h"
 
+/* System oscillator rate and clock rate on the CLKIN pin */
+const uint32_t OscRateIn = 12000000;
+const uint32_t ExtRateIn = 0;
+
 extern volatile int16_t counter;
 static volatile int16_t old_counter;
 extern volatile bool button_state;
@@ -148,24 +152,8 @@ static uint8_t information[]=
   "Power Mode: xxx DEV-ID: xxxx Speed: xx Mhz "
   "Debug: xxxxxxxxxxxxxxxxxxxx";
 
-static uint8_t months[][3]={{},
-                            {'J'+0x80,'a'+0x80,'n'+0x80},
-                            {'F'+0x80,'e'+0x80,'b'+0x80},
-                            {'M'+0x80,'a'+0x80,'r'+0x80},
-                            {'A'+0x80,'p'+0x80,'r'+0x80},
-                            {'M'+0x80,'a'+0x80,'y'+0x80},
-                            {'J'+0x80,'u'+0x80,'n'+0x80},
-                            {'J'+0x80,'u'+0x80,'l'+0x80},
-                            {'A'+0x80,'u'+0x80,'g'+0x80},
-                            {'S'+0x80,'e'+0x80,'p'+0x80},
-                            {'O'+0x80,'c'+0x80,'t'+0x80},
-                            {'N'+0x80,'o'+0x80,'v'+0x80},
-                            {'D'+0x80,'e'+0x80,'c'+0x80}};
-
 static uint8_t birthday_record[15];
-static bool birthday = false;
-static uint32_t old_day;
-static BIRTHDAY birthdays[BIRTHDAYS_COUNT];
+BIRTHDAY birthdays[BIRTHDAYS_COUNT];
 static uint8_t no_birthday[PCF2103_LCD_SEND_WIDTH]=
   {0x8C,0x40,'N'+0x80,'o'+0x80,0x20,'b'+0x80,'i'+0x80,'r'+0x80,'t'+0x80,'h'+0x80,'d'+0x80,'a'+0x80,'y'+0x80,0x20};
 
@@ -195,31 +183,14 @@ static FORMAT_CHAR format_chars[]=
 
 static uint32_t format_chars_array_size = sizeof(format_chars) / sizeof(format_chars[0]);
 
-typedef struct _PACKED {
-  bool separator_flip;
-  uint8_t freq;
-  uint8_t sleep;
-  bool scroll;
-  uint8_t blink;
-  uint8_t icons_mode;
-  uint8_t aging_offset;
-  bool swd;
-  uint8_t format[12];
-} PARAMETERS;
-
-typedef union {
-  PARAMETERS s;
-  uint8_t buf[_24C32WI_SETTINGS_LENGTH];
-} SETTINGS;
-
 SETTINGS settings, old_settings;
 uint32_t max_scroll_position;
 
 // current state of separator
-static bool sep_flip;
+bool sep_flip;
 
-static uint32_t scroll_position;
-static bool scroll_direction = true;
+uint32_t scroll_position;
+bool scroll_direction = true;
 
 static uint8_t menu_forward[] = {
   1, 2, 3, 4, 5, 6, 7, 0, 9,10,
@@ -248,20 +219,9 @@ static uint8_t menu_enter[] = {
  0
 };
 
+extern void display_clock(void);
+
 static uint8_t buf[16];
-// time and date read from PCA2129T
-static uint8_t time_and_date[9];
-
-#define LED1_OFF Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, PIN_LED1, false);
-#define LED1_ON Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, PIN_LED1, true);
-#define LED2_OFF Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, PIN_LED2, false);
-#define LED2_ON Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, PIN_LED2, true);
-#define SLEEP Chip_PMU_Sleep(LPC_PMU, (CHIP_PMU_MCUPOWER_T)settings.s.sleep);
-#define WRITE_LCD(str) write_LCD(PCF2103_I2C_ADDR_7BIT, 0x80, PCF2103_LCD_SEND_WIDTH, str);
-
-#define WRITE_LCD_SLEEP(str) \
-   WRITE_LCD(str)\
-   SLEEP
 
 static void set_menu(uint8_t* str, uint32_t num) {
 
@@ -270,14 +230,14 @@ static void set_menu(uint8_t* str, uint32_t num) {
    }
 }
 
-static void clear_icons(void) {
+void clear_icons(void) {
 
   for (uint32_t i = 2; i < PCF2103_LCD_SEND_WIDTH; i++){
     icons[i] = 0x00;
   }
 }
 
-static void clear_lcd(void) {
+void clear_lcd(void) {
 
   for (uint32_t i = 2; i < PCF2103_LCD_SEND_WIDTH; i++){
     buffer_LCD[i] = 0x20;
@@ -592,203 +552,6 @@ static void set_format(void) {
 
   update_max_scroll_position();
   scroll_position = max_scroll_position;
-}
-
-static void display_clock(void) {
-
-  uint32_t i;
-  uint32_t month, day;
-
-  switch (settings.s.blink) {
-    case BLINK_OFF:break;
-    case BLINK_ON:
-      if (birthday) {
-        LED2_ON
-      }
-      else {
-        LED1_ON
-      }
-      break;
-    case BLINK_1MIN:
-      if ((settings.s.freq == UPDATEFREQ_1_SEC) && (time_and_date[2] == 0x59) ||
-          (settings.s.freq == UPDATEFREQ_1_MIN) ) {
-        if (birthday) {
-          LED2_ON
-        }
-        else {
-          LED1_ON
-        }
-      }
-      break;
-  }
-
-  if (clock_interrupt) {
-
-    clock_interrupt = false;
-
-    read_clock(PCA2129T_I2C_ADDR_7BIT, PCA2129T_CONTROL3_REGISTER, PCA2129T_CONTROL3_LENGTH + PCA2129T_TIMEDATE_LENGHT + 1, time_and_date);
-    // mask OSF from seconds
-    time_and_date[2] &= 0x7F;
-
-    if (old_day != time_and_date[5]) {
-      // new day -> check for birthdays
-      month = time_and_date[7];
-      day = time_and_date[5];
-
-      for (i = 0; i < BIRTHDAYS_COUNT; i++ ) {
-        if ((birthdays[i].date[0] == month) && (birthdays[i].date[1] == day)) {
-          birthday = true;
-          switch (settings.s.blink) {
-            case BLINK_OFF: break;
-            case BLINK_ON:
-            case BLINK_1MIN:
-              LED1_OFF
-            break;
-          }
-          break;
-        }
-      }
-      if (i == BIRTHDAYS_COUNT) {
-        birthday = false;
-        switch (settings.s.blink) {
-          case BLINK_OFF: break;
-          case BLINK_ON:
-          case BLINK_1MIN:
-            LED2_OFF
-          break;
-        }
-      }
-      old_day = time_and_date[5];
-    }
-
-    clear_icons();
-    clear_lcd();
-
-    switch (settings.s.icons_mode) {
-      case ICONSMODE_POWER:
-        icons[12] = time_and_date[1] & 0x04 ? 0x04 : 0x1F;
-        icons[13] = 0x10;
-        switch (settings.s.sleep) {
-          case PMU_MCU_SLEEP: icons[2] = 0x10; break;
-          case PMU_MCU_DEEP_SLEEP: icons[2] = 0x1C; break;
-          case PMU_MCU_POWER_DOWN: icons[2] = 0x1F; break;
-          default: icons[2] = 0x00; break;
-        }
-        break;
-      case ICONSMODE_WEEKDAYS:
-        switch (time_and_date[6]) {
-          case 0: icons[12] = 0x1F; icons[13] = 0x10; break;
-          case 1: icons[2] = 0x1F; break;
-          case 2: icons[4] = 0x1E; break;
-          case 3: icons[5] = 0x18; break;
-          case 4: icons[7] = 0x10; break;
-          case 5: icons[8] = 0x18; break;
-          case 6: icons[10] = 0x10; break;
-        }
-        break;
-      case ICONSMODE_NONE:
-        break;
-    }
-
-    WRITE_LCD(icons)
-
-    i = 0;
-    while (i < 12 - scroll_position) {
-      switch (settings.s.format[i]) {
-        case 'H':
-          buffer_LCD[scroll_position + 2 + i] = FROM_BCD_HIGH(time_and_date[4]) + 0xb0;
-          buffer_LCD[scroll_position + 3 + i] = FROM_BCD_LOW(time_and_date[4]) + 0xb0;
-          i += 2;
-          break;
-        case 'M':
-          buffer_LCD[scroll_position + 2 + i] = FROM_BCD_HIGH(time_and_date[3]) + 0xb0;
-          buffer_LCD[scroll_position + 3 + i] = FROM_BCD_LOW(time_and_date[3]) + 0xb0;
-          i += 2;
-          break;
-        case 'S':
-          buffer_LCD[scroll_position + 2 + i] = FROM_BCD_HIGH(time_and_date[2]) + 0xb0;
-          buffer_LCD[scroll_position + 3 + i] = FROM_BCD_LOW(time_and_date[2]) + 0xb0;
-          i += 2;
-          break;
-        case 'O':
-          buffer_LCD[scroll_position + 2 + i] = FROM_BCD_HIGH(time_and_date[7]) + 0xb0;
-          buffer_LCD[scroll_position + 3 + i] = FROM_BCD_LOW(time_and_date[7]) + 0xb0;
-          i += 2;
-          break;
-        case 'N':
-          buffer_LCD[scroll_position + 2 + i] = months[FROM_BCD(time_and_date[7])][0];
-          buffer_LCD[scroll_position + 3 + i] = months[FROM_BCD(time_and_date[7])][1];
-          buffer_LCD[scroll_position + 4 + i] = months[FROM_BCD(time_and_date[7])][2];
-          i += 3;
-          break;
-        case 'D':
-          buffer_LCD[scroll_position + 2 + i] = FROM_BCD_HIGH(time_and_date[5]) + 0xb0;
-          buffer_LCD[scroll_position + 3 + i] = FROM_BCD_LOW(time_and_date[5]) + 0xb0;
-          i += 2;
-          break;
-        case 'Y':
-          buffer_LCD[scroll_position + 2 + i] = FROM_BCD_HIGH(time_and_date[8]) + 0xb0;
-          buffer_LCD[scroll_position + 3 + i] = FROM_BCD_LOW(time_and_date[8]) + 0xb0;
-          i += 2;
-          break;
-        case ':':
-          if (settings.s.separator_flip) {
-            if (sep_flip)
-              buffer_LCD[scroll_position + 2 + i] = '-' + 0x80;
-            else
-              buffer_LCD[scroll_position + 2 + i] = ':' + 0x80;
-            sep_flip = !sep_flip;
-          }
-          else
-            buffer_LCD[scroll_position + 2 + i] = ':' + 0x80;
-          i++;
-          break;
-        case '.':
-          buffer_LCD[scroll_position + 2 + i] = '.' + 0x80;
-          i++;
-          break;
-        case ' ':
-          buffer_LCD[scroll_position + 2 + i] = ' ' + 0x80;
-          i++;
-          break;
-        default:
-          i++;
-          break;
-      }
-    }
-
-    WRITE_LCD(buffer_LCD)
-
-    if (settings.s.scroll && max_scroll_position) {
-      if (scroll_direction) {
-        if (scroll_position == max_scroll_position) {
-           scroll_direction = false;
-           scroll_position--;
-        }
-        else scroll_position++;
-      }
-      else {
-        if (scroll_position == 0) {
-          scroll_direction = true;
-          scroll_position++;
-        }
-        else scroll_position--;
-      }
-    }
-  }
-
-  switch (settings.s.blink) {
-    case BLINK_OFF:break;
-    case BLINK_ON:
-    case BLINK_1MIN:
-      if (birthday) {
-        LED2_OFF
-      }
-      else {
-        LED1_OFF
-      }
-      break;
-  }
 }
 
 static void display_info(void) {
