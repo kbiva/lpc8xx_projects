@@ -991,8 +991,6 @@ static void display_birthdays(void) {
 
 int main(void) {
 
-  uint32_t idle = 0;
-
   // Read clock settings and update SystemCoreClock variable
   SystemCoreClockUpdate();
 
@@ -1086,7 +1084,6 @@ int main(void) {
         clock_mode = false;
         button_state = true;
         old_counter = counter;
-        idle = 0;
         for (uint32_t i = 0; i < _24C32WI_SETTINGS_LENGTH; i++) {
           old_settings.buf[i] = settings.buf[i];
         }
@@ -1097,13 +1094,7 @@ int main(void) {
     }
     else {
       // settings mode
-      if (idle++ > 60) {
-        button_state = false;
-        menu_position = 7;
-      }
-
       if (!button_state) {
-        idle = 0;
         button_state = true;
         switch (menu_position) {
           case 0: display_birthdays(); break;
@@ -1174,7 +1165,6 @@ int main(void) {
         }
       } else if (counter > old_counter) {
         if (counter - 3 > old_counter) {
-          idle = 0;
           menu_position = menu_forward[menu_position];
           WRITE_LCD(strMenu[menu_position])
           old_counter = counter;
@@ -1182,7 +1172,6 @@ int main(void) {
       }
       else if (counter < old_counter) {
         if (counter + 3 < old_counter) {
-          idle = 0;
           menu_position = menu_backward[menu_position];
           WRITE_LCD(strMenu[menu_position])
           old_counter = counter;
