@@ -972,8 +972,6 @@ static void edit_birthdays(void) {
   Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, PIN_EEPROM_WP, false);
   write_EEPROM(_24C32WI_I2C_ADDR_7BIT, _24C32WI_BIRTHDAYS_ADDRESS + 32 * birthday_nr, BIRTHDAY_RECORD_LENGTH, birthday_record);
   Chip_GPIO_SetPinState(LPC_GPIO_PORT, 0, PIN_EEPROM_WP, true);
-
-  SLEEP
 }
 
 static void display_birthdays(void) {
