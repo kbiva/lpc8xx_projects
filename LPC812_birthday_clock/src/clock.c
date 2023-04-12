@@ -5,6 +5,7 @@
  */
 
 #include "chip.h"
+#include "system_LPC812.h"
 #include "PCA2129T.h"
 #include "i2c.h"
 #include "PCF2103.h"
@@ -13,8 +14,8 @@
 #include "clock.h"
 
 /* System oscillator rate and clock rate on the CLKIN pin */
-const uint32_t OscRateIn = 12000000;
-const uint32_t ExtRateIn = 0;
+const uint32_t OscRateIn = CLK_IRC_12MHZ;
+const uint32_t ExtRateIn = EXT_CLK_IN;
 
 extern volatile int16_t counter;
 static volatile int16_t old_counter;
