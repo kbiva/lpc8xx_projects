@@ -152,7 +152,7 @@ static uint8_t information[]=
   "Power Mode: xxx DEV-ID: xxxx Speed: xx Mhz "
   "Debug: xxxxxxxxxxxxxxxxxxxx";
 
-static uint8_t birthday_record[15];
+static uint8_t birthday_record[BIRTHDAY_RECORD_LENGTH];
 BIRTHDAY birthdays[BIRTHDAYS_COUNT];
 static uint8_t no_birthday[PCF2103_LCD_SEND_WIDTH]=
   {0x8C,0x40,'N'+0x80,'o'+0x80,0x20,'b'+0x80,'i'+0x80,'r'+0x80,'t'+0x80,'h'+0x80,'d'+0x80,'a'+0x80,'y'+0x80,0x20};
