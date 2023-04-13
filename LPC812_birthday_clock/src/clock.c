@@ -150,7 +150,7 @@ static uint8_t about[]=
    "EEPROM: CSI 24C32WI. Bus Protocol: I2C";
 
 static uint8_t information[]=
-  "Power Mode: xxx DEV-ID: xxxx Speed: xx Mhz "
+  "Power Mode: xxxxxxxxx DEV-ID: xxxx Speed: xx Mhz "
   "Debug: xxxxxxxxxxxxxxxxxxxx";
 
 static uint8_t birthday_record[BIRTHDAY_RECORD_LENGTH];
@@ -584,41 +584,59 @@ static void display_info(void) {
 
   uint32_t i = 0, j;
 
-  information[24] = ((LPC_SYSCTL->DEVICEID >> 12) & 0x0F) + 0x30;
-  information[25] = ((LPC_SYSCTL->DEVICEID >> 8) & 0x0F) + 0x30;
-  information[26] = ((LPC_SYSCTL->DEVICEID >> 4) & 0x0F) + 0x30;
-  information[27] = (LPC_SYSCTL->DEVICEID & 0x0F) + 0x30;
+  information[30] = ((LPC_SYSCTL->DEVICEID >> 12) & 0x0F) + 0x30;
+  information[31] = ((LPC_SYSCTL->DEVICEID >> 8) & 0x0F) + 0x30;
+  information[32] = ((LPC_SYSCTL->DEVICEID >> 4) & 0x0F) + 0x30;
+  information[33] = (LPC_SYSCTL->DEVICEID & 0x0F) + 0x30;
 
-  if (information[24] > 0x39) information[30] += 7;
-  if (information[25] > 0x39) information[31] += 7;
-  if (information[26] > 0x39) information[32] += 7;
-  if (information[27] > 0x39) information[33] += 7;
+  if (information[30] > 0x39) information[30] += 7;
+  if (information[31] > 0x39) information[31] += 7;
+  if (information[32] > 0x39) information[32] += 7;
+  if (information[33] > 0x39) information[33] += 7;
 
-  information[36] = (uint8_t)(((SystemCoreClock / 1000000) / 10) + 0x30);
-  information[37] = (uint8_t)(((SystemCoreClock / 1000000) % 10) + 0x30);
+  information[42] = (uint8_t)(((SystemCoreClock / 1000000) / 10) + 0x30);
+  information[43] = (uint8_t)(((SystemCoreClock / 1000000) % 10) + 0x30);
 
   for (j = 0; j < 8; j++) {
-    information[50 + j] = settings.buf[j] + 0x30;
+    information[56 + j] = settings.buf[j] + 0x30;
   }
   for (j = 8; j < 20; j++) {
-    information[50 + j] = settings.buf[j] ? settings.buf[j] : 0x20;
+    information[56 + j] = settings.buf[j] ? settings.buf[j] : 0x20;
   }
 
   switch (settings.s.sleep){
     case PMU_MCU_SLEEP:
       information[12] = 'S';
       information[13] = 'l';
-      information[14] = 'p';
+      information[14] = 'e';
+      information[15] = 'e';
+      information[16] = 'p';
+      information[17] = 0x20;
+      information[18] = 0x20;
+      information[19] = 0x20;
+      information[20] = 0x20;
       break;
     case PMU_MCU_DEEP_SLEEP:
       information[12] = 'D';
-      information[13] = 'S';
-      information[14] = 'l';
+      information[13] = 'e';
+      information[14] = 'e';
+      information[15] = 'p';
+      information[16] = 'S';
+      information[17] = 'l';
+      information[18] = 'e';
+      information[19] = 'e';
+      information[20] = 'p';
       break;
     case PMU_MCU_POWER_DOWN:
       information[12] = 'P';
-      information[13] = 'D';
-      information[14] = 'n';
+      information[13] = 'o';
+      information[14] = 'w';
+      information[15] = 'e';
+      information[16] = 'r';
+      information[17] = 'D';
+      information[18] = 'o';
+      information[19] = 'w';
+      information[20] = 'n';
       break;
     default:
       break;
@@ -628,7 +646,7 @@ static void display_info(void) {
     if (counter > old_counter) {
       if (counter - 3 > old_counter) {
         old_counter = counter;
-        if (i < 58) i++;
+        if (i < 64) i++;
       }
     }
     else if (counter < old_counter) {
