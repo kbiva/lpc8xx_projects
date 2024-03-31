@@ -10,14 +10,14 @@
       <TargetName>LPC812_birthday_clock</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>6190000::V6.19::ARMCLANG</pCCUsed>
+      <pCCUsed>6210000::V6.21::ARMCLANG</pCCUsed>
       <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>LPC812M101JD20</Device>
           <Vendor>NXP</Vendor>
-          <PackID>Keil.LPC800_DFP.1.10.1</PackID>
-          <PackURL>http://www.keil.com/pack/</PackURL>
+          <PackID>Keil.LPC800_DFP.1.10.2</PackID>
+          <PackURL>https://www.keil.com/pack/</PackURL>
           <Cpu>IROM(0x00000000,0x4000) IRAM(0x10000000,0x1000) CPUTYPE("Cortex-M0+") CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -532,7 +532,7 @@
       <file attr="config" category="source" condition="Compiler ARMCC" name="Device\Source\ARM\startup_LPC812.s" version="1.2.0">
         <instance index="0">RTE\Device\LPC812M101JD20\startup_LPC812.s</instance>
         <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="2.0.0" condition="LPC812 CMSIS"/>
-        <package name="LPC800_DFP" schemaVersion="1.4" url="http://www.keil.com/pack/" vendor="Keil" version="1.10.1"/>
+        <package name="LPC800_DFP" schemaVersion="1.4" url="https://www.keil.com/pack/" vendor="Keil" version="1.10.2"/>
         <targetInfos>
           <targetInfo name="LPC812_birthday_clock"/>
         </targetInfos>
@@ -546,7 +546,7 @@
       <file attr="config" category="source" name="Device\Source\system_LPC812.c" version="1.2.0">
         <instance index="0">RTE\Device\LPC812M101JD20\system_LPC812.c</instance>
         <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="2.0.0" condition="LPC812 CMSIS"/>
-        <package name="LPC800_DFP" schemaVersion="1.4" url="http://www.keil.com/pack/" vendor="Keil" version="1.10.1"/>
+        <package name="LPC800_DFP" schemaVersion="1.4" url="https://www.keil.com/pack/" vendor="Keil" version="1.10.2"/>
         <targetInfos>
           <targetInfo name="LPC812_birthday_clock"/>
         </targetInfos>
