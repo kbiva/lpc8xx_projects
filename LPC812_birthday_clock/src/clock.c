@@ -413,7 +413,7 @@ static void set_time(void) {
 
   uint32_t set_hour, set_minute, set_second;
 
-  read_clock(PCA2129T_I2C_ADDR_7BIT, PCA2129T_TIME_REGISTER, PCA2129T_TIME_LENGHT, buf);
+  read_clock(PCA2129T_I2C_ADDR_7BIT, PCA2129T_TIME_REGISTER, PCA2129T_TIME_LENGTH, buf);
   // mask OSF from seconds
   buf[1] &= 0x7F;
 
@@ -491,7 +491,7 @@ static void set_time(void) {
   buf[0] = (uint8_t)TO_BCD(set_second);
   buf[1] = (uint8_t)TO_BCD(set_minute);
   buf[2] = (uint8_t)TO_BCD(set_hour);
-  write_clock(PCA2129T_I2C_ADDR_7BIT, PCA2129T_TIME_REGISTER, PCA2129T_TIME_LENGHT, buf);
+  write_clock(PCA2129T_I2C_ADDR_7BIT, PCA2129T_TIME_REGISTER, PCA2129T_TIME_LENGTH, buf);
 }
 
 static void update_max_scroll_position(void) {
