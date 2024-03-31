@@ -49,99 +49,108 @@ static uint8_t strMenu[][PCF2103_LCD_SEND_WIDTH]={
     {0x8C,0x40,'S'+0x80,'e'+0x80,'t'+0x80,0x20,'d'+0x80,'a'+0x80,'t'+0x80,'e'+0x80,0x20,0x20,0x20,0x77},
     //9 Set time
     {0x8C,0x40,'S'+0x80,'e'+0x80,'t'+0x80,0x20,'t'+0x80,'i'+0x80,'m'+0x80,'e'+0x80,0x20,0x20,0x20,0x77},
-    //10 Set format
+    //10 Adj. hour
+    {0x8C,0x40,'A'+0x80,'d'+0x80,'j'+0x80,'.'+0x80,0x20,'h'+0x80,'o'+0x80,'u'+0x80,'r'+0x80,0x20,0x20,0x77},
+    //11 Set format
     {0x8C,0x40,'S'+0x80,'e'+0x80,'t'+0x80,0x20,'f'+0x80,'o'+0x80,'r'+0x80,'m'+0x80,'a'+0x80,'t'+0x80,0x20,0x77},
-    //11 Update freq
+    //12 Update freq
     {0x8C,0x40,'U'+0x80,'p'+0x80,'d'+0x80,'a'+0x80,'t'+0x80,'e'+0x80,0x20,'f'+0x80,'r'+0x80,'e'+0x80,'q'+0x80,0x77},
-    //12 Set scroll
+    //13 Set scroll
     {0x8C,0x40,'S'+0x80,'e'+0x80,'t'+0x80,0x20,'s'+0x80,'c'+0x80,'r'+0x80,'o'+0x80,'l'+0x80,'l'+0x80,0x20,0x77},
-    //13 ppm offset
+    //14 ppm offset
     {0x8C,0x40,'p'+0x80,'p'+0x80,'m'+0x80,0x20,'o'+0x80,'f'+0x80,'f'+0x80,'s'+0x80,'e'+0x80,'t'+0x80,0x20,0x77},
-    //14 LED blink
+    //15 LED blink
     {0x8C,0x40,'L'+0x80,'E'+0x80,'D'+0x80,0x20,'b'+0x80,'l'+0x80,'i'+0x80,'n'+0x80,'k'+0x80,0x20,0x20,0x77},
-    //15 Icons mode
+    //16 Icons mode
     {0x8C,0x40,'I'+0x80,'c'+0x80,'o'+0x80,'n'+0x80,'s'+0x80,0x20,'m'+0x80,'o'+0x80,'d'+0x80,'e'+0x80,0x20,0x77},
-    //16 Sep. flip
+    //17 Sep. flip
     {0x8C,0x40,'S'+0x80,'e'+0x80,'p'+0x80,'.'+0x80,0x20,'f'+0x80,'l'+0x80,'i'+0x80,'p'+0x80,0x20,0x20,0x77},
-    //17 SWD Port
+    //18 SWD Port
     {0x8C,0x40,'S'+0x80,'W'+0x80,'D'+0x80,0x20,'P'+0x80,'o'+0x80,'r'+0x80,'t'+0x80,0x20,0x20,0x20,0x77},
-    //18 Back
+    //19 Back
     {0x8C,0x40,'B'+0x80,'a'+0x80,'c'+0x80,'k'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x77},
 
-    //19 1 sec
+    //20 1 sec
     {0x8C,0x40,'1'+0x80,0x20,'s'+0x80,'e'+0x80,'c'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //20 1 min
+    //21 1 min
     {0x8C,0x40,'1'+0x80,0x20,'m'+0x80,'i'+0x80,'n'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
 
-    //21 On scroll
+    //22 On scroll
     {0x8C,0x40,'O'+0x80,'n'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //22 Off scroll
+    //23 Off scroll
     {0x8C,0x40,'O'+0x80,'f'+0x80,'f'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
 
-    //23 ppm offset:
+    //24 ppm offset:
     {0x8C,0x40,'O'+0x80,'f'+0x80,'f'+0x80,'s'+0x80,'e'+0x80,'t'+0x80,':'+0x80,0x20,0x20,0x20,0x20,0x20},
 
-    //24 On blink
+    //25 On blink
     {0x8C,0x40,'O'+0x80,'n'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //25 Off blink
+    //26 Off blink
     {0x8C,0x40,'O'+0x80,'f'+0x80,'f'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //26 Every minute
+    //27 Every minute
     {0x8C,0x40,'E'+0x80,'v'+0x80,'e'+0x80,'r'+0x80,'y'+0x80,0x20,'m'+0x80,'i'+0x80,'n'+0x80,0x20,0x20,0x1f},
 
-    //27 Show Power
+    //28 Show Power
     {0x8C,0x40,'S'+0x80,'h'+0x80,'o'+0x80,'w'+0x80,0x20,'p'+0x80,'o'+0x80,'w'+0x80,'e'+0x80,'r'+0x80,0x20,0x1f},
-    //28 Weekdays
+    //29 Weekdays
     {0x8C,0x40,'W'+0x80,'e'+0x80,'e'+0x80,'k'+0x80,'d'+0x80,'a'+0x80,'y'+0x80,'s'+0x80,0x20,0x20,0x20,0x1f},
-    //29 None
+    //30 None
     {0x8C,0x40,'N'+0x80,'o'+0x80,'n'+0x80,'e'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
 
-    //30 On Sep. flip
+    //31 On Sep. flip
     {0x8C,0x40,'O'+0x80,'n'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //31 Off Sep. flip
+    //32 Off Sep. flip
     {0x8C,0x40,'O'+0x80,'f'+0x80,'f'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
 
-    //32 Off SWD Port
+    //33 Off SWD Port
     {0x8C,0x40,'O'+0x80,'f'+0x80,'f'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //33 On SWD Port
+    //34 On SWD Port
     {0x8C,0x40,'O'+0x80,'n'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
 
-    //34 Power-down
+    //35 Power-down
     {0x8C,0x40,'P'+0x80,'o'+0x80,'w'+0x80,'e'+0x80,'r'+0x80,'-'+0x80,'d'+0x80,'o'+0x80,'w'+0x80,'n'+0x80,0x20,0x1f},
-    //35 Deep-sleep
+    //36 Deep-sleep
     {0x8C,0x40,'D'+0x80,'e'+0x80,'e'+0x80,'p'+0x80,'-'+0x80,'s'+0x80,'l'+0x80,'e'+0x80,'e'+0x80,'p'+0x80,0x20,0x1f},
-    //36 Sleep
+    //37 Sleep
     {0x8C,0x40,'S'+0x80,'l'+0x80,'e'+0x80,'e'+0x80,'p'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
 
-    //37 Birthday nr:
+    //38 Birthday nr:
     {0x8C,0x40,0x20,0x20,':'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //38 Month:
+    //39 Month:
     {0x8C,0x40,'M'+0x80,'o'+0x80,'n'+0x80,'t'+0x80,'h'+0x80,':'+0x80,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //39 Day:
+    //40 Day:
     {0x8C,0x40,'D'+0x80,'a'+0x80,'y'+0x80,':'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
 
-    //40 Font table
+    //41 Font table
     {0x8C,0x40,'F'+0x80,'o'+0x80,'n'+0x80,'t'+0x80,0x20,'t'+0x80,'a'+0x80,'b'+0x80,'l'+0x80,'e'+0x80,0x20,0x77},
-    //41 Icons
+    //42 Icons
     {0x8C,0x40,'I'+0x80,'c'+0x80,'o'+0x80,'n'+0x80,'s'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x77},
-    //42 LEDs
+    //43 LEDs
     {0x8C,0x40,'L'+0x80,'E'+0x80,'D'+0x80,'s'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x77},
-    //43 Back
+    //44 Back
     {0x8C,0x40,'B'+0x80,'a'+0x80,'c'+0x80,'k'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x77},
 
-    //44 Year:
+    //45 Year:
     {0x8C,0x40,'Y'+0x80,'e'+0x80,'a'+0x80,'r'+0x80,':'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //45 Month:
+    //46 Month:
     {0x8C,0x40,'M'+0x80,'o'+0x80,'n'+0x80,'t'+0x80,'h'+0x80,':'+0x80,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //46 Day:
+    //47 Day:
     {0x8C,0x40,'D'+0x80,'a'+0x80,'y'+0x80,':'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //47 Weekday:
+    //48 Weekday:
     {0x8C,0x40,'W'+0x80,'e'+0x80,'e'+0x80,'k'+0x80,'d'+0x80,'a'+0x80,'y'+0x80,':'+0x80,0x20,0x20,0x20,0x1f},
-    //48 Hour:
+    //49 Hour:
     {0x8C,0x40,'H'+0x80,'o'+0x80,'u'+0x80,'r'+0x80,':'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x1f},
-    //49 Minute:
+    //50 Minute:
     {0x8C,0x40,'M'+0x80,'i'+0x80,'n'+0x80,'u'+0x80,'t'+0x80,'e'+0x80,':'+0x80,0x20,0x20,0x20,0x20,0x1f},
-    //50 Second:
+    //51 Second:
     {0x8C,0x40,'S'+0x80,'e'+0x80,'c'+0x80,'o'+0x80,'n'+0x80,'d'+0x80,':'+0x80,0x20,0x20,0x20,0x20,0x1f},
+
+    //52 -1
+    {0x8C,0x40,'-'+0x80,'1'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x77},
+    //53 +1
+    {0x8C,0x40,'+'+0x80,'1'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x77},
+    //54 Back
+    {0x8C,0x40,'B'+0x80,'a'+0x80,'c'+0x80,'k'+0x80,0x20,0x20,0x20,0x20,0x20,0x20,0x20,0x77}
   };
 
 static uint8_t about[]=
@@ -195,29 +204,29 @@ bool scroll_direction = true;
 
 static uint8_t menu_forward[] = {
   1, 2, 3, 4, 5, 6, 7, 0, 9,10,
- 11,12,13,14,15,16,17,18, 8,20,
- 19,22,21, 0,25,26,24,28,29,27,
- 31,30,33,32,35,36,34, 0, 0, 0,
- 41,42,43,40, 0, 0, 0, 0, 0, 0,
- 0
+ 11,12,13,14,15,16,17,18,19, 8,
+ 21,20,23,22, 0,26,27,25,29,30,
+ 28,32,31,34,33,36,37,35, 0, 0,
+  0,42,43,44,41, 0, 0, 0, 0, 0,
+  0, 0,53,54,52
 };
 
 static uint8_t menu_backward[ ]= {
-  7, 0, 1, 2, 3, 4, 5, 6,18, 8,
-  9,10,11,12,13,14,15,16,17,20,
- 19,22,21, 0,26,24,25,29,27,28,
- 31,30,33,32,36,34,35, 0, 0, 0,
- 43,40,41,42, 0, 0, 0, 0, 0, 0,
- 0
+  7, 0, 1, 2, 3, 4, 5, 6,19, 8,
+  9,10,11,12,13,14,15,16,17,18,
+ 21,20,23,22, 0,27,25,26,30,28,
+ 29,32,31,34,33,37,35,36, 0, 0,
+  0,44,41,42,43, 0, 0, 0, 0, 0,
+  0, 0,54,52,53
 };
 
 static uint8_t menu_enter[] = {
-  0, 8,34, 3, 4,40, 6, 0, 8, 9,
- 10,19,21,13,24,27,30,32, 1,11,
- 11,12,12, 1,14,14,14,15,15,15,
- 16,16,17,17, 2, 2, 2, 0, 0, 0,
- 40,41,42, 5, 0, 0, 0, 0, 0, 0,
- 0
+  0, 8,35, 3, 4,41, 6, 0, 8, 9,
+ 52,11,20,22,14,25,28,31,33, 1,
+ 12,12,13,13, 1,15,15,15,16,16,
+ 16,17,17,18,18, 2, 2, 2, 0, 0,
+  0,41,42,43, 5, 0, 0, 0, 0, 0,
+  0, 0,10,10,10
 };
 
 extern void display_clock(void);
@@ -266,7 +275,7 @@ static void set_aging_offset(void) {
   uint32_t displayed_offset;
   uint32_t sign;
 
-  set_menu(buffer_LCD, 23);
+  set_menu(buffer_LCD, 24);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -313,7 +322,7 @@ static void set_date(void) {
   set_month = FROM_BCD(buf[3]);
   set_year = FROM_BCD(buf[4]);
 
-  set_menu(buffer_LCD, 44);
+  set_menu(buffer_LCD, 45);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -334,7 +343,7 @@ static void set_date(void) {
     if (idle_count > idle_threshhold) return;
   }
 
-  set_menu(buffer_LCD, 45);
+  set_menu(buffer_LCD, 46);
 
   button_state = true;
 
@@ -359,7 +368,7 @@ static void set_date(void) {
 
   button_state = true;
 
-  set_menu(buffer_LCD, 46);
+  set_menu(buffer_LCD, 47);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -382,7 +391,7 @@ static void set_date(void) {
 
   button_state = true;
 
-  set_menu(buffer_LCD, 47);
+  set_menu(buffer_LCD, 48);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -421,7 +430,7 @@ static void set_time(void) {
   set_minute = FROM_BCD(buf[2]);
   set_second = FROM_BCD(buf[1]);
 
-  set_menu(buffer_LCD, 48);
+  set_menu(buffer_LCD, 49);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -444,7 +453,7 @@ static void set_time(void) {
 
   button_state = true;
 
-  set_menu(buffer_LCD, 49);
+  set_menu(buffer_LCD, 50);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -467,7 +476,7 @@ static void set_time(void) {
 
   button_state = true;
 
-  set_menu(buffer_LCD, 50);
+  set_menu(buffer_LCD, 51);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -492,6 +501,33 @@ static void set_time(void) {
   buf[1] = (uint8_t)TO_BCD(set_minute);
   buf[2] = (uint8_t)TO_BCD(set_hour);
   write_clock(PCA2129T_I2C_ADDR_7BIT, PCA2129T_TIME_REGISTER, PCA2129T_TIME_LENGTH, buf);
+}
+
+static void updateHour(int32_t val) {
+
+  uint32_t set_hour;
+
+  read_clock(PCA2129T_I2C_ADDR_7BIT, PCA2129T_TIME_REGISTER, PCA2129T_TIME_LENGTH, buf);
+  // mask OSF from seconds
+  buf[1] &= 0x7F;
+
+  set_hour = FROM_BCD(buf[3]);
+
+  if (val == 1) {
+    if (set_hour < 23)
+      set_hour++;
+  }
+  else {
+    if (set_hour > 0)
+      set_hour--;
+  }
+
+  buf[0] = buf[1];
+  buf[1] = buf[2];
+  buf[2] = (uint8_t)TO_BCD(set_hour);
+
+  write_clock(PCA2129T_I2C_ADDR_7BIT, PCA2129T_TIME_REGISTER, PCA2129T_TIME_LENGTH, buf);
+
 }
 
 static void update_max_scroll_position(void) {
@@ -844,7 +880,7 @@ static void edit_birthdays(void) {
   uint32_t month,day;
   uint32_t current_position;
 
-  set_menu(buffer_LCD, 37);
+  set_menu(buffer_LCD, 38);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -889,7 +925,7 @@ static void edit_birthdays(void) {
 
   month = FROM_BCD(birthdays[birthday_nr].date[0]);
 
-  set_menu(buffer_LCD, 38);
+  set_menu(buffer_LCD, 39);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -913,7 +949,7 @@ static void edit_birthdays(void) {
 
   day = FROM_BCD(birthdays[birthday_nr].date[1]);
 
-  set_menu(buffer_LCD, 39);
+  set_menu(buffer_LCD, 40);
 
   while (button_state) {
     if (counter > old_counter) {
@@ -1166,28 +1202,30 @@ int main(void) {
           case 6: display_about(); break;
           case 8: set_date(); break;
           case 9: set_time(); break;
-          case 10: set_format(); break;
-          case 13: set_aging_offset(); break;
-          case 19: settings.s.freq = UPDATEFREQ_1_SEC; break;
-          case 20: settings.s.freq = UPDATEFREQ_1_MIN; break;
-          case 21: settings.s.scroll = true; break;
-          case 22: settings.s.scroll = false; scroll_position = 0; break;
-          case 24: settings.s.blink = BLINK_ON; break;
-          case 25: settings.s.blink = BLINK_OFF; break;
-          case 26: settings.s.blink = BLINK_1MIN; break;
-          case 27: settings.s.icons_mode = ICONSMODE_POWER; break;
-          case 28: settings.s.icons_mode = ICONSMODE_WEEKDAYS; break;
-          case 29: settings.s.icons_mode = ICONSMODE_NONE; break;
-          case 30: settings.s.separator_flip = true; break;
-          case 31: settings.s.separator_flip = false; break;
-          case 32: settings.s.swd = false; configure_SWD(false); break;
-          case 33: settings.s.swd = true; configure_SWD(true); break;
-          case 34: settings.s.sleep = PMU_MCU_POWER_DOWN; break;
-          case 35: settings.s.sleep = PMU_MCU_DEEP_SLEEP; break;
-          case 36: settings.s.sleep = PMU_MCU_SLEEP; break;
-          case 40: display_font(); break;
-          case 41: display_icons(); break;
-          case 42: display_leds(); break;
+          case 11: set_format(); break;
+          case 14: set_aging_offset(); break;
+          case 20: settings.s.freq = UPDATEFREQ_1_SEC; break;
+          case 21: settings.s.freq = UPDATEFREQ_1_MIN; break;
+          case 22: settings.s.scroll = true; break;
+          case 23: settings.s.scroll = false; scroll_position = 0; break;
+          case 25: settings.s.blink = BLINK_ON; break;
+          case 26: settings.s.blink = BLINK_OFF; break;
+          case 27: settings.s.blink = BLINK_1MIN; break;
+          case 28: settings.s.icons_mode = ICONSMODE_POWER; break;
+          case 29: settings.s.icons_mode = ICONSMODE_WEEKDAYS; break;
+          case 30: settings.s.icons_mode = ICONSMODE_NONE; break;
+          case 31: settings.s.separator_flip = true; break;
+          case 32: settings.s.separator_flip = false; break;
+          case 33: settings.s.swd = false; configure_SWD(false); break;
+          case 34: settings.s.swd = true; configure_SWD(true); break;
+          case 35: settings.s.sleep = PMU_MCU_POWER_DOWN; break;
+          case 36: settings.s.sleep = PMU_MCU_DEEP_SLEEP; break;
+          case 37: settings.s.sleep = PMU_MCU_SLEEP; break;
+          case 41: display_font(); break;
+          case 42: display_icons(); break;
+          case 43: display_leds(); break;
+          case 52: updateHour(-1); break;
+          case 53: updateHour(1); break;
           default: break;
         }
         if (idle_count > idle_threshhold) {
@@ -1208,22 +1246,22 @@ int main(void) {
         else {
           menu_position = menu_enter[menu_position];
           switch (menu_position) {
-            case 19:
+            case 20:
               switch (settings.s.freq) {
                 case UPDATEFREQ_1_SEC: break;
-                case UPDATEFREQ_1_MIN: menu_position = 20; break;
+                case UPDATEFREQ_1_MIN: menu_position = 21; break;
                 default: break;
               }; break;
-            case 21: if (!settings.s.scroll) menu_position = 22; break;
-            case 24: menu_position += settings.s.blink; break;
-            case 27: menu_position += settings.s.icons_mode; break;
-            case 30: if (!settings.s.separator_flip) menu_position = 31; break;
-            case 32: if (settings.s.swd) menu_position = 33; break;
-            case 34:
+            case 22: if (!settings.s.scroll) menu_position = 23; break;
+            case 25: menu_position += settings.s.blink; break;
+            case 28: menu_position += settings.s.icons_mode; break;
+            case 31: if (!settings.s.separator_flip) menu_position = 32; break;
+            case 33: if (settings.s.swd) menu_position = 34; break;
+            case 35:
               switch (settings.s.sleep) {
                 case PMU_MCU_POWER_DOWN: break;
-                case PMU_MCU_DEEP_SLEEP: menu_position = 35; break;
-                case PMU_MCU_SLEEP: menu_position = 36; break;
+                case PMU_MCU_DEEP_SLEEP: menu_position = 36; break;
+                case PMU_MCU_SLEEP: menu_position = 37; break;
                 default: break;
               }; break;
             default: break;
